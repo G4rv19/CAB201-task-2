@@ -53,9 +53,9 @@ namespace Myapp {
 
         public MenuOptions(){
             options = new string[] {
-                "1. Login as a registered user.",
-                "2. Register as a new user.",
-                "3. Exit."
+                "1. Login as a registered user",
+                "2. Register as a new user",
+                "3. Exit"
             };
         }
         public void ShowOptions(){
