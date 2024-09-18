@@ -102,7 +102,7 @@ public class RegisterType {
                     Console.WriteLine("You have chosen to register as a staff.");
                     break;      
                 case 3:
-                    Console.WriteLine("You have chosen to return to the first menu.");
+                    Console.WriteLine("");
                     break;
                 default:
                     Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
