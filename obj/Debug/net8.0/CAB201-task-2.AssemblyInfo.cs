@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CAB201-task-2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+108c389401488181bd82555b6cefc533eef9e358")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0407d48b331dfe376e4ccccf7e89978e5889bff6")]
 [assembly: System.Reflection.AssemblyProductAttribute("CAB201-task-2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CAB201-task-2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
