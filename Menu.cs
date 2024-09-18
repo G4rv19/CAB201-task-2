@@ -1,6 +1,9 @@
 using System;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 
 namespace Myapp {
     public class Menu {
@@ -18,10 +21,11 @@ namespace Myapp {
                         Console.WriteLine("You have chosen to login as a registered user.");
                         break;
                     case 2:
-                        Console.WriteLine("You have chosen to register as a new user.");
+                        RegisterType register = new RegisterType();
+                        register.RunRegister();
                         break;
                     case 3:
-                        Console.WriteLine("You have chosen to exit the program.");
+                        Console.WriteLine("Goodbye. Please stay safe.");
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
@@ -63,4 +67,48 @@ namespace Myapp {
         }
 
     };
+}
+
+/// <summary>
+/// RegisterType class is used to know the register type so they can go to the respective classes.
+/// </summary>
+public class RegisterType {
+    private string[] usertype;
+    public RegisterType(){
+        usertype = new string[] {
+            "1. Patient",
+            "2. Staff",
+            "3. Return to the first menu"
+        };
+    }
+    public void RegisterOptions(){
+        Console.WriteLine("Register as which type of user:");
+        foreach (string type in usertype){
+            Console.WriteLine(type);
+        }
+        Console.WriteLine("Please enter a choice between 1 and 3.");
+    }
+
+    public void RunRegister(){
+        int choice;
+        do{
+            RegisterOptions();
+            choice = Convert.ToInt16(Console.ReadLine());
+            switch (choice){
+                case 1:
+                    Console.WriteLine("You have chosen to register as a patient.");
+                    break;
+                case 2:
+                    Console.WriteLine("You have chosen to register as a staff.");
+                    break;      
+                case 3:
+                    Console.WriteLine("You have chosen to return to the first menu.");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
+                    break;
+            }
+        } while(choice != 3);   
+    }
+
 }
