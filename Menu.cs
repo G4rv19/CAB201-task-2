@@ -18,7 +18,8 @@ namespace Myapp {
                 choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice){
                     case 1:
-                        Console.WriteLine("You have chosen to login as a registered user.");
+                        Login login = new Login();
+                        login.LoginUser();
                         break;
                     case 2:
                         RegisterType register = new RegisterType();
@@ -115,17 +116,55 @@ public class RegisterType {
 /// Register patient registers the patient with the details
 /// </summary>
 public class RegisterPatient {
+    public static List<string> names = new List<string>(); 
+    public static List<int> ages = new List<int>();
+    public static List<int> mobiles = new List<int>();
+    public static List<string> emails = new List<string>();
+    public static List<string> passwords = new List<string>();
+
     public void Register() {
+        Console.WriteLine("Registering as a patient.");
         Console.WriteLine("Please enter in your name:");
         string name = Console.ReadLine();
+        names.Add(name);
         Console.WriteLine("Please enter in your age:");
         int age = Convert.ToInt16(Console.ReadLine());
+        ages.Add(age);
         Console.WriteLine("Please enter in your mobile number:");
         int mobile = Convert.ToInt32(Console.ReadLine());
+        mobiles.Add(mobile);
         Console.WriteLine("Please enter in your email:");
         string email = Console.ReadLine();
+        emails.Add(email);
         Console.WriteLine("Please enter in your password:");
         string password = Console.ReadLine();
+        passwords.Add(password);
         Console.WriteLine($"{name} is registered as a patient.");
+    }
+}
+
+
+
+public class Login {
+    public void LoginUser(){
+        Console.WriteLine("Login Menu.");    
+        Console.WriteLine("Please enter in your email:");
+        int index = -1;
+        string email = Console.ReadLine();
+        for (int i = 0; i < RegisterPatient.emails.Count; i++){
+            if (RegisterPatient.emails[i] == email){
+                index = i;
+                break;
+            }
+        }
+        if (index != -1){
+            Console.WriteLine("Please enter in your password:");
+            string enteredPassword = Console.ReadLine();
+            if (enteredPassword == RegisterPatient.passwords[index]){
+                Console.WriteLine($"Hello {RegisterPatient.names[index]} welcome back.");
+            } else {
+                Console.WriteLine("Incorrect password. Please try again.");
+            }
+        }
     }
 }
