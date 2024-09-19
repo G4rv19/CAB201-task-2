@@ -91,25 +91,23 @@ public class RegisterType {
 
     public void RunRegister(){
         int choice;
-        do{
-            RegisterOptions();
-            choice = Convert.ToInt16(Console.ReadLine());
-            switch (choice){
-                case 1:
-                    RegisterPatient registerPatient = new RegisterPatient();
-                    registerPatient.Register();
-                    break;
-                case 2:
-                    Console.WriteLine("You have chosen to register as a staff.");
-                    break;      
-                case 3:
-                    Console.WriteLine("");
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
-                    break;
-            }
-        } while(choice != 3);   
+        RegisterOptions();
+        choice = Convert.ToInt16(Console.ReadLine());
+        switch (choice){
+            case 1:
+                RegisterPatient registerPatient = new RegisterPatient();
+                registerPatient.Register();
+                break;
+            case 2:
+                Console.WriteLine("You have chosen to register as a staff.");
+                break;      
+            case 3:
+                Console.WriteLine("");
+                break;
+            default:
+                Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
+                break;
+        } 
     }
 
 }
