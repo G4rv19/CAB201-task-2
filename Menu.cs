@@ -96,7 +96,8 @@ public class RegisterType {
             choice = Convert.ToInt16(Console.ReadLine());
             switch (choice){
                 case 1:
-                    Console.WriteLine("You have chosen to register as a patient.");
+                    RegisterPatient registerPatient = new RegisterPatient();
+                    registerPatient.Register();
                     break;
                 case 2:
                     Console.WriteLine("You have chosen to register as a staff.");
@@ -111,4 +112,22 @@ public class RegisterType {
         } while(choice != 3);   
     }
 
+}
+/// <summary>
+/// Register patient registers the patient with the details
+/// </summary>
+public class RegisterPatient {
+    public void Register() {
+        Console.WriteLine("Please enter in your name:");
+        string name = Console.ReadLine();
+        Console.WriteLine("Please enter in your age:");
+        int age = Convert.ToInt16(Console.ReadLine());
+        Console.WriteLine("Please enter in your mobile number:");
+        int mobile = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Please enter in your email:");
+        string email = Console.ReadLine();
+        Console.WriteLine("Please enter in your password:");
+        string password = Console.ReadLine();
+        Console.WriteLine($"{name} is registered as a patient.");
+    }
 }
