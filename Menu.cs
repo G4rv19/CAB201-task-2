@@ -96,11 +96,14 @@ public class RegisterType {
         choice = Convert.ToInt16(Console.ReadLine());
         switch (choice){
             case 1:
-                RegisterPatient registerPatient = new RegisterPatient();
-                registerPatient.Register();
+                Console.WriteLine("Registering as a patient.");
+                Register register = new Register();
+                register.Register_function();
+                register.Patient_register();
                 break;
             case 2:
-                Console.WriteLine("You have chosen to register as a staff.");
+                Register register_staff = new Register();
+                register_staff.staff_type();
                 break;      
             case 3:
                 Console.WriteLine("");
@@ -115,32 +118,89 @@ public class RegisterType {
 /// <summary>
 /// Register patient registers the patient with the details
 /// </summary>
-public class RegisterPatient {
+public class Register {
     public static List<string> names = new List<string>(); 
     public static List<int> ages = new List<int>();
     public static List<int> mobiles = new List<int>();
     public static List<string> emails = new List<string>();
     public static List<string> passwords = new List<string>();
+    public static List<string> staff_id = new List<string>();
+    public static List<int> floor_number = new List<int>();
+    private static List<string> staff_email = new List<string>();
 
-    public void Register() {
-        Console.WriteLine("Registering as a patient.");
+    private string current_name;
+    private string current_email;
+
+    public void Register_function() {
         Console.WriteLine("Please enter in your name:");
         string name = Console.ReadLine();
-        names.Add(name);
+        current_name = name;
+        names.Add(current_name);
+
         Console.WriteLine("Please enter in your age:");
         int age = Convert.ToInt16(Console.ReadLine());
         ages.Add(age);
+
         Console.WriteLine("Please enter in your mobile number:");
         int mobile = Convert.ToInt32(Console.ReadLine());
         mobiles.Add(mobile);
+
         Console.WriteLine("Please enter in your email:");
         string email = Console.ReadLine();
-        emails.Add(email);
+        current_email = email;
+        emails.Add(current_email);
+
         Console.WriteLine("Please enter in your password:");
         string password = Console.ReadLine();
         passwords.Add(password);
-        Console.WriteLine($"{name} is registered as a patient.");
     }
+    public void staff_type() {
+        List<string> staff_type = new List<string>();
+        staff_type.Add("1. Floor Manager");
+        staff_type.Add("2. Surgeon");
+        staff_type.Add("3. Return to the first menu");
+        Console.WriteLine("Register as which type of staff:");
+        foreach (string type in staff_type){
+            Console.WriteLine(type);
+        }
+        Console.WriteLine("Please enter a choice between 1 and 3.");
+        int choice = Convert.ToInt16(Console.ReadLine());
+        switch (choice){
+            case 1:
+                Register_function();
+                floor_register();
+                break;
+            case 2:
+                Console.WriteLine("Registering as a surgeon.");
+                break;
+            case 3:
+                Console.WriteLine("");
+                break;
+            default:
+                Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
+                break;
+        }
+
+    }
+    public void Patient_register() {
+        Console.WriteLine($"{current_name} is registered as a patient.");
+    }
+
+    public void floor_register() {
+        Console.WriteLine("Please enter in your staff ID:");
+        string id = Console.ReadLine();
+        staff_id.Add(id);
+        staff_email.Add(current_email);
+        Console.WriteLine("Please enter in your floor number:");
+        int floor = Convert.ToInt16(Console.ReadLine());
+        floor_number.Add(floor);
+        Console.WriteLine($"{current_name} is registered as a floor manager.");
+
+    }
+
+
+    
+
 }
 
 
@@ -151,8 +211,8 @@ public class Login {
         Console.WriteLine("Please enter in your email:");
         int index = -1;
         string email = Console.ReadLine();
-        for (int i = 0; i < RegisterPatient.emails.Count; i++){
-            if (RegisterPatient.emails[i] == email){
+        for (int i = 0; i < Register.emails.Count; i++){
+            if (Register.emails[i] == email){
                 index = i;
                 break;
             }
@@ -160,8 +220,8 @@ public class Login {
         if (index != -1){
             Console.WriteLine("Please enter in your password:");
             string enteredPassword = Console.ReadLine();
-            if (enteredPassword == RegisterPatient.passwords[index]){
-                Console.WriteLine($"Hello {RegisterPatient.names[index]} welcome back.");
+            if (enteredPassword == Register.passwords[index]){
+                Console.WriteLine($"Hello {Register.names[index]} welcome back.");
             } else {
                 Console.WriteLine("Incorrect password. Please try again.");
             }
