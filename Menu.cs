@@ -174,6 +174,8 @@ public class Register {
                 break;
             case 2:
                 Console.WriteLine("Registering as a surgeon.");
+                Register_function();
+                surgeon_register();
                 break;
             case 3:
                 Console.WriteLine("");
