@@ -212,7 +212,7 @@ public class Register {
         speciality.Add("2. Orthopaedic Surgeon");
         speciality.Add("3. Cardiothoracic Surgeon");
         speciality.Add("4. Neurosurgeon");
-        Console.WriteLine("Please enter your speciality:");
+        Console.WriteLine("Please choose your speciality:");
         foreach (string type in speciality){
             Console.WriteLine(type);
         }
@@ -221,19 +221,19 @@ public class Register {
         switch(choice){
             case 1:
                 staff_speciality.Add(speciality[0]);
-                Console.WriteLine($"{current_name} is registered as a Surgeon.");
+                Console.WriteLine($"{current_name} is registered as a surgeon.");
                 break;
             case 2:
                 staff_speciality.Add(speciality[1]);
-                Console.WriteLine($"{current_name} is registered as a Surgeon.");
+                Console.WriteLine($"{current_name} is registered as a surgeon.");
                 break;
             case 3:
                 staff_speciality.Add(speciality[2]);
-                Console.WriteLine($"{current_name} is registered as a Surgeon.");
+                Console.WriteLine($"{current_name} is registered as a surgeon.");
                 break;
             case 4:
                 staff_speciality.Add(speciality[3]);
-                Console.WriteLine($"{current_name} is registered as a Surgeon.");
+                Console.WriteLine($"{current_name} is registered as a surgeon.");
                 break;
             default:
                 Console.WriteLine("Invalid choice. Please enter a choice between 1 and 4.");
