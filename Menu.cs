@@ -124,9 +124,10 @@ public class Register {
     public static List<int> mobiles = new List<int>();
     public static List<string> emails = new List<string>();
     public static List<string> passwords = new List<string>();
-    public static List<string> staff_id = new List<string>();
+    public static List<int> staff_id = new List<int>();
     public static List<int> floor_number = new List<int>();
     private static List<string> staff_email = new List<string>();
+    private static List<string> staff_speciality = new List<string>();
 
     private string current_name;
     private string current_email;
@@ -156,7 +157,7 @@ public class Register {
     }
     public void staff_type() {
         List<string> staff_type = new List<string>();
-        staff_type.Add("1. Floor Manager");
+        staff_type.Add("1. Floor manager");
         staff_type.Add("2. Surgeon");
         staff_type.Add("3. Return to the first menu");
         Console.WriteLine("Register as which type of staff:");
@@ -167,6 +168,7 @@ public class Register {
         int choice = Convert.ToInt16(Console.ReadLine());
         switch (choice){
             case 1:
+                Console.WriteLine("Registering as a floor manager.");
                 Register_function();
                 floor_register();
                 break;
@@ -188,7 +190,7 @@ public class Register {
 
     public void floor_register() {
         Console.WriteLine("Please enter in your staff ID:");
-        string id = Console.ReadLine();
+        int id = Convert.ToInt16(Console.ReadLine());
         staff_id.Add(id);
         staff_email.Add(current_email);
         Console.WriteLine("Please enter in your floor number:");
@@ -196,6 +198,45 @@ public class Register {
         floor_number.Add(floor);
         Console.WriteLine($"{current_name} is registered as a floor manager.");
 
+    }
+
+    public void surgeon_register() {
+        Console.WriteLine("Please enter in your staff ID:");
+        int id = Convert.ToInt16(Console.ReadLine());
+        staff_id.Add(id);
+        staff_email.Add(current_email);
+        List<string> speciality = new List<string>();
+        speciality.Add("1. General Surgeon");
+        speciality.Add("2. Orthopaedic Surgeon");
+        speciality.Add("3. Cardiothoracic Surgeon");
+        speciality.Add("4. Neurosurgeon");
+        Console.WriteLine("Please enter your speciality:");
+        foreach (string type in speciality){
+            Console.WriteLine(type);
+        }
+        Console.WriteLine("Please enter a choice between 1 and 4.");
+        int choice = Convert.ToInt16(Console.ReadLine());
+        switch(choice){
+            case 1:
+                staff_speciality.Add(speciality[0]);
+                Console.WriteLine($"{current_name} is registered as a Surgeon.");
+                break;
+            case 2:
+                staff_speciality.Add(speciality[1]);
+                Console.WriteLine($"{current_name} is registered as a Surgeon.");
+                break;
+            case 3:
+                staff_speciality.Add(speciality[2]);
+                Console.WriteLine($"{current_name} is registered as a Surgeon.");
+                break;
+            case 4:
+                staff_speciality.Add(speciality[3]);
+                Console.WriteLine($"{current_name} is registered as a Surgeon.");
+                break;
+            default:
+                Console.WriteLine("Invalid choice. Please enter a choice between 1 and 4.");
+                break;
+        }
     }
 
 
