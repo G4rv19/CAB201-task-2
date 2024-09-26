@@ -9,6 +9,7 @@ namespace Myapp{
         public string email;
 
         public void Login_User(){
+            Console.WriteLine("Login Menu.");
             Console.WriteLine("Please enter in your email:");
             email = Console.ReadLine();
             User user = Register.GetUser(email);
@@ -20,8 +21,6 @@ namespace Myapp{
                 string password = Console.ReadLine();
                 if (user.Password == password){
                     Console.WriteLine($"Hello {user.Name} welcome back.");
-                    Console.WriteLine();
-                    Console.WriteLine("Login Menu.");
                     login_menu();
                 }
                 else{
@@ -44,7 +43,7 @@ namespace Myapp{
             User user = Register.GetUser(email);
             if (user.is_staff == false){
                 Console.WriteLine("Patient Menu.");
-                Console.WriteLine("please choose from the menu below:");
+                Console.WriteLine("Please choose from the menu below:");
                 foreach (string option in menu){
                     Console.WriteLine(option);
                 }
