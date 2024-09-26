@@ -50,11 +50,11 @@ namespace Myapp {
     /// Register patient registers the patient with the details
     /// </summary>
     public class Register {
-        private static Dictionary<string, User> users = new Dictionary<string, User>();
-        private User Register_function() {
+        public static Dictionary<string, User> users = new Dictionary<string, User>();
+        public User Register_function() {
 
             Console.WriteLine("Please enter in your name:");
-            string name = Console.ReadLine();
+            string name = Console.ReadLine() ?? string.Empty;
 
             Console.WriteLine("Please enter in your age:");
             int age = Convert.ToInt16(Console.ReadLine());
@@ -63,10 +63,10 @@ namespace Myapp {
             int mobile = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Please enter in your email:");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine() ?? string.Empty; 
 
             Console.WriteLine("Please enter in your password:");
-            string password = Console.ReadLine();
+            string password = Console.ReadLine() ?? string.Empty;
 
             User user = new User(name, age, mobile, email, password);
             return user;
@@ -74,6 +74,8 @@ namespace Myapp {
         }
         public void Register_patient() {
             User user = Register_function();
+            user.is_staff = false;
+
             if (!users.ContainsKey(user.Email)) {
                 users[user.Email] = user;
                 Console.WriteLine($"{user.Name} has been registered successfully.");
@@ -167,7 +169,7 @@ namespace Myapp {
             }
         }
 
-        public static User GetUser(string email) {
+        public static User? GetUser(string email) {
             return users.TryGetValue(email, out User user) ? user : null;
         }
 

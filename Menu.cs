@@ -19,7 +19,6 @@ namespace Myapp {
                 choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice){
                     case 1:
-                        Login login = new Login();
                         ///login.LoginUser();
                         ///login.login_staff();
                         Console.WriteLine("Login Menu.");
