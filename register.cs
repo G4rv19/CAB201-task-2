@@ -5,9 +5,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Myapp {
-        public class RegisterType {
+        public class Register_menu {
         private string[] usertype;
-        public RegisterType(){
+        public Register_menu(){
             usertype = new string[] {
                 "1. Patient",
                 "2. Staff",
@@ -78,7 +78,7 @@ namespace Myapp {
 
             if (!users.ContainsKey(user.Email)) {
                 users[user.Email] = user;
-                Console.WriteLine($"{user.Name} has been registered successfully.");
+                Console.WriteLine($"{user.Name} is registered as a patient.");
             }
             else {
                 Console.WriteLine("User already exists.");

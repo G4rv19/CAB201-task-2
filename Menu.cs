@@ -19,12 +19,11 @@ namespace Myapp {
                 choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice){
                     case 1:
-                        ///login.LoginUser();
-                        ///login.login_staff();
-                        Console.WriteLine("Login Menu.");
+                        Login login = new Login();
+                        login.Login_User();
                         break;
                     case 2:
-                        RegisterType register = new RegisterType();
+                        Register_menu register = new Register_menu();
                         register.RunRegister();
                         break;
                     case 3:
