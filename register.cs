@@ -158,7 +158,21 @@ namespace Myapp {
                 Console.WriteLine("Invalid choice. Please enter a choice between 1 and 4.");
                 return;
             }
-            staff.Surgeon_speciality = speciality[choice - 1];
+            if (choice == 1){
+                staff.Surgeon_speciality = "General Surgeon";
+            }
+            else if (choice == 2){
+                staff.Surgeon_speciality = "Orthopaedic Surgeon";
+            }
+            else if (choice == 3){
+                staff.Surgeon_speciality = "Cardiothoracic Surgeon";
+            }
+            else if (choice == 4){
+                staff.Surgeon_speciality = "Neurosurgeon";
+            }
+            else {
+                Console.WriteLine("Invalid choice. Please enter a choice between 1 and 4.");
+            }
 
             if (!users.ContainsKey(staff.Email)) {
                 users[staff.Email] = staff;
