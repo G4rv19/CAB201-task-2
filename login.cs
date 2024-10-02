@@ -42,46 +42,121 @@ namespace Myapp{
         public void login_menu(){
             User user = Register.GetUser(email);
             if (user.is_staff == false){
-                Console.WriteLine("Patient Menu.");
-                Console.WriteLine("Please choose from the menu below:");
-                foreach (string option in menu){
-                    Console.WriteLine(option);
-                }
-                Console.WriteLine("Please enter a choice between 1 and 7.");    
-                int choice = Convert.ToInt16(Console.ReadLine());
-                switch (choice){
-                    case 1:
-                        Console.WriteLine("Your details.");
-                        Console.WriteLine($"Name: {user.Name}");
-                        Console.WriteLine($"Age: {user.Age}");
-                        Console.WriteLine($"Mobile phone: {user.Mobile}");
-                        Console.WriteLine($"Email: {user.Email}");
-                        break;
-                    case 2:
-                        Console.WriteLine("Change password.");
-                        break;
-                    case 3:
-                        Console.WriteLine("Check in.");
-                        break;
-                    case 4:
-                        Console.WriteLine("See room.");
-                        break;
-                    case 5:
-                        Console.WriteLine("See surgeon.");
-                        break;
-                    case 6: 
-                        Console.WriteLine("See surgery date and time.");
-                        break;
-                    case 7:
-                        Console.WriteLine($"Patient {user.Name} has logged out.");
-                        break;
+                bool is_patient_logged_in = true;
+                while(is_patient_logged_in){
+                    Console.WriteLine("Patient Menu.");
+                    Console.WriteLine("Please choose from the menu below:");
+                    foreach (string option in menu){
+                        Console.WriteLine(option);
+                    }
+                    Console.WriteLine("Please enter a choice between 1 and 7.");    
+                    int choice = Convert.ToInt16(Console.ReadLine());
+                    switch (choice){
+                        case 1:
+                            show_details();
+                            break;
+                        case 2:
+                            change_password();
+                            break;
+                        case 3:
+                            Console.WriteLine("Check in.");
+                            break;
+                        case 4:
+                            Console.WriteLine("See room.");
+                            break;
+                        case 5:
+                            Console.WriteLine("See surgeon.");
+                            break;
+                        case 6: 
+                            Console.WriteLine("See surgery date and time.");
+                            break;
+                        case 7:
+                            Console.WriteLine($"Patient {user.Name} has logged out.");
+                            is_patient_logged_in = false;
+                            break;
+                    }
                 }
 
             }
-            else{
-                Console.WriteLine("Staff Menu");
+            else if(user.is_staff == true){
+                if (user.Floor_number != null) {
+                    bool is_staff_logged_in = true;
+                    while(is_staff_logged_in){
+                        Console.WriteLine("Floor Manager Menu.");
+                        Console.WriteLine("Please choose from the menu below:");
+                        foreach (string option in floor_manager_menu){
+                            Console.WriteLine(option);
+                        }
+                        int choice = Convert.ToInt16(Console.ReadLine());
+                        switch(choice){
+                            case 1:
+                                show_details(); 
+                                break;
+                            case 2:
+                                change_password();
+                                break;
+                            case 3:
+                                Console.WriteLine("Assign room to patient.");
+                                break;
+                            case 4:
+                                Console.WriteLine("Assign surgery.");
+                                break;
+                            case 5:
+                                Console.WriteLine("Unassign room.");
+                                break;
+                            case 6:
+                                Console.WriteLine($"Floor manager {user.Name} has logged out.");
+                                is_staff_logged_in = false;
+                                break;
+
+                        }
+
+                        
+                    }
+                }
             }
         
         }
+        public void show_details() {
+            User user = Register.GetUser(email);
+            if (user != null && user.is_staff == false){
+                Console.WriteLine("Your details.");
+                Console.WriteLine($"Name: {user.Name}");
+                Console.WriteLine($"Age: {user.Age}");
+                Console.WriteLine($"Mobile phone: {user.Mobile}");
+                Console.WriteLine($"Email: {user.Email}");
+            }
+            else if (user != null && user.is_staff == true){
+                if (user.Floor_number != null){
+                    Console.WriteLine("Your details.");
+                    Console.WriteLine($"Name: {user.Name}");
+                    Console.WriteLine($"Age: {user.Age}");
+                    Console.WriteLine($"Mobile phone: {user.Mobile}");
+                    Console.WriteLine($"Email: {user.Email}");
+                    Console.WriteLine($"Staff ID: {user.Staff_id}");    
+                    Console.WriteLine($"Floor: {user.Floor_number}.");
+                }
+                else {
+                    Console.WriteLine("surgoen");
+                }
+
+            }
+        }
+        public void change_password(){
+            Console.WriteLine("Enter new password:");
+            string new_password = Console.ReadLine();
+            User user = Register.GetUser(email);
+            user.Password = new_password;
+            Console.WriteLine("Password changed successfully.");
+        }
+        public static List<string> floor_manager_menu = new List<string>(){
+            "1. Display my details",
+            "2. Change password",
+            "3. Assign room to patient",
+            "4. Assign surgery",
+            "5. Unassign room",
+            "6. Log out",
+        };
+
     }
 }
