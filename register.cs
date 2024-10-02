@@ -60,7 +60,7 @@ namespace Myapp {
             int age = Convert.ToInt16(Console.ReadLine());
 
             Console.WriteLine("Please enter in your mobile number:");
-            int mobile = Convert.ToInt32(Console.ReadLine());
+            string mobile = Console.ReadLine();
 
             Console.WriteLine("Please enter in your email:");
             string email = Console.ReadLine() ?? string.Empty; 

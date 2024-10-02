@@ -32,7 +32,7 @@ namespace Myapp{
         public static List<string> menu = new List<string>(){
             "1. Display my details ",
             "2. Change password",
-            "3. Check in",
+            "3. Check Out",
             "4. See room",
             "5. See surgeon",
             "6. See surgery date and time",
@@ -110,6 +110,7 @@ namespace Myapp{
                                 break;
 
                         }
+                        Console.WriteLine("Please enter a choice between 1 and 6.");
 
                         
                     }
@@ -147,7 +148,7 @@ namespace Myapp{
             string new_password = Console.ReadLine();
             User user = Register.GetUser(email);
             user.Password = new_password;
-            Console.WriteLine("Password changed successfully.");
+            Console.WriteLine("Password has been changed.");
         }
         public static List<string> floor_manager_menu = new List<string>(){
             "1. Display my details",
