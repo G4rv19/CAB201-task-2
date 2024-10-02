@@ -32,7 +32,7 @@ namespace Myapp{
         public static List<string> menu = new List<string>(){
             "1. Display my details ",
             "2. Change password",
-            "3. Check Out",
+            "3. Check in",
             "4. See room",
             "5. See surgeon",
             "6. See surgery date and time",
@@ -87,6 +87,7 @@ namespace Myapp{
                         foreach (string option in floor_manager_menu){
                             Console.WriteLine(option);
                         }
+                        Console.WriteLine("Please enter a choice between 1 and 6.");
                         int choice = Convert.ToInt16(Console.ReadLine());
                         switch(choice){
                             case 1:
@@ -110,7 +111,6 @@ namespace Myapp{
                                 break;
 
                         }
-                        Console.WriteLine("Please enter a choice between 1 and 6.");
 
                         
                     }
