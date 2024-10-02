@@ -124,41 +124,40 @@ namespace Myapp{
                         
                     }
                 }
-            }
-            else if (user.is_staff == true && user.Surgeon_speciality != null){
-                bool is_surgeon_logged_in = true;
-                while(is_surgeon_logged_in){
-                    Console.WriteLine("Surgeon Menu.");
-                    Console.WriteLine("Please choose from the menu below:");
-                    foreach (string option in surgeon_menu){
-                        Console.WriteLine(option);
-                    }
-                    Console.WriteLine("Please enter a choice between 1 and 6.");
-                    int choice = Convert.ToInt16(Console.ReadLine());
-                    switch(choice){
-                        case 1:
-                            show_details();
-                            break;
-                        case 2:
-                            change_password();
-                            break;
-                        case 3:
-                            Console.WriteLine("See your list of patients.");
-                            break;
-                        case 4:
-                            Console.WriteLine("See your schedule.");
-                            break;
-                        case 5:
-                            Console.WriteLine("Perform surgery.");
-                            break;
-                        case 6:
-                            Console.WriteLine($"Surgeon {user.Name} has logged out.");
-                            is_surgeon_logged_in = false;
-                            break;
+                else if(user.Surgeon_speciality != null){
+                    bool is_surgeon_logged_in = true;
+                    while(is_surgeon_logged_in){
+                        Console.WriteLine("Surgeon Menu.");
+                        Console.WriteLine("Please choose from the menu below:");
+                        foreach (string option in surgeon_menu){
+                            Console.WriteLine(option);
+                        }
+                        Console.WriteLine("Please enter a choice between 1 and 6.");
+                        int choice = Convert.ToInt16(Console.ReadLine());
+                        switch(choice){
+                            case 1:
+                                show_details();
+                                break;
+                            case 2:
+                                change_password();
+                                break;
+                            case 3:
+                                Console.WriteLine("See your list of patients.");
+                                break;
+                            case 4:
+                                Console.WriteLine("See your schedule.");
+                                break;
+                            case 5:
+                                Console.WriteLine("Perform surgery.");
+                                break;
+                            case 6:
+                                Console.WriteLine($"Surgeon {user.Name} has logged out.");
+                                is_surgeon_logged_in = false;
+                                break;
+                        }
                     }
                 }
             }
-        
         }
         public void show_details() {
             User user = Register.GetUser(email);
@@ -181,12 +180,12 @@ namespace Myapp{
                 }
                 else {
                     Console.WriteLine("Your details.");
-                    Console.WriteLine("Name: {user.Name}");
-                    Console.WriteLine("Age: {user.Age}");
-                    Console.WriteLine("Mobile phone: {user.Mobile}");
-                    Console.WriteLine("Email: {user.Email}");
-                    Console.WriteLine("Staff ID: {user.Staff_id}");
-                    Console.WriteLine("Speciality: {user.Surgeon_speciality}"); 
+                    Console.WriteLine($"Name: {user.Name}");
+                    Console.WriteLine($"Age: {user.Age}");
+                    Console.WriteLine($"Mobile phone: {user.Mobile}");
+                    Console.WriteLine($"Email: {user.Email}");
+                    Console.WriteLine($"Staff ID: {user.Staff_id}");
+                    Console.WriteLine($"Speciality: {user.Surgeon_speciality}"); 
                 }
 
             }
