@@ -73,10 +73,10 @@ namespace Myapp{
                         case 3:
                             isCheckedIn = !isCheckedIn;
                             if (isCheckedIn){
-                                Console.WriteLine($"Patient {user.Name} has checked in.");
+                                Console.WriteLine($"Patient {user.Name} has been checked in.");
                             }
                             else{
-                                Console.WriteLine($"Patient {user.Name} has checked out.");
+                                Console.WriteLine($"Patient {user.Name} has been checked out.");
                             }
                             break;
                         case 4:
