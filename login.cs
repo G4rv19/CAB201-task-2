@@ -50,11 +50,14 @@ namespace Myapp{
         
         public void login_menu(){
             User user = Register.GetUser(email);
+            Management management = new Management();
+            bool isCheckedIn = false;
             if (user.is_staff == false){
                 bool is_patient_logged_in = true;
                 while(is_patient_logged_in){
                     Console.WriteLine("Patient Menu.");
                     Console.WriteLine("Please choose from the menu below:");
+                    management.CheckIn(isCheckedIn, menu);
                     foreach (string option in menu){
                         Console.WriteLine(option);
                     }
@@ -68,7 +71,13 @@ namespace Myapp{
                             change_password();
                             break;
                         case 3:
-                            Console.WriteLine("Check in.");
+                            isCheckedIn = !isCheckedIn;
+                            if (isCheckedIn){
+                                Console.WriteLine($"Patient {user.Name} has checked in.");
+                            }
+                            else{
+                                Console.WriteLine($"Patient {user.Name} has checked out.");
+                            }
                             break;
                         case 4:
                             Console.WriteLine("See room.");
