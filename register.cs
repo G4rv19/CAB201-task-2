@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Myapp {
-        public class Register_menu {
+    public class Register_menu {
         private string[] usertype;
         public Register_menu(){
             usertype = new string[] {
@@ -84,7 +84,6 @@ namespace Myapp {
                 Console.WriteLine("User already exists.");
             }
         }
-
         public void Register_floor_manager() {
             
             User staff = Register_function();
@@ -133,9 +132,7 @@ namespace Myapp {
                     Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
                     break;
             }
-
         }
-    
         public void surgeon_register() {
             User staff = Register_function();
             staff.is_staff = true;
@@ -186,13 +183,5 @@ namespace Myapp {
         public static User? GetUser(string email) {
             return users.TryGetValue(email, out User user) ? user : null;
         }
-
-
-        
-
     }
-
-
-
-
 }

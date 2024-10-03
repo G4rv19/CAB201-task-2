@@ -120,8 +120,6 @@ namespace Myapp{
                                 break;
 
                         }
-
-                        
                     }
                 }
                 else if(user.Surgeon_speciality != null){
