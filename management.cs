@@ -31,7 +31,7 @@ namespace Myapp {
             Console.WriteLine("Please select your patient: ");
             CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, CheckedInPatients);
             if (CheckedInPatients.Count == 0){
-                Console.WriteLine("No patients are checked in.");
+                Console.WriteLine("There are no checked in patients.");
                 return;
             }
             Console.WriteLine($"Please enter a choice between 1 and {CheckedInPatients.Count}.");
@@ -69,11 +69,13 @@ namespace Myapp {
 
         public void CheckedInPatientList(Func <User, bool> condition, List<string> SavingList){
             CheckedInPatients.Clear();
+            int index = 1;
             foreach (var patient in Register.users){
                 if (condition(patient.Value)){
                     SavingList.Add(patient.Value.Name);
-                    patientEmailMap.Add(CheckedInPatients.Count, patient.Value.Email);
-                    Console.WriteLine($"{CheckedInPatients.Count}. {patient.Value.Name}");
+                    patientEmailMap.Add(index, patient.Value.Email);
+                    Console.WriteLine($"{index}. {patient.Value.Name}");
+                    index++;
                 }
             }
         }
