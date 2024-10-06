@@ -7,7 +7,7 @@ namespace Myapp {
     public class Management {
 
         public static List<string> CheckedInPatients = new List<string>(); // list of all patients who are checked in 
-        public static User selectedPatient; // the current patient selected by the floor manager.
+        public string selectedPatient; // the current patient selected by the floor manager.
         User user;
         public Management(User user)
         {
@@ -22,18 +22,9 @@ namespace Myapp {
                 menu[2] = "3. Check in";
             }
         }
+     
 
-
-        public void Assign_room(User user){
-            DisplayCheckedInPatients();
-            Console.WriteLine("Please enter your room (1-10):");
-            int room = Convert.ToInt32(Console.ReadLine());
-            selectedPatient.Room = room;
-            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor {user.Floor_number}.");
-        }        
-
-
-        public void DisplayCheckedInPatients(){
+        public void AssigningRoom(User user){
             CheckedInPatients.Clear();
             Console.WriteLine("Please select your patient:");
             int index = 1;
@@ -49,9 +40,15 @@ namespace Myapp {
             if (choice > CheckedInPatients.Count){
                 Console.WriteLine("Invalid choice.");
             }
-            else{
-            selectedPatient = Register.GetUser(CheckedInPatients[choice - 1]);
+            string Selected_patient =  Register.GetUser(CheckedInPatients[choice-1]).Name;
+            Console.WriteLine("Please enter your room (1-10):");
+            int room = Convert.ToInt32(Console.ReadLine());
+            foreach (var patient in Register.users){
+                if (patient.Value.Name == Selected_patient){
+                    patient.Value.Room = room;
+                }
             }
+            Console.WriteLine($"Patient {Selected_patient} has been assigned to room number {room} on floor {user.Floor_number}.");
         }
     }
 

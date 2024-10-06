@@ -116,7 +116,7 @@ namespace Myapp{
                                 change_password();
                                 break;
                             case 3:
-                                management.Assign_room(user);
+                                management.AssigningRoom(user);
                                 break;
                             case 4:
                                 Console.WriteLine("Assign surgery.");
