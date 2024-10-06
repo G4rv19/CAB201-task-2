@@ -29,7 +29,7 @@ namespace Myapp {
             Console.WriteLine("Please enter your room (1-10):");
             int room = Convert.ToInt32(Console.ReadLine());
             selectedPatient.Room = room;
-            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor number {user.Floor_number}.");
+            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor {user.Floor_number}.");
         }        
 
 
