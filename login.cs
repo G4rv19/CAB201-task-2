@@ -8,7 +8,7 @@ namespace Myapp{
     public class Login{
         public string email;
 
-        public void Login_User(){
+        public User Login_User(){
             Console.WriteLine("Login Menu.");
             Console.WriteLine("Please enter in your email:");
             email = Console.ReadLine();
@@ -27,6 +27,8 @@ namespace Myapp{
                     Console.WriteLine("Incorrect password.");
                 }
             }
+        
+            return user; // Add this line to return a value
         }
         
         public static List<string> menu = new List<string>(){
@@ -47,7 +49,7 @@ namespace Myapp{
             "5. Perform surgery",
             "6. Log out",
         };
-        
+
         public void login_menu(){
             User user = Register.GetUser(email);
             Management management = new Management(user);
@@ -114,7 +116,7 @@ namespace Myapp{
                                 change_password();
                                 break;
                             case 3:
-                                management.Assign_room();
+                                management.Assign_room(user);
                                 break;
                             case 4:
                                 Console.WriteLine("Assign surgery.");

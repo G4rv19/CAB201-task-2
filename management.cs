@@ -5,8 +5,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace Myapp {
     public class Management {
+
+        public static List<string> CheckedInPatients = new List<string>(); // list of all patients who are checked in 
+        public static User selectedPatient; // the current patient selected by the floor manager.
         User user;
-        
         public Management(User user)
         {
             this.user = user;
@@ -22,19 +24,13 @@ namespace Myapp {
         }
 
 
-        public void Assign_room(){
+        public void Assign_room(User user){
             DisplayCheckedInPatients();
             Console.WriteLine("Please enter your room (1-10):");
             int room = Convert.ToInt32(Console.ReadLine());
             selectedPatient.Room = room;
-            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor.");
-        }
-
-
-
-        public static List<string> CheckedInPatients = new List<string>(); // list of all patients who are checked in 
-        public static User selectedPatient; // the current patient selected by the floor manager.
-        
+            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor number {user.Floor_number}.");
+        }        
 
 
         public void DisplayCheckedInPatients(){
@@ -48,6 +44,7 @@ namespace Myapp {
                     index++;
                 }
             }
+            Console.WriteLine($"Please enter a choice betweem 1 and {CheckedInPatients.Count}:");
             int choice = Convert.ToInt32(Console.ReadLine());
             if (choice > CheckedInPatients.Count){
                 Console.WriteLine("Invalid choice.");
