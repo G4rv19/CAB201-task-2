@@ -61,7 +61,7 @@ namespace Myapp {
 
             selectedPatient.Room = room;
             selectedPatient.Floor = user.Floor_number;
-            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room {selectedPatient.Floor}.");
+            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {selectedPatient.Room} on floor {selectedPatient.Floor}.");
         }
 
         public void PatientSeeRoom(User user){
@@ -69,7 +69,7 @@ namespace Myapp {
                 Console.WriteLine("You have not been assigned a room.");
             }
             else{
-                Console.WriteLine($"Your room is nunber {user.Room} on floor {user.Floor}.");
+                Console.WriteLine($"Your room is number {user.Room} on floor {user.Floor}.");
             }
         }
 
