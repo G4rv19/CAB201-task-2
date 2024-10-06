@@ -119,7 +119,7 @@ namespace Myapp{
                                 management.AssigningRoom(user);
                                 break;
                             case 4:
-                                Console.WriteLine("Assign surgery.");
+                                management.AsignSurgery(user);
                                 break;
                             case 5:
                                 Console.WriteLine("Unassign room.");
