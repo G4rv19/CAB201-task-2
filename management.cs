@@ -41,7 +41,7 @@ namespace Myapp {
                 Console.WriteLine("No patients are checked in.");
                 return;
             }
-            Console.WriteLine($"Please enter a choice from 1 to {CheckedInPatients.Count}");
+            Console.WriteLine($"Please enter a choice between 1 and {CheckedInPatients.Count}.");
             int choice = Convert.ToInt32(Console.ReadLine());
 
             if (choice <1 || choice > CheckedInPatients.Count){
@@ -60,10 +60,18 @@ namespace Myapp {
             int room = Convert.ToInt32(Console.ReadLine());
 
             selectedPatient.Room = room;
-            Console.WriteLine($"{selectedPatient.Name} has been assigned to room {room}.");
+            selectedPatient.Floor = user.Floor_number;
+            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room {selectedPatient.Floor}.");
         }
 
-
+        public void PatientSeeRoom(User user){
+            if(user.Room == null){
+                Console.WriteLine("You have not been assigned a room.");
+            }
+            else{
+                Console.WriteLine($"Your room is nunber {user.Room} on floor {user.Floor}.");
+            }
+        }
 
     }
 

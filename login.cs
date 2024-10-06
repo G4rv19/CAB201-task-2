@@ -81,7 +81,7 @@ namespace Myapp{
                             }
                             break;
                         case 4:
-                            Console.WriteLine($"Your room is {user.Room}.");
+                            management.PatientSeeRoom(user);
                             break;
                         case 5:
                             Console.WriteLine("See surgeon.");
