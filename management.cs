@@ -40,15 +40,15 @@ namespace Myapp {
             if (choice > CheckedInPatients.Count){
                 Console.WriteLine("Invalid choice.");
             }
-            string Selected_patient =  Register.GetUser(CheckedInPatients[choice-1]).Name;
+            User selectedPatient = Register.GetUser(CheckedInPatients[choice-1]);
             Console.WriteLine("Please enter your room (1-10):");
             int room = Convert.ToInt32(Console.ReadLine());
             foreach (var patient in Register.users){
-                if (patient.Value.Name == Selected_patient){
+                if (patient.Value.Name == selectedPatient.Name){
                     patient.Value.Room = room;
                 }
             }
-            Console.WriteLine($"Patient {Selected_patient} has been assigned to room number {room} on floor {user.Floor_number}.");
+            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor {user.Floor_number}.");
         }
     }
 
