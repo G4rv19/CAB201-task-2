@@ -14,12 +14,14 @@ namespace Myapp {
             this.user = user;
         }
 
-        public void CheckIn(bool isCheckedIn, List<string> menu){
+        public void CheckIn(bool isCheckedIn, List<string> menu, User user){
             if (user.Checked_in){
                 menu[2] = "3. Check out";
+                Console.WriteLine($"Patient {user.Name} has been checked in.");
             }
             else if (!user.Checked_in){
                 menu[2] = "3. Check in";
+                Console.WriteLine($"Patient {user.Name} has been checked out.");
             }
         }
 
