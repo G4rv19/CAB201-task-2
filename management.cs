@@ -29,14 +29,11 @@ namespace Myapp {
             Dictionary<int, string> patientEmailMap = new Dictionary<int, string>();
             int index = 1;  
             foreach (var patient in Register.users){
-                if (patient.Value.Checked_in){
-                    if(patient.Value.Room == null){
-                        CheckedInPatients.Add(patient.Value.Name);
-                        patientEmailMap.Add(index, patient.Value.Email);
-                        Console.WriteLine($"{index}. {patient.Value.Name}");
-                        index++;
-
-                    }
+                if (patient.Value.Checked_in && patient.Value.Room == null){
+                    CheckedInPatients.Add(patient.Value.Name);
+                    patientEmailMap.Add(index, patient.Value.Email);
+                    Console.WriteLine($"{index}. {patient.Value.Name}");
+                    index++;
                 }
             }
 
