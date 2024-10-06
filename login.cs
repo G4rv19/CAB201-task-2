@@ -50,14 +50,13 @@ namespace Myapp{
         
         public void login_menu(){
             User user = Register.GetUser(email);
-            Management management = new Management();
-            bool isCheckedIn = false;
+            Management management = new Management(user);
             if (user.is_staff == false){
                 bool is_patient_logged_in = true;
                 while(is_patient_logged_in){
                     Console.WriteLine("Patient Menu.");
                     Console.WriteLine("Please choose from the menu below:");
-                    management.CheckIn(isCheckedIn, menu);
+                    management.CheckIn(user.Checked_in, menu);
                     foreach (string option in menu){
                         Console.WriteLine(option);
                     }
@@ -71,16 +70,16 @@ namespace Myapp{
                             change_password();
                             break;
                         case 3:
-                            isCheckedIn = !isCheckedIn;
-                            if (isCheckedIn){
-                                Console.WriteLine($"Patient {user.Name} has been checked in.");
+                            user.Checked_in = !user.Checked_in;
+                            if (user.Checked_in){
+                                Console.WriteLine("You has been checked in.");
                             }
                             else{
-                                Console.WriteLine($"Patient {user.Name} has been checked out.");
+                                Console.WriteLine("You has been checked out.");
                             }
                             break;
                         case 4:
-                            Console.WriteLine("See room.");
+                            Console.WriteLine($"Your room is {user.Room}.");
                             break;
                         case 5:
                             Console.WriteLine("See surgeon.");
@@ -115,7 +114,7 @@ namespace Myapp{
                                 change_password();
                                 break;
                             case 3:
-                                Console.WriteLine("Assign room to patient.");
+                                management.Assign_room();
                                 break;
                             case 4:
                                 Console.WriteLine("Assign surgery.");

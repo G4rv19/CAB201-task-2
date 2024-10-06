@@ -18,6 +18,8 @@ namespace Myapp {
         public int? Staff_id { get; set; }
         public int? Floor_number { get; set; }
         public string? Surgeon_speciality { get; set; }
+        public bool Checked_in { get; set; }
+        public int? Room { get; set; }
 
     
     public User(string name, int age, string mobile, string email, string password) {
@@ -26,7 +28,9 @@ namespace Myapp {
         Mobile = mobile;
         Email = email;
         Password = password;
-    } 
+        Checked_in = false;
+        Room = null;
+        } 
     }
 
 }
