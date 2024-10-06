@@ -6,9 +6,8 @@ using System.Text;
 namespace Myapp {
     public class Management {
 
-        public static List<string> CheckedInPatients = new List<string>(); // list of all patients who are checked in 
-        public string selectedPatient; // the current patient selected by the floor manager.
-        User user;
+        public static List<string> CheckedInPatients = new List<string>(); // list of all patients who are checked in  
+        private User user;
         public Management(User user)
         {
             this.user = user;
@@ -25,31 +24,47 @@ namespace Myapp {
      
 
         public void AssigningRoom(User user){
+            Console.WriteLine("Please select your patient: ");
             CheckedInPatients.Clear();
-            Console.WriteLine("Please select your patient:");
-            int index = 1;
+            Dictionary<int, string> patientEmailMap = new Dictionary<int, string>();
+            int index = 1;  
             foreach (var patient in Register.users){
-                if(patient.Value.Checked_in){
+                if (patient.Value.Checked_in){
                     CheckedInPatients.Add(patient.Value.Name);
+                    patientEmailMap.Add(index, patient.Value.Email);
                     Console.WriteLine($"{index}. {patient.Value.Name}");
                     index++;
                 }
             }
-            Console.WriteLine($"Please enter a choice betweem 1 and {CheckedInPatients.Count}:");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            if (choice > CheckedInPatients.Count){
-                Console.WriteLine("Invalid choice.");
+
+            if (CheckedInPatients.Count == 0){
+                Console.WriteLine("No patients are checked in.");
+                return;
             }
-            User selectedPatient = Register.GetUser(CheckedInPatients[choice-1]);
+            Console.WriteLine($"Please enter a choice from 1 to {CheckedInPatients.Count}");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            if (choice <1 || choice > CheckedInPatients.Count){
+                Console.WriteLine("Invalid choice.");
+                return;
+            }
+
+            string selectedPatientEmail = patientEmailMap[choice];
+            User selectedPatient = Register.GetUser(selectedPatientEmail);
+
+            if(selectedPatient == null){
+                Console.WriteLine("Patient not found.");
+                return;
+            }
             Console.WriteLine("Please enter your room (1-10):");
             int room = Convert.ToInt32(Console.ReadLine());
-            foreach (var patient in Register.users){
-                if (patient.Value.Name == selectedPatient.Name){
-                    patient.Value.Room = room;
-                }
-            }
-            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor {user.Floor_number}.");
+
+            selectedPatient.Room = room;
+            Console.WriteLine($"{selectedPatient.Name} has been assigned to room {room}.");
         }
+
+
+
     }
 
 }
