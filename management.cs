@@ -30,10 +30,13 @@ namespace Myapp {
             int index = 1;  
             foreach (var patient in Register.users){
                 if (patient.Value.Checked_in){
-                    CheckedInPatients.Add(patient.Value.Name);
-                    patientEmailMap.Add(index, patient.Value.Email);
-                    Console.WriteLine($"{index}. {patient.Value.Name}");
-                    index++;
+                    if(patient.Value.Room == null){
+                        CheckedInPatients.Add(patient.Value.Name);
+                        patientEmailMap.Add(index, patient.Value.Email);
+                        Console.WriteLine($"{index}. {patient.Value.Name}");
+                        index++;
+
+                    }
                 }
             }
 
@@ -56,6 +59,7 @@ namespace Myapp {
                 Console.WriteLine("Patient not found.");
                 return;
             }
+            
             Console.WriteLine("Please enter your room (1-10):");
             int room = Convert.ToInt32(Console.ReadLine());
 
