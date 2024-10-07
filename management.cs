@@ -119,7 +119,7 @@ namespace Myapp {
                 Console.WriteLine("You do not have a surgery scheduled.");
             }
             else{
-                Console.WriteLine($"Your surgery is scheduled for {user.surgeryDateTime}.");
+                Console.WriteLine($"Your surgery time is {user.surgeryDateTime}.");
             }
         }
         public void SurgeonAssigned(User user){

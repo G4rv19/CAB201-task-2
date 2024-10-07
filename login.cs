@@ -87,7 +87,7 @@ namespace Myapp{
                             management.SurgeonAssigned(user);
                             break;
                         case 6: 
-                            Console.WriteLine("See surgery date and time.");
+                            management.ShowSurgeryDate(user);
                             break;
                         case 7:
                             Console.WriteLine($"Patient {user.Name} has logged out.");
