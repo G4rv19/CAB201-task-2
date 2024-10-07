@@ -84,7 +84,7 @@ namespace Myapp{
                             management.PatientSeeRoom(user);
                             break;
                         case 5:
-                            Console.WriteLine("See surgeon.");
+                            management.SurgeonAssigned(user);
                             break;
                         case 6: 
                             Console.WriteLine("See surgery date and time.");

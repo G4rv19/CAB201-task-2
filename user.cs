@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -21,6 +22,8 @@ namespace Myapp {
         public bool Checked_in { get; set; }
         public int? Room { get; set; }
         public int? Floor { get; set; }
+        public string? surgeonassigned { get; set; }
+        public string? surgeryDateTime { get; set; }
 
     
     public User(string name, int age, string mobile, string email, string password) {
@@ -32,6 +35,8 @@ namespace Myapp {
         Checked_in = false;
         Room = null;
         Floor = null;
+        surgeonassigned = null;
+        surgeryDateTime = null;
         } 
     }
 

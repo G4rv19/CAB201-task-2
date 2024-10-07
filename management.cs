@@ -105,12 +105,32 @@ namespace Myapp {
 
             string selectedSurgeonEmail = patientEmailMap[surgeonChoice];
             User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
+            selectedPatient.surgeonassigned = selectedSurgeon.Name;
 
             Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
             string surgeryDateTime = Console.ReadLine();
+            selectedPatient.surgeryDateTime = surgeryDateTime;
             Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
             Console.WriteLine($"Surgery will take place on {surgeryDateTime}.");
         }
+        
+        public void ShowSurgeryDate(User user){
+            if (user.surgeryDateTime == null){
+                Console.WriteLine("You do not have a surgery scheduled.");
+            }
+            else{
+                Console.WriteLine($"Your surgery is scheduled for {user.surgeryDateTime}.");
+            }
+        }
+        public void SurgeonAssigned(User user){
+            if (user.surgeonassigned == null){
+                Console.WriteLine("You have not been assigned a surgeon.");
+            }
+            else{
+                Console.WriteLine($"Your surgeon is {user.surgeonassigned}.");
+            }
+        }
     }
+    
 
 }
