@@ -82,7 +82,7 @@ namespace Myapp {
         }
 
         public void AsignSurgery(User user){
-            Console.WriteLine("Please select a patient to perform surgery on: ");
+            Console.WriteLine("Please select your patient: ");
             CheckedInPatientList(patient => patient.Checked_in == true && patient.Room != null && patient.Floor != null, SurgeryPatients);
             if (SurgeryPatients == null){
                 Console.WriteLine("No patients are checked in and assigned to a room.");
@@ -106,7 +106,7 @@ namespace Myapp {
             string selectedSurgeonEmail = patientEmailMap[surgeonChoice];
             User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
 
-            Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01;2024)");
+            Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
             string surgeryDateTime = Console.ReadLine();
             Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
             Console.WriteLine($"Surgery will take place on {surgeryDateTime}.");
