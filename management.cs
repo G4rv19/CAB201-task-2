@@ -83,7 +83,7 @@ namespace Myapp {
 
         public void AsignSurgery(User user){
             Console.WriteLine("Please select your patient: ");
-            CheckedInPatientList(patient => patient.Checked_in == true && patient.Room != null && patient.Floor != null, SurgeryPatients);
+            CheckedInPatientList(patient => patient.Checked_in == true && patient.Room != null && patient.Floor != null && patient.surgeonassigned == null && patient.surgeryDateTime == null, SurgeryPatients);
             if (SurgeryPatients == null){
                 Console.WriteLine("No patients are checked in and assigned to a room.");
                 return;
