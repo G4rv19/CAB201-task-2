@@ -71,6 +71,7 @@ namespace Myapp {
             CheckedInPatients.Clear();
             patientEmailMap.Clear();
             SurgeryPatients.Clear();
+            SurgeonList.Clear();
             int index = 1;
             foreach (var patient in Register.users){
                 if (condition(patient.Value)){
