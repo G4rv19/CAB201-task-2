@@ -69,6 +69,7 @@ namespace Myapp {
 
         public void CheckedInPatientList(Func <User, bool> condition, List<string> SavingList){
             CheckedInPatients.Clear();
+            patientEmailMap.Clear();
             int index = 1;
             foreach (var patient in Register.users){
                 if (condition(patient.Value)){
