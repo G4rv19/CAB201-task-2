@@ -135,19 +135,31 @@ namespace Myapp {
         }
 
         public void PatientAssignedForSurgeon(User user){
+            Console.WriteLine("Your patients.");
             PatientAssignedToSurgeon.Clear();
             CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
+        }
+
+        public void SeeSurgery(User user){
+            PatientAssignedToSurgeon.Clear();
+            foreach (var patient in Register.users){
+                if (patient.Value.surgeonassigned == user.Name){
+                    PatientAssignedToSurgeon.Add(patient.Value.Name);
+                }
+            }
             if (PatientAssignedToSurgeon.Count == 0){
-                Console.WriteLine("You have no patients assigned to you.");
+                Console.WriteLine("You have no patients assigned.");
             }
             else{
-                Console.WriteLine("Your patients.");
-                int Index = 1;
-                foreach (var patient in PatientAssignedToSurgeon){
-                    Console.WriteLine($"{Index}. {patient}.");
-                    Index++;
+                string PatientName;
+                string surgeryDate;
+                foreach (var assignedPatient in PatientAssignedToSurgeon){
+                    PatientName = assignedPatient;
+                    User patient = Register.GetUser(PatientName);
+                    surgeryDate = patient.surgeryDateTime;
+                    Console.WriteLine($"performing surgery on patient {PatientName} on  {surgeryDate}.");
                 }
-        }
+            }
         }
     }
     
