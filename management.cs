@@ -144,23 +144,18 @@ namespace Myapp {
             PatientAssignedToSurgeon.Clear();
             foreach (var patient in Register.users){
                 if (patient.Value.surgeonassigned == user.Name){
-                    PatientAssignedToSurgeon.Add(patient.Value.Name);
+                    PatientAssignedToSurgeon.Add(patient.Value.Email);
                 }
             }
             if (PatientAssignedToSurgeon.Count == 0){
                 Console.WriteLine("You have no patients assigned.");
             }
             else{
-                List<string> patientName = new List<string>();
-                List<string> surgeryDate = new List<string>();
-                int index = 0;
                 Console.WriteLine("Your schedule.");
-                foreach (var assignedPatient in PatientAssignedToSurgeon){
-                    User patient = Register.GetUser(assignedPatient);
-                    patientName.Add(patient.Name);
-                    surgeryDate.Add(patient.surgeryDateTime);
-                    Console.WriteLine($"performing surgery on patient {patientName[index]} on  {surgeryDate[index]}.");
-                    index++;
+                foreach (var assignedPatientEmail in PatientAssignedToSurgeon){
+                    if (Register.users.TryGetValue(assignedPatientEmail, out User assignedPatient)){
+                        Console.WriteLine($"Performing surgery on patient {assignedPatient.Name} on {assignedPatient.surgeryDateTime}");
+                    }
                 }
             }
         }
