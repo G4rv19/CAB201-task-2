@@ -189,6 +189,8 @@ namespace Myapp {
             Console.WriteLine($"Please enter a choice between 1 and {PatientAssignedToSurgeon.Count}.");
             int choice = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine($"Surgery performed on {PatientAssignedToSurgeon[choice-1]} by {user.Name}.");
+            Register.users[PatientAssignedToSurgeon[choice-1]].surgeryDateTime = null;
+            Register.users[PatientAssignedToSurgeon[choice-1]].surgeonassigned = null;
 
         }
 
