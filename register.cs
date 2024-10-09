@@ -40,7 +40,9 @@ namespace Myapp {
                     Console.WriteLine("");
                     break;
                 default:
-                    Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
+                    Console.WriteLine("#####");
+                    Console.WriteLine("#Error - Invalid Menu Option, please try again.");
+                    Console.WriteLine("#####");
                     break;
             } 
         }

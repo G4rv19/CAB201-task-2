@@ -10,25 +10,36 @@ namespace Myapp{
 
         public User Login_User(){
             Console.WriteLine("Login Menu.");
-            Console.WriteLine("Please enter in your email:");
-            email = Console.ReadLine();
-            User user = Register.GetUser(email);
-            if (user == null){
-                Console.WriteLine("User not found.");
-            } // Add the closing brace here
+            if (Register.users.Count == 0){
+                Console.WriteLine("#####");
+                Console.WriteLine("#Error - There are no people registered.");
+                return null;
+            }
             else{
-                Console.WriteLine("Please enter in your password:");
-                string password = Console.ReadLine();
-                if (user.Password == password){
-                    Console.WriteLine($"Hello {user.Name} welcome back.");
-                    login_menu();
+                Console.WriteLine("Please enter in your email:");
+                email = Console.ReadLine();
+                User user = Register.GetUser(email);
+                if (user.Email != email){
+                    Console.WriteLine("#####");
+                    Console.WriteLine("#Error - Email is not registered.");
+                    Console.WriteLine("#####");
                 }
                 else{
-                    Console.WriteLine("Incorrect password.");
+                    Console.WriteLine("Please enter in your password:");
+                    string password = Console.ReadLine();
+                    if (user.Password == password){
+                        Console.WriteLine($"Hello {user.Name} welcome back.");
+                        login_menu();
+                    }
+                    else{
+                        Console.WriteLine("#####");
+                        Console.WriteLine("#Error - Wrong Password.");
+                        Console.WriteLine("#####");
+                    }
                 }
+                return user;
             }
         
-            return user; // Add this line to return a value
         }
         
         public static List<string> menu = new List<string>(){
