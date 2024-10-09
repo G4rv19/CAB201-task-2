@@ -151,14 +151,16 @@ namespace Myapp {
                 Console.WriteLine("You have no patients assigned.");
             }
             else{
-                string PatientName;
-                string surgeryDate;
+                List<string> patientName = new List<string>();
+                List<string> surgeryDate = new List<string>();
+                int index = 1;
                 Console.WriteLine("Your schedule.");
                 foreach (var assignedPatient in PatientAssignedToSurgeon){
-                    PatientName = assignedPatient;
-                    User patient = Register.GetUser(PatientName);
-                    surgeryDate = patient.surgeryDateTime;
-                    Console.WriteLine($"performing surgery on patient {PatientName} on  {surgeryDate}.");
+                    User patient = Register.GetUser(assignedPatient);
+                    patientName.Add(patient.Name);
+                    surgeryDate.Add(patient.surgeryDateTime);
+                    Console.WriteLine($"performing surgery on patient {patientName[index]} on  {surgeryDate[index]}.");
+                    index++;
                 }
             }
         }
