@@ -156,7 +156,7 @@ namespace Myapp{
                                 management.SeeSurgery(user);
                                 break;
                             case 5:
-                                management.UnassignSurgeon(user);
+                                management.PerformSurgery(user);
                                 break;
                             case 6:
                                 Console.WriteLine($"Surgeon {user.Name} has logged out.");

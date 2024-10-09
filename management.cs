@@ -178,28 +178,21 @@ namespace Myapp {
             }
         }
 
-        public User PerformSurgery(User user){
+        public void PerformSurgery(User user){
             PatientAssignedToSurgeon.Clear();
             Console.WriteLine("Please select your patient: ");
             CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
             if (PatientAssignedToSurgeon.Count == 0){
                 Console.WriteLine("You have no patients assigned.");
-                return null;
+                return;
             }
             Console.WriteLine($"Please enter a choice between 1 and {PatientAssignedToSurgeon.Count}.");
             int choice = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine($"Surgery performed on {PatientAssignedToSurgeon[choice-1]} by {user.Name}.");
-            return Register.GetUser(PatientAssignedToSurgeon[choice-1]);
-        }
-
-        public void UnassignSurgeon(User user){
-            PerformSurgery(user);
-            if (PerformSurgery(user) != null){
-                User patient = PerformSurgery(user);
-                User selectedPatient = Register.GetUser(patient.Email);
-                selectedPatient.surgeonassigned = null;
-                selectedPatient.surgeryDateTime = null;
-            }
+            string selectedPatientEmail = patientEmailMap[choice];
+            User selectedPatient = Register.GetUser(selectedPatientEmail);
+            selectedPatient.surgeryDateTime = null;
+            selectedPatient.surgeonassigned = null;
         }
 
 
