@@ -154,8 +154,9 @@ namespace Myapp {
             }
             Console.WriteLine("Please enter a choice between 1 and 4.");
             if(!int.TryParse(Console.ReadLine(), out int choice) || choice < 1 || choice > 4) {
-                Console.WriteLine("Invalid choice. Please enter a choice between 1 and 4.");
-                return;
+                Console.WriteLine("#####");
+                Console.WriteLine("#Error - Non-valid speciality type, please try again.");
+                Console.WriteLine("#####");
             }
             if (choice == 1){
                 staff.Surgeon_speciality = "General Surgeon";
