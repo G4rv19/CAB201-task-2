@@ -7,7 +7,7 @@ using System.Text;
 namespace Myapp {
     public class Management {
 
-        public static List<string> CheckedInPatients = new List<string>(); // list of all patients who are checked in  
+        public static List<string> Patients = new List<string>(); // list of all patients who are checked in  
         public static List<string> SurgeryPatients = new List<string>(); // list of all patients who are checked in and have a surgery scheduled    
         public static List<string> SurgeonList = new List<string>(); // list of all surgeons who are available to perform surgery
         private Dictionary<int, string> patientEmailMap = new Dictionary<int, string>();
@@ -30,15 +30,15 @@ namespace Myapp {
 
         public void AssigningRoom(User user){
             Console.WriteLine("Please select your patient: ");
-            CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, CheckedInPatients);
-            if (CheckedInPatients.Count == 0){
+            CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, Patients);
+            if (Patients.Count == 0){
                 Console.WriteLine("There are no checked in patients.");
                 return;
             }
-            Console.WriteLine($"Please enter a choice between 1 and {CheckedInPatients.Count}.");
+            Console.WriteLine($"Please enter a choice between 1 and {Patients.Count}.");
             int choice = Convert.ToInt32(Console.ReadLine());
 
-            if (choice <1 || choice > CheckedInPatients.Count){
+            if (choice <1 || choice > Patients.Count){
                 Console.WriteLine("Invalid choice.");
                 return;
             }
@@ -59,6 +59,24 @@ namespace Myapp {
             Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {selectedPatient.Room} on floor {selectedPatient.Floor}.");
         }
 
+        public void UnassignRoom(User user){
+            Console.WriteLine("Please select your patient: ");
+            CheckedInPatientList(patient => patient.Checked_in == false && patient.Room != null && patient.Floor != null, Patients);
+            Console.WriteLine($"Please enter a choice between 1 and {Patients.Count}.");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            if (choice <1 || choice > Patients.Count){
+                Console.WriteLine("Invalid choice.");
+                return;
+            }
+            string selectedPatientEmail = patientEmailMap[choice];
+            User selectedPatient = Register.GetUser(selectedPatientEmail);
+            Console.WriteLine($"Room number {selectedPatient.Room} on floor {selectedPatient.Floor} has been unassigned.");
+            selectedPatient.Room = null;
+            selectedPatient.Floor = null;
+        }
+
+
+
         public void PatientSeeRoom(User user){
             if(user.Room == null){
                 Console.WriteLine("You have not been assigned a room.");
@@ -69,7 +87,7 @@ namespace Myapp {
         }
 
         public void CheckedInPatientList(Func <User, bool> condition, List<string> SavingList){
-            CheckedInPatients.Clear();
+            Patients.Clear();
             patientEmailMap.Clear();
             SurgeryPatients.Clear();
             SurgeonList.Clear();
@@ -173,6 +191,8 @@ namespace Myapp {
             Console.WriteLine($"Surgery performed on {PatientAssignedToSurgeon[choice-1]} by {user.Name}.");
 
         }
+
+
     }
     
 
