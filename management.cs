@@ -153,7 +153,7 @@ namespace Myapp {
             else{
                 List<string> patientName = new List<string>();
                 List<string> surgeryDate = new List<string>();
-                int index = 1;
+                int index = 0;
                 Console.WriteLine("Your schedule.");
                 foreach (var assignedPatient in PatientAssignedToSurgeon){
                     User patient = Register.GetUser(assignedPatient);
