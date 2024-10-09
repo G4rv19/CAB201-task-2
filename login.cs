@@ -122,7 +122,7 @@ namespace Myapp{
                                 management.AsignSurgery(user);
                                 break;
                             case 5:
-                                Console.WriteLine("Unassign room.");
+                                management.UnassignRoom(user);
                                 break;
                             case 6:
                                 Console.WriteLine($"Floor manager {user.Name} has logged out.");
