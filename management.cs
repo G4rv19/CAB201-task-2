@@ -135,7 +135,7 @@ namespace Myapp {
         }
 
         public void PatientAssignedForSurgeon(User user){
-            Console.WriteLine("Your patients.");
+            Console.WriteLine("Your Patients.");
             PatientAssignedToSurgeon.Clear();
             CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
         }
@@ -153,6 +153,7 @@ namespace Myapp {
             else{
                 string PatientName;
                 string surgeryDate;
+                Console.WriteLine("Your schedule.");
                 foreach (var assignedPatient in PatientAssignedToSurgeon){
                     PatientName = assignedPatient;
                     User patient = Register.GetUser(PatientName);

@@ -153,7 +153,7 @@ namespace Myapp{
                                 management.PatientAssignedForSurgeon(user);
                                 break;
                             case 4:
-                                Console.WriteLine("See your schedule.");
+                                management.SeeSurgery(user);
                                 break;
                             case 5:
                                 Console.WriteLine("Perform surgery.");
