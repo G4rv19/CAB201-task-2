@@ -159,6 +159,20 @@ namespace Myapp {
                 }
             }
         }
+
+        public void PerformSurgery(User user){
+            PatientAssignedToSurgeon.Clear();
+            Console.WriteLine("Please select your patient: ");
+            CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
+            if (PatientAssignedToSurgeon.Count == 0){
+                Console.WriteLine("You have no patients assigned.");
+                return;
+            }
+            Console.WriteLine($"Please enter a choice between 1 and {PatientAssignedToSurgeon.Count}.");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine($"Surgery performed on {PatientAssignedToSurgeon[choice-1]} by surgeon {user.Name}.");
+
+        }
     }
     
 
