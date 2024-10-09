@@ -11,6 +11,7 @@ namespace Myapp {
         public static List<string> SurgeryPatients = new List<string>(); // list of all patients who are checked in and have a surgery scheduled    
         public static List<string> SurgeonList = new List<string>(); // list of all surgeons who are available to perform surgery
         private Dictionary<int, string> patientEmailMap = new Dictionary<int, string>();
+        private static List<string> PatientAssignedToSurgeon = new List<string>();
         private User user;
         public Management(User user)
         {
@@ -131,6 +132,22 @@ namespace Myapp {
             else{
                 Console.WriteLine($"Your surgeon is {user.surgeonassigned}.");
             }
+        }
+
+        public void PatientAssignedForSurgeon(User user){
+            PatientAssignedToSurgeon.Clear();
+            CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
+            if (PatientAssignedToSurgeon.Count == 0){
+                Console.WriteLine("You have no patients assigned to you.");
+            }
+            else{
+                Console.WriteLine("Your patients.");
+                int Index = 1;
+                foreach (var patient in PatientAssignedToSurgeon){
+                    Console.WriteLine($"{Index}. {patient}.");
+                    Index++;
+                }
+        }
         }
     }
     

@@ -150,7 +150,7 @@ namespace Myapp{
                                 change_password();
                                 break;
                             case 3:
-                                Console.WriteLine("See your list of patients.");
+                                management.PatientAssignedForSurgeon(user);
                                 break;
                             case 4:
                                 Console.WriteLine("See your schedule.");
