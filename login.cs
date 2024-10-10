@@ -44,7 +44,7 @@ namespace Myapp{
         
         }
         
-        public static List<string> menu = new List<string>(){
+        public List<string> menu = new List<string>(){
             "1. Display my details ",
             "2. Change password",
             "3. Check in",
@@ -54,7 +54,7 @@ namespace Myapp{
             "7. Log out",
         };
 
-        public static List<string> surgeon_menu = new List<string>(){
+        public List<string> surgeon_menu = new List<string>(){
             "1. Display my details",
             "2. Change password",
             "3. See your list of patients",
@@ -213,7 +213,7 @@ namespace Myapp{
             user.Password = new_password;
             Console.WriteLine("Password has been changed.");
         }
-        public static List<string> floor_manager_menu = new List<string>(){
+        public List<string> floor_manager_menu = new List<string>(){
             "1. Display my details",
             "2. Change password",
             "3. Assign room to patient",
