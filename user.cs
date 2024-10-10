@@ -24,6 +24,7 @@ namespace Myapp {
         public int? Floor { get; set; }
         public string? surgeonassigned { get; set; }
         public string? surgeryDateTime { get; set; }
+        public bool? SurgeryPerformed { get; set; }
 
     
     public User(string name, int age, string mobile, string email, string password) {
@@ -37,6 +38,7 @@ namespace Myapp {
         Floor = null;
         surgeonassigned = null;
         surgeryDateTime = null;
+        SurgeryPerformed = false;
         } 
     }
 

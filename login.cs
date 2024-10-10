@@ -13,16 +13,18 @@ namespace Myapp{
             if (Register.users.Count == 0){
                 Console.WriteLine("#####");
                 Console.WriteLine("#Error - There are no people registered.");
+                Console.WriteLine("#####");
                 return null;
             }
             else{
                 Console.WriteLine("Please enter in your email:");
                 email = Console.ReadLine();
                 User user = Register.GetUser(email);
-                if (user.Email != email){
+                if (user == null){
                     Console.WriteLine("#####");
                     Console.WriteLine("#Error - Email is not registered.");
                     Console.WriteLine("#####");
+                    return null;
                 }
                 else{
                     Console.WriteLine("Please enter in your password:");
@@ -71,7 +73,7 @@ namespace Myapp{
                 while(is_patient_logged_in){
                     Console.WriteLine("Patient Menu.");
                     Console.WriteLine("Please choose from the menu below:");
-                    management.CheckIn(user.Checked_in, menu);
+                    management.CheckIn(user.Checked_in, menu, user);
                     foreach (string option in menu){
                         Console.WriteLine(option);
                     }
@@ -86,12 +88,6 @@ namespace Myapp{
                             break;
                         case 3:
                             user.Checked_in = !user.Checked_in;
-                            if (user.Checked_in){
-                                Console.WriteLine($"Patient {user.Name} has been checked in.");
-                            }
-                            else{
-                                Console.WriteLine($"Patient {user.Name} has been checked out.");
-                            }
                             break;
                         case 4:
                             management.PatientSeeRoom(user);
