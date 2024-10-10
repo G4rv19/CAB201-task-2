@@ -79,7 +79,7 @@ namespace Myapp{
                     }
                     menu.Add("4. See room");
                     menu.Add("5. See surgeon");
-                    menu.Add("6. See surgery date");
+                    menu.Add("6. See surgery date and time");
                     menu.Add("7. Log out");
                     Console.WriteLine("Patient Menu."); 
                     Console.WriteLine("Please choose from the menu below:");
