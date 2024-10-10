@@ -29,19 +29,24 @@ namespace Myapp {
                     return;
                 }
                 else{
-                    string selectedPatientEmail = managementTools.patientEmailMap[choice - 1];
-                    User selectedPatient = Register.GetUser(selectedPatientEmail);
-                    if(selectedPatient == null){
-                        Console.WriteLine("Patient not found.");
-                        return;
+                    if (managementTools.patientEmailMap.TryGetValue(choice, out string selectedPatientEmail)){
+                        User selectedPatient = Register.GetUser(selectedPatientEmail);
+                        if (selectedPatient.Room != null){
+                            Console.WriteLine("Patient already has a room assigned.");
+                            return;
+                        }
+                        else{
+                            Console.WriteLine("Please enter the room (1-10):");
+                            int room = Convert.ToInt32(Console.ReadLine());
+                            selectedPatient.Room = room;
+                            selectedPatient.Floor = user.Floor_number;
+                            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room {room} on floor {user.Floor_number}.");
+                        }    
                     }
                     else{
-                        Console.WriteLine("Please enter your room (1-10):");
-                        int room = Convert.ToInt32(Console.ReadLine());
-                        selectedPatient.Room = room;
-                        selectedPatient.Floor = user.Floor_number;
-                        Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {selectedPatient.Room} on floor {selectedPatient.Floor}.");
+                        Console.WriteLine("Error in retrieving patient.");
                     }
+
                 }
             }
 
