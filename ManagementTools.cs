@@ -45,11 +45,11 @@ namespace Myapp {
         public void CheckIn(bool isCheckedIn, List<string> menu, User user){
             if (user.SurgeryPerformed == true){ 
                 if (isCheckedIn){
-                    Console.WriteLine("You cant check in rn.");
+                    Console.WriteLine("You are unable to check in at this time.");
                     return;
                 }
                 else if (!isCheckedIn){
-                    Console.WriteLine("You cant check out rn.");
+                    Console.WriteLine("You are unable to check out at this time.");
                     return;
                 }
             }
