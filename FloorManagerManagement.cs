@@ -17,7 +17,7 @@ namespace Myapp {
             if (patients.Count == 0){
                 managementTools.CheckedInPatientList(patient => patient.Name != null && patient.Email != null && patient.is_staff == false, Users);
                 if (Users.Count != 0){
-                    Console.WriteLine("There are no registered patients.");
+                    Console.WriteLine("There are no checked in patients.");
                     return;
                 }
                 else{

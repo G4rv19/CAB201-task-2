@@ -44,6 +44,7 @@ namespace Myapp {
                 foreach (string patient in SurgeryPatients){
                     string PatientEmail = managementTools.patientEmailMap[index];
                     User selectedPatient = Register.GetUser(PatientEmail);
+                    Console.WriteLine("Your schedule.");
                     Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
                     index++;
                 }
@@ -77,7 +78,6 @@ namespace Myapp {
                     User selectedPatient = Register.GetUser(patientEmail);  
                     selectedPatient.surgeryDateTime = null;
                     selectedPatient.surgeonassigned = null;
-                    Console.WriteLine("Your schedule.");
                     Console.WriteLine($"Surgery performed on {selectedPatient.Name} by {user.Name}.");
                     return;
                 }
