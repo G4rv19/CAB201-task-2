@@ -47,7 +47,7 @@ namespace Myapp {
                 if (isCheckedIn == true){
                     menu[2] = "3. Check out";
                     user.Checked_in = false;
-                    Console.WriteLine("You have checked out.");
+                    Console.WriteLine($"Patient {user.Name} has been checked out.");
                     return;
                 }
                 else{
@@ -59,7 +59,7 @@ namespace Myapp {
                 if(!isCheckedIn){
                     menu[2] = "3. Check out";
                     user.Checked_in = true;
-                    Console.WriteLine("You have checked in.");
+                    Console.WriteLine($"Patient {user.Name} has been checked in.");
                     return;
                 }
                 else{
