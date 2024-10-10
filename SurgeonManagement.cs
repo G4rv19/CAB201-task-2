@@ -40,7 +40,7 @@ namespace Myapp {
                 return;
             }
             else{
-                int index = 0;
+                int index = 1;
                 foreach (string patient in SurgeryPatients){
                     string PatientEmail = managementTools.patientEmailMap[index];
                     User selectedPatient = Register.GetUser(PatientEmail);
@@ -73,7 +73,7 @@ namespace Myapp {
                 }
                 else{
 
-                    string patientEmail = managementTools.patientEmailMap[choice - 1];
+                    string patientEmail = managementTools.patientEmailMap[choice];
                     User selectedPatient = Register.GetUser(patientEmail);  
                     selectedPatient.surgeryDateTime = null;
                     selectedPatient.surgeonassigned = null;
