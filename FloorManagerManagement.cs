@@ -71,7 +71,7 @@ namespace Myapp {
                     return;
                 }
                 else{
-                    string selectedPatientEmail = managementTools.patientEmailMap[choice - 1];
+                    string selectedPatientEmail = managementTools.patientEmailMap[choice];
                     User selectedPatient = Register.GetUser(selectedPatientEmail);
                     Console.WriteLine($"Room number {selectedPatient.Room} on floor {selectedPatient.Floor} has been unassigned.");
                     selectedPatient.Room = null;

@@ -44,7 +44,7 @@ namespace Myapp {
                 foreach (string patient in SurgeryPatients){
                     string PatientEmail = managementTools.patientEmailMap[index];
                     User selectedPatient = Register.GetUser(PatientEmail);
-                    Console.WriteLine($"Patient {selectedPatient.Name} has surgery scheduled on {selectedPatient.surgeryDateTime}.");
+                    Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}.");
                     index++;
                 }
                 return;
