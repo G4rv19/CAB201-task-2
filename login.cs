@@ -71,7 +71,7 @@ namespace Myapp{
                     menu.Clear();
                     menu.Add("1. Display my details");
                     menu.Add("2. Change password");
-                    if (user.SurgeryPerformed == true || user.Checked_in == true){
+                    if (user.SurgeryPerformed == true && user.Checked_in == true){
                         menu.Add("3. Check out");
                     }
                     else{
