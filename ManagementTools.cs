@@ -42,26 +42,12 @@ namespace Myapp {
             }
         }
 
-        public void CheckIn(bool isCheckedIn, List<string> menu, User user){
+        public void CheckIn(bool isCheckedIn, List<string> menu){
             if (isCheckedIn){
-                if (user.SurgeryPerformed == true){
-                    Console.WriteLine("You have already checked out.");
-                    return;
-                }
-                else{
                 menu[2] = "3. Check out";
-                Console.WriteLine($"Patient {user.Name} has been checked in.");
-                }
             }
             else if (!isCheckedIn){
-                if (user.SurgeryPerformed == true){
-                    menu[2] = "3. Check in";
-                    Console.WriteLine($"Patient {user.Name} has been checked out.");
-                    return;
-                }
-                else{
-                    Console.WriteLine("You are unable to check out at this time.");
-                }
+                menu[2] = "3. Check in";
             }
         }
 

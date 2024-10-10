@@ -73,7 +73,7 @@ namespace Myapp{
                 while(is_patient_logged_in){
                     Console.WriteLine("Patient Menu.");
                     Console.WriteLine("Please choose from the menu below:");
-                    management.CheckIn(user.Checked_in, menu, user);
+                    management.CheckIn(user.Checked_in, menu);
                     foreach (string option in menu){
                         Console.WriteLine(option);
                     }
@@ -88,6 +88,12 @@ namespace Myapp{
                             break;
                         case 3:
                             user.Checked_in = !user.Checked_in;
+                            if (user.Checked_in){
+                                Console.WriteLine($"Patient {user.Name} has been checked in.");
+                            }
+                            else{
+                                Console.WriteLine($"Patient {user.Name} has been checked out.");
+                            }
                             break;
                         case 4:
                             management.PatientSeeRoom(user);
