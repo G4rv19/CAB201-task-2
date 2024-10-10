@@ -12,15 +12,16 @@ namespace Myapp {
         public List<string> surgeons = new List<string>();
         ManagementTools managementTools = new ManagementTools();
         public void AssigningRoom(User user){
+            Users.Clear();
             managementTools.CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, patients);
             if (patients.Count == 0){
-                managementTools.CheckedInPatientList(patient => patient.Name != null && patient.Email != null, Users);
-                if (Users.Count == 0){
+                managementTools.CheckedInPatientList(patient => patient.Name != null && patient.Email != null && patient.is_staff == false, Users);
+                if (Users.Count != 0){
                     Console.WriteLine("There are no registered patients.");
                     return;
                 }
                 else{
-                    Console.WriteLine("There are no patients to assign rooms to.");
+                    Console.WriteLine("There are no registered patients.");
                     return;
                 }
             }
@@ -91,15 +92,16 @@ namespace Myapp {
         }
         
         public void AssignSurgery(User user){
+            Users.Clear();
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == null && patient.surgeryDateTime == null && patient.Checked_in == true && patient.Room != null, patients);
             if (patients.Count == 0){
-                managementTools.CheckedInPatientList(patient => patient.Name != null && patient.Email != null, Users);
-                if (Users.Count == 0){
-                    Console.WriteLine("There are no registered patients.");
+                managementTools.CheckedInPatientList(patient => patient.Name != null && patient.Email != null && patient.is_staff == false, Users);
+                if (Users.Count != 0){
+                    Console.WriteLine("There are no patients ready for surgery.");
                     return;
                 }
                 else{
-                    Console.WriteLine("There are no patients ready for surgery."); 
+                    Console.WriteLine("There are no registered patients."); 
                     return;
                 }
             }

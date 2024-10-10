@@ -178,7 +178,7 @@ namespace Myapp {
                         break;
                     default:
                         Console.WriteLine("#####");
-                        Console.WriteLine("#Error - Invalid Menu Option, please try again.");
+                        Console.WriteLine("#Error - Non-valid speciality type, please try again.");
                         Console.WriteLine("#####");
                         break;
                 }
