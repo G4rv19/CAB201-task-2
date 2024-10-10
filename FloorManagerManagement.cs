@@ -12,7 +12,7 @@ namespace Myapp {
         public void AssigningRoom(User user){
             managementTools.CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, patients);
             if (patients.Count == 0){
-                Console.WriteLine("There are no checked in patients.");
+                Console.WriteLine("There are no registered in patients.");
                 return;
             }
             else{
@@ -84,7 +84,7 @@ namespace Myapp {
         public void AssignSurgery(User user){
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == null && patient.surgeryDateTime == null && patient.Checked_in == true && patient.Room != null, patients);
             if (patients.Count == 0){
-                Console.WriteLine("No patients are checked in and assigned to a room.");
+                Console.WriteLine("There are no registered patients.");
                 return;
             }
             else{

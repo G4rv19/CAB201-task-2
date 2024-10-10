@@ -131,7 +131,9 @@ namespace Myapp {
                     Console.WriteLine("");
                     break;
                 default:
-                    Console.WriteLine("Invalid choice. Please enter a choice between 1 and 3.");
+                    Console.WriteLine("#####");
+                    Console.WriteLine("#Error - Invalid Menu Option, please try again.");
+                    Console.WriteLine("#####");
                     break;
             }
         }
@@ -154,9 +156,7 @@ namespace Myapp {
             }
             Console.WriteLine("Please enter a choice between 1 and 4.");
             if(!int.TryParse(Console.ReadLine(), out int choice) || choice < 1 || choice > 4) {
-                Console.WriteLine("#####");
-                Console.WriteLine("#Error - Non-valid speciality type, please try again.");
-                Console.WriteLine("#####");
+                return;
             }
             if (choice == 1){
                 staff.Surgeon_speciality = "General Surgeon";
