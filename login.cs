@@ -63,7 +63,9 @@ namespace Myapp{
 
         public void login_menu(){
             User user = Register.GetUser(email);
-            Management management = new Management(user);
+            ManagementTools management = new ManagementTools();
+            SurgeonManagement surgeonManagement = new SurgeonManagement(user);
+            FloorManagerManagement floormanagement = new FloorManagerManagement();
             if (user.is_staff == false){
                 bool is_patient_logged_in = true;
                 while(is_patient_logged_in){
@@ -127,13 +129,13 @@ namespace Myapp{
                                 change_password();
                                 break;
                             case 3:
-                                management.AssigningRoom(user);
+                                floormanagement.AssigningRoom(user);
                                 break;
                             case 4:
-                                management.AsignSurgery(user);
+                                floormanagement.AssignSurgery(user);
                                 break;
                             case 5:
-                                management.UnassignRoom(user);
+                                floormanagement.UnassignRoom(user);
                                 break;
                             case 6:
                                 Console.WriteLine($"Floor manager {user.Name} has logged out.");
@@ -161,13 +163,13 @@ namespace Myapp{
                                 change_password();
                                 break;
                             case 3:
-                                management.PatientAssignedForSurgeon(user);
+                                surgeonManagement.PatientAssignedForSurgeon(user);
                                 break;
                             case 4:
-                                management.SeeSurgery(user);
+                                surgeonManagement.SeeSurgery(user);
                                 break;
                             case 5:
-                                management.PerformSurgery(user);
+                                surgeonManagement.PerformSurgery(user);
                                 break;
                             case 6:
                                 Console.WriteLine($"Surgeon {user.Name} has logged out.");
