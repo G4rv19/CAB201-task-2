@@ -43,26 +43,30 @@ namespace Myapp {
         }
 
         public void CheckIn(bool isCheckedIn, List<string> menu, User user){
-            if (user.SurgeryPerformed == true){ 
-                if (isCheckedIn){
+            if (user.SurgeryPerformed == true){
+                if(isCheckedIn){
                     Console.WriteLine("You are unable to check in at this time.");
                     return;
                 }
-                else if (!isCheckedIn){
-                    menu[2] = "3. Check out";
-                    Console.WriteLine($"Patient {user.Name} has been checked out.");
+                else {
+                    menu[2] = "3. Check in";
+                    user.Checked_in = false;
+                    Console.WriteLine("You have checked out.");
                     return;
                 }
             }
-            else if (user.SurgeryPerformed == false){
-            if (isCheckedIn){
-                menu[2] = "3. Check out";
-                Console.WriteLine($"Patient {user.Name} has been checked in.");
+            else{
+                if(isCheckedIn){
+                    menu[2] = "3. Check out";
+                    user.Checked_in = true;
+                    Console.WriteLine("You have checked in.");
+                    return;
+                }
+                else{
+                    Console.WriteLine("You are unable to check out at this time.");
+                }
             }
-            else if (!isCheckedIn){
-                Console.WriteLine("You are unable to check out at this time.");
-            }
-        }
+    
         }
 
         public void PatientSeeRoom(User user){
