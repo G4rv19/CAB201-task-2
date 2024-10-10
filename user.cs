@@ -38,7 +38,7 @@ namespace Myapp {
         Floor = null;
         surgeonassigned = null;
         surgeryDateTime = null;
-        SurgeryPerformed = false;
+        
         } 
     }
 
