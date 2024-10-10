@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -150,28 +151,37 @@ namespace Myapp {
             speciality.Add("2. Orthopaedic Surgeon");
             speciality.Add("3. Cardiothoracic Surgeon");
             speciality.Add("4. Neurosurgeon");
-            Console.WriteLine("Please choose your speciality:");
-            foreach (string type in speciality){
-                Console.WriteLine(type);
-            }
-            Console.WriteLine("Please enter a choice between 1 and 4.");
-            if(!int.TryParse(Console.ReadLine(), out int choice) || choice < 1 || choice > 4) {
-                return;
-            }
-            if (choice == 1){
-                staff.Surgeon_speciality = "General Surgeon";
-            }
-            else if (choice == 2){
-                staff.Surgeon_speciality = "Orthopaedic Surgeon";
-            }
-            else if (choice == 3){
-                staff.Surgeon_speciality = "Cardiothoracic Surgeon";
-            }
-            else if (choice == 4){
-                staff.Surgeon_speciality = "Neurosurgeon";
-            }
-            else {
-                Console.WriteLine("Invalid choice. Please enter a choice between 1 and 4.");
+            bool ValidChoice = false;
+            while (!ValidChoice){
+                Console.WriteLine("Please choose your speciality:");
+                foreach (string type in speciality){
+                    Console.WriteLine(type);
+                }
+                Console.WriteLine("Please enter a choice between 1 and 4.");
+                int choice = Convert.ToInt16(Console.ReadLine());
+                switch (choice){
+                    case 1:
+                        staff.Surgeon_speciality = "General Surgeon";
+                        ValidChoice = true;
+                        break;
+                    case 2:
+                        staff.Surgeon_speciality = "Orthopaedic Surgeon";
+                        ValidChoice = true;
+                        break;
+                    case 3:
+                        staff.Surgeon_speciality = "Cardiothoracic Surgeon";
+                        ValidChoice = true;
+                        break;
+                    case 4:
+                        staff.Surgeon_speciality = "Neurosurgeon";  
+                        ValidChoice = true;
+                        break;
+                    default:
+                        Console.WriteLine("#####");
+                        Console.WriteLine("#Error - Invalid Menu Option, please try again.");
+                        Console.WriteLine("#####");
+                        break;
+                }
             }
 
             if (!users.ContainsKey(staff.Email)) {

@@ -77,6 +77,7 @@ namespace Myapp {
                     User selectedPatient = Register.GetUser(patientEmail);  
                     selectedPatient.surgeryDateTime = null;
                     selectedPatient.surgeonassigned = null;
+                    Console.WriteLine("Your schedule.");
                     Console.WriteLine($"Surgery performed on {selectedPatient.Name} by {user.Name}.");
                     return;
                 }

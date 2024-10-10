@@ -2,18 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace Myapp {
     public class FloorManagerManagement {
         public List<string> patients = new List<string>(); 
+        public List<string> Users = new List<string>();
         public List<string> surgeons = new List<string>();
         ManagementTools managementTools = new ManagementTools();
         public void AssigningRoom(User user){
             managementTools.CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, patients);
             if (patients.Count == 0){
-                Console.WriteLine("There are no registered in patients.");
-                return;
+                managementTools.CheckedInPatientList(patient => patient.Name != null && patient.Email != null, Users);
+                if (Users.Count == 0){
+                    Console.WriteLine("There are no registered patients.");
+                    return;
+                }
+                else{
+                    Console.WriteLine("There are no patients to assign rooms to.");
+                    return;
+                }
             }
             else{
                 Console.WriteLine("Please select your patient: ");
@@ -84,8 +93,15 @@ namespace Myapp {
         public void AssignSurgery(User user){
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == null && patient.surgeryDateTime == null && patient.Checked_in == true && patient.Room != null, patients);
             if (patients.Count == 0){
-                Console.WriteLine("There are no registered patients.");
-                return;
+                managementTools.CheckedInPatientList(patient => patient.Name != null && patient.Email != null, Users);
+                if (Users.Count == 0){
+                    Console.WriteLine("There are no registered patients.");
+                    return;
+                }
+                else{
+                    Console.WriteLine("There are no patients ready for surgery."); 
+                    return;
+                }
             }
             else{
                 Console.WriteLine("Please select your patient: ");
