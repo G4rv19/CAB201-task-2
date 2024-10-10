@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
@@ -44,15 +45,10 @@ namespace Myapp{
         
         }
         
-        public List<string> menu = new List<string>(){
-            "1. Display my details ",
-            "2. Change password",
-            "3. Check in",
-            "4. See room",
-            "5. See surgeon",
-            "6. See surgery date and time",
-            "7. Log out",
-        };
+        public List<string> menu = new List<string>();
+        
+        
+
 
         public List<string> surgeon_menu = new List<string>(){
             "1. Display my details",
@@ -62,6 +58,7 @@ namespace Myapp{
             "5. Perform surgery",
             "6. Log out",
         };
+        
 
         public void login_menu(){
             User user = Register.GetUser(email);
@@ -71,8 +68,22 @@ namespace Myapp{
             if (user.is_staff == false){
                 bool is_patient_logged_in = true;
                 while(is_patient_logged_in){
-                    Console.WriteLine("Patient Menu.");
+                    menu.Clear();
+                    menu.Add("1. Display my details");
+                    menu.Add("2. Change password");
+                    if (user.SurgeryPerformed == true || user.Checked_in == true){
+                        menu.Add("3. Check out");
+                    }
+                    else{
+                        menu.Add("3. Check in");
+                    }
+                    menu.Add("4. See room");
+                    menu.Add("5. See surgeon");
+                    menu.Add("6. See surgery date");
+                    menu.Add("7. Log out");
+                    Console.WriteLine("Patient Menu."); 
                     Console.WriteLine("Please choose from the menu below:");
+
                     foreach (string option in menu){
                         Console.WriteLine(option);
                     }

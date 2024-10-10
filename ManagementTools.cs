@@ -45,7 +45,6 @@ namespace Myapp {
         public void CheckIn(bool isCheckedIn, List<string> menu, User user){
             if (user.SurgeryPerformed == true){
                 if (isCheckedIn == true){
-                    menu[2] = "3. Check in";
                     user.Checked_in = false;
                     Console.WriteLine($"Patient {user.Name} has been checked out.");
                     return;
@@ -57,7 +56,6 @@ namespace Myapp {
             }
             else{
                 if(!isCheckedIn){
-                    menu[2] = "3. Check out";
                     user.Checked_in = true;
                     Console.WriteLine($"Patient {user.Name} has been checked in.");
                     return;
