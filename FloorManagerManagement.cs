@@ -16,6 +16,12 @@ namespace Myapp {
                 return;
             }
             else{
+                Console.WriteLine("Please select your patient: ");
+                int index = 1;
+                foreach (string patient in patients){
+                    Console.WriteLine($"{index}. {patient}");
+                    index++;
+                }
                 Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice <1 || choice > patients.Count){
