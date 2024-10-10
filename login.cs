@@ -88,12 +88,6 @@ namespace Myapp{
                             break;
                         case 3:
                             user.Checked_in = !user.Checked_in;
-                            if (user.Checked_in){
-                                Console.WriteLine($"Patient {user.Name} has been checked in.");
-                            }
-                            else{
-                                Console.WriteLine($"Patient {user.Name} has been checked out.");
-                            }
                             break;
                         case 4:
                             management.PatientSeeRoom(user);

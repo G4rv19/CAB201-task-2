@@ -49,16 +49,18 @@ namespace Myapp {
                     return;
                 }
                 else if (!isCheckedIn){
-                    Console.WriteLine("You are unable to check out at this time.");
+                    menu[2] = "3. Check out";
+                    Console.WriteLine($"Patient {user.Name} has been checked out.");
                     return;
                 }
             }
             else if (user.SurgeryPerformed == false){
             if (isCheckedIn){
                 menu[2] = "3. Check out";
+                Console.WriteLine($"Patient {user.Name} has been checked in.");
             }
             else if (!isCheckedIn){
-                menu[2] = "3. Check in";
+                Console.WriteLine("You are unable to check out at this time.");
             }
         }
         }
