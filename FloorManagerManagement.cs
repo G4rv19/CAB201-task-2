@@ -36,11 +36,11 @@ namespace Myapp {
                             return;
                         }
                         else{
-                            Console.WriteLine("Please enter the room (1-10):");
+                            Console.WriteLine("Please enter your room (1-10):");
                             int room = Convert.ToInt32(Console.ReadLine());
                             selectedPatient.Room = room;
                             selectedPatient.Floor = user.Floor_number;
-                            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room {room} on floor {user.Floor_number}.");
+                            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor {user.Floor_number}.");
                         }    
                     }
                     else{
@@ -101,7 +101,7 @@ namespace Myapp {
                     return;
                 }
                 else{
-                    string selectedPatientEmail = managementTools.patientEmailMap[choice - 1];
+                    string selectedPatientEmail = managementTools.patientEmailMap[choice];
                     User selectedPatient = Register.GetUser(selectedPatientEmail);
                     Console.WriteLine("Please select your surgeon: ");
                     managementTools.CheckedInPatientList(patient => patient.Staff_id != null && patient.Surgeon_speciality != null, surgeons);
@@ -122,7 +122,7 @@ namespace Myapp {
                             return;
                         }
                         else{
-                            string selectedSurgeonEmail = managementTools.patientEmailMap[surgeonChoice - 1];
+                            string selectedSurgeonEmail = managementTools.patientEmailMap[surgeonChoice];
                             User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
                             selectedPatient.surgeonassigned = selectedSurgeon.Name;
                             Console.WriteLine("Please enter the date and time of the surgery (yyyy-mm-dd hh:mm):");
