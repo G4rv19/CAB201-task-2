@@ -29,34 +29,36 @@ namespace Myapp {
      
 
         public void AssigningRoom(User user){
-            Console.WriteLine("Please select your patient: ");
             CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, Patients);
             if (Patients.Count == 0){
                 Console.WriteLine("There are no checked in patients.");
                 return;
             }
-            Console.WriteLine($"Please enter a choice between 1 and {Patients.Count}.");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            else{
+                Console.WriteLine("Please select your patient: ");
+                Console.WriteLine($"Please enter a choice between 1 and {Patients.Count}.");
+                int choice = Convert.ToInt32(Console.ReadLine());
 
-            if (choice <1 || choice > Patients.Count){
-                Console.WriteLine("Invalid choice.");
-                return;
+                if (choice <1 || choice > Patients.Count){
+                    Console.WriteLine("Invalid choice.");
+                    return;
+                }
+
+                string selectedPatientEmail = patientEmailMap[choice];
+                User selectedPatient = Register.GetUser(selectedPatientEmail);
+
+                if(selectedPatient == null){
+                    Console.WriteLine("Patient not found.");
+                    return;
+                }
+                
+                Console.WriteLine("Please enter your room (1-10):");
+                int room = Convert.ToInt32(Console.ReadLine());
+
+                selectedPatient.Room = room;
+                selectedPatient.Floor = user.Floor_number;
+                Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {selectedPatient.Room} on floor {selectedPatient.Floor}.");
             }
-
-            string selectedPatientEmail = patientEmailMap[choice];
-            User selectedPatient = Register.GetUser(selectedPatientEmail);
-
-            if(selectedPatient == null){
-                Console.WriteLine("Patient not found.");
-                return;
-            }
-            
-            Console.WriteLine("Please enter your room (1-10):");
-            int room = Convert.ToInt32(Console.ReadLine());
-
-            selectedPatient.Room = room;
-            selectedPatient.Floor = user.Floor_number;
-            Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {selectedPatient.Room} on floor {selectedPatient.Floor}.");
         }
 
         public void UnassignRoom(User user){
@@ -79,7 +81,7 @@ namespace Myapp {
 
         public void PatientSeeRoom(User user){
             if(user.Room == null){
-                Console.WriteLine("You have not been assigned a room.");
+                Console.WriteLine("You do not have an assigned room.");
             }
             else{
                 Console.WriteLine($"Your room is number {user.Room} on floor {user.Floor}.");
@@ -103,41 +105,43 @@ namespace Myapp {
         }
 
         public void AsignSurgery(User user){
-            Console.WriteLine("Please select your patient: ");
             CheckedInPatientList(patient => patient.Checked_in == true && patient.Room != null && patient.Floor != null && patient.surgeonassigned == null && patient.surgeryDateTime == null, SurgeryPatients);
             if (SurgeryPatients == null){
                 Console.WriteLine("No patients are checked in and assigned to a room.");
                 return;
             }
-            Console.WriteLine($"Please enter a choice between 1 and {SurgeryPatients.Count}.");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            else{
+                Console.WriteLine("Please select your patient: ");
+                Console.WriteLine($"Please enter a choice between 1 and {SurgeryPatients.Count}.");
+                int choice = Convert.ToInt32(Console.ReadLine());
 
-            string selectedPatientEmail = patientEmailMap[choice];
-            User selectedPatient = Register.GetUser(selectedPatientEmail);
+                string selectedPatientEmail = patientEmailMap[choice];
+                User selectedPatient = Register.GetUser(selectedPatientEmail);
 
-            Console.WriteLine("Please select your surgeon: ");
-            CheckedInPatientList(patient => patient.Staff_id != null && patient.Surgeon_speciality != null, SurgeonList);
-            if (SurgeonList == null){
-                Console.WriteLine("No surgeons are available.");
-                return;
+                Console.WriteLine("Please select your surgeon: ");
+                CheckedInPatientList(patient => patient.Staff_id != null && patient.Surgeon_speciality != null, SurgeonList);
+                if (SurgeonList == null){
+                    Console.WriteLine("No surgeons are available.");
+                    return;
+                }
+                Console.WriteLine($"Please enter a choice between 1 and {SurgeonList.Count}.");
+                int surgeonChoice = Convert.ToInt32(Console.ReadLine());
+
+                string selectedSurgeonEmail = patientEmailMap[surgeonChoice];
+                User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
+                selectedPatient.surgeonassigned = selectedSurgeon.Name;
+
+                Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
+                string surgeryDateTime = Console.ReadLine();
+                selectedPatient.surgeryDateTime = surgeryDateTime;
+                Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
+                Console.WriteLine($"Surgery will take place on {surgeryDateTime}.");
             }
-            Console.WriteLine($"Please enter a choice between 1 and {SurgeonList.Count}.");
-            int surgeonChoice = Convert.ToInt32(Console.ReadLine());
-
-            string selectedSurgeonEmail = patientEmailMap[surgeonChoice];
-            User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
-            selectedPatient.surgeonassigned = selectedSurgeon.Name;
-
-            Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
-            string surgeryDateTime = Console.ReadLine();
-            selectedPatient.surgeryDateTime = surgeryDateTime;
-            Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
-            Console.WriteLine($"Surgery will take place on {surgeryDateTime}.");
         }
         
         public void ShowSurgeryDate(User user){
             if (user.surgeryDateTime == null){
-                Console.WriteLine("You do not have a surgery scheduled.");
+                Console.WriteLine("You do not have assigned surgery.");
             }
             else{
                 Console.WriteLine($"Your surgery time is {user.surgeryDateTime}.");
@@ -145,7 +149,7 @@ namespace Myapp {
         }
         public void SurgeonAssigned(User user){
             if (user.surgeonassigned == null){
-                Console.WriteLine("You have not been assigned a surgeon.");
+                Console.WriteLine("You do not have an assigned surgeon.");
             }
             else{
                 Console.WriteLine($"Your surgeon is {user.surgeonassigned}.");
@@ -156,6 +160,10 @@ namespace Myapp {
             Console.WriteLine("Your Patients.");
             PatientAssignedToSurgeon.Clear();
             CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
+            if (PatientAssignedToSurgeon.Count == 0){
+                Console.WriteLine("You have no patients assigned.");
+                return;
+            }
         }
 
         public void SeeSurgery(User user){
