@@ -125,22 +125,17 @@ namespace Myapp {
                             string selectedSurgeonEmail = managementTools.patientEmailMap[surgeonChoice];
                             User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
                             selectedPatient.surgeonassigned = selectedSurgeon.Name;
-                            Console.WriteLine("Please enter the date and time of the surgery (yyyy-mm-dd hh:mm):");
+                            Console.WriteLine("Please enter the date and time (e.g. 14:30 31/01/2024).");
                             string surgeryDateTime = Console.ReadLine();
                             selectedPatient.surgeryDateTime = surgeryDateTime;
                             Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
                             Console.WriteLine($"Surgery will take place on {surgeryDateTime}.");
                         }
-    
-                            
-                            
-
                     }
                     
                 }
             }
         }
-
     
     }
 }

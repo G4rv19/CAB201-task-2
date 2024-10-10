@@ -16,7 +16,7 @@ namespace Myapp {
 
         public void PatientAssignedForSurgeon(User user){
             PatientAssignedToSurgeon.Clear();   
-            Console.WriteLine("Your Patients:");
+            Console.WriteLine("Your Patients.");
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
             if (PatientAssignedToSurgeon.Count == 0){
                 Console.WriteLine("You have no patients assigned.");
