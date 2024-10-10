@@ -73,7 +73,7 @@ namespace Myapp{
                 while(is_patient_logged_in){
                     Console.WriteLine("Patient Menu.");
                     Console.WriteLine("Please choose from the menu below:");
-                    management.CheckIn(user.Checked_in, menu);
+                    management.CheckIn(user.Checked_in, menu, user);
                     foreach (string option in menu){
                         Console.WriteLine(option);
                     }

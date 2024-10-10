@@ -42,13 +42,25 @@ namespace Myapp {
             }
         }
 
-        public void CheckIn(bool isCheckedIn, List<string> menu){
+        public void CheckIn(bool isCheckedIn, List<string> menu, User user){
+            if (user.SurgeryPerformed == true){ 
+                if (isCheckedIn){
+                    Console.WriteLine("You cant check in rn.");
+                    return;
+                }
+                else if (!isCheckedIn){
+                    Console.WriteLine("You cant check out rn.");
+                    return;
+                }
+            }
+            else if (user.SurgeryPerformed == false){
             if (isCheckedIn){
                 menu[2] = "3. Check out";
             }
             else if (!isCheckedIn){
                 menu[2] = "3. Check in";
             }
+        }
         }
 
         public void PatientSeeRoom(User user){
