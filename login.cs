@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -67,27 +68,8 @@ namespace Myapp{
             FloorManagerManagement floormanagement = new FloorManagerManagement();
             if (user.is_staff == false){
                 bool is_patient_logged_in = true;
-                while(is_patient_logged_in){
-                    menu.Clear();
-                    menu.Add("1. Display my details");
-                    menu.Add("2. Change password");
-                    if (user.SurgeryPerformed == true && user.Checked_in == true){
-                        menu.Add("3. Check out");
-                    }
-                    else{
-                        menu.Add("3. Check in");
-                    }
-                    menu.Add("4. See room");
-                    menu.Add("5. See surgeon");
-                    menu.Add("6. See surgery date and time");
-                    menu.Add("7. Log out");
-                    Console.WriteLine("Patient Menu."); 
-                    Console.WriteLine("Please choose from the menu below:");
-
-                    foreach (string option in menu){
-                        Console.WriteLine(option);
-                    }
-                    Console.WriteLine("Please enter a choice between 1 and 7.");    
+                while(is_patient_logged_in){  
+                    PatientMenu(user);          
                     int choice = Convert.ToInt16(Console.ReadLine());
                     switch (choice){
                         case 1:
@@ -216,6 +198,35 @@ namespace Myapp{
                 }
 
             }
+        }
+        public void PatientMenu(User user){
+            Console.WriteLine("Patient Menu");
+            Console.WriteLine("Please choose from the menu below:");
+            Console.WriteLine("1. Display my details");
+            Console.WriteLine("2. Change password");
+            if (user.SurgeryPerformed == true){
+                if (user.Checked_in == true){
+                    Console.WriteLine("3. Check out");
+                }
+                else{
+                    Console.WriteLine("3. Check in");
+                }
+            }
+            else{
+                if (!user.Checked_in){
+                    Console.WriteLine("3. Check in");
+                }
+                else{
+                    Console.WriteLine("3. Check out");
+                }
+            }
+            Console.WriteLine("4. See room");
+            Console.WriteLine("5. See surgeon");
+            Console.WriteLine("6. See surgery date and time");
+            Console.WriteLine("7. Log out");
+            Console.WriteLine("Please enter a choice between 1 and 7.");
+            
+            
         }
         public void change_password(){
             Console.WriteLine("Enter new password:");
