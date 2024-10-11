@@ -200,7 +200,7 @@ namespace Myapp{
             }
         }
         public void PatientMenu(User user){
-            Console.WriteLine("Patient Menu");
+            Console.WriteLine("Patient Menu.");
             Console.WriteLine("Please choose from the menu below:");
             Console.WriteLine("1. Display my details");
             Console.WriteLine("2. Change password");
