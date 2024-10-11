@@ -74,7 +74,7 @@ namespace Myapp {
         
         // Name Check
         while (!valid) {
-            Console.WriteLine("Please enter your name:");
+            Console.WriteLine("Please enter in your name:");
             name = Console.ReadLine() ?? string.Empty;
             check.NameCheck(name);
 
@@ -91,7 +91,7 @@ namespace Myapp {
 
         // Age Check
         while (!valid) {
-            Console.WriteLine("Please enter your age:");
+            Console.WriteLine("Please enter in your age:");
             age = Convert.ToInt16(Console.ReadLine());
             check.AgeCheck(Useris, age);
             if(check.AgeCheck(Useris, age) == true) {
@@ -108,7 +108,7 @@ namespace Myapp {
 
         // Mobile Check
         while (!valid) {
-            Console.WriteLine("Please enter your mobile number:");
+            Console.WriteLine("Please enter in your mobile number:");
             mobile = Console.ReadLine() ?? string.Empty;
             check.MobileCheck(mobile);
             if (check.MobileCheck(mobile) == true) {
@@ -123,7 +123,7 @@ namespace Myapp {
         // Email Check
         valid = false;
         while (!valid) {
-            Console.WriteLine("Please enter your email:");
+            Console.WriteLine("Please enter in your email:");
             email = Console.ReadLine() ?? string.Empty;
             check.EmailCheck(email);
             if (check.EmailCheck(email) == true) {
@@ -138,7 +138,7 @@ namespace Myapp {
         // Password Check
         valid = false;
         while (!valid) {
-            Console.WriteLine("Please enter your password:");
+            Console.WriteLine("Please enter in your password:");
             password = Console.ReadLine() ?? string.Empty;
             check.PasswordCheck(password);
             if (check.PasswordCheck(password) == true) {
