@@ -58,6 +58,11 @@ namespace Myapp {
     public class Register {
         public string Useris;
         public static Dictionary<string, User> users = new Dictionary<string, User>();
+        public void Error(string message) {
+            Console.WriteLine("#####");
+            Console.WriteLine($"#Error - Supplied {message} is invalid, please try again.");
+            Console.WriteLine("#####");
+        }
         public User Register_function() {
         Check check = new Check();
         bool valid = false;
@@ -76,6 +81,7 @@ namespace Myapp {
             if (check.NameCheck(name) == true) {
                 valid = true; // Only set to true if the name is valid
             } else {
+                Error("name");
                 valid = false; // Only set to true if the name is valid
             }
         }
@@ -92,6 +98,7 @@ namespace Myapp {
                 valid = true;
             }
             else {
+                Error("age");
                 valid = false;
             }
         }
@@ -108,6 +115,7 @@ namespace Myapp {
                 valid = true;
             }
             else {
+                Error("mobile number");
                 valid = false;
             }
         }
@@ -122,6 +130,7 @@ namespace Myapp {
                 valid = true;
             }
             else {
+                Error("email");
                 valid = false;
             }
         }
@@ -136,6 +145,7 @@ namespace Myapp {
                 valid = true;
             }
             else {
+                Error("password");
                 valid = false;
             }
         }
@@ -173,6 +183,7 @@ namespace Myapp {
                     valid = true;
                 }
                 else {
+                    Error("staff ID");
                     valid = false;
                 }
             }
@@ -186,6 +197,7 @@ namespace Myapp {
                     valid = true;
                 }
                 else {
+                    Error("floor number");
                     valid = false;
                 }
             } 
@@ -240,9 +252,21 @@ namespace Myapp {
         public void surgeon_register() {
             User staff = Register_function();
             staff.is_staff = true;
-
-            Console.WriteLine("Please enter in your staff ID:");
-            int id = Convert.ToInt16(Console.ReadLine());
+            Check check = new Check();
+            int id = 0;
+            bool valid = false;
+            while (!valid) {
+                Console.WriteLine("Please enter in your staff ID:");
+                id = Convert.ToInt16(Console.ReadLine());
+                check.StaffIdCheck(id);
+                if (check.StaffIdCheck(id) == true) {
+                    valid = true;
+                }
+                else {
+                    Error("staff ID");
+                    valid = false;
+                }
+            }
             staff.Staff_id = id;
 
             List<string> speciality = new List<string>();
