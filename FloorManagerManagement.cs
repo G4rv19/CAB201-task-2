@@ -64,7 +64,7 @@ namespace Myapp {
         public void UnassignRoom(User user){
             managementTools.CheckedInPatientList(patient => patient.Checked_in == false && patient.Room != null && patient.Floor != null, patients);
             if (patients.Count == 0){
-                Console.WriteLine("There are no patients with assigned rooms.");
+                Console.WriteLine("There are no patients ready to have their rooms unassigned.");
                 return;
             }
             else{

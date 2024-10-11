@@ -34,6 +34,7 @@ namespace Myapp {
         }
 
         public void SeeSurgery(User user){
+            Console.WriteLine("Your schedule.");
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == user.Name, SurgeryPatients);
             if (SurgeryPatients.Count == 0){
                 Console.WriteLine("You do not have any patients assigned.");
@@ -44,7 +45,6 @@ namespace Myapp {
                 foreach (string patient in SurgeryPatients){
                     string PatientEmail = managementTools.patientEmailMap[index];
                     User selectedPatient = Register.GetUser(PatientEmail);
-                    Console.WriteLine("Your schedule.");
                     Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
                     index++;
                 }
