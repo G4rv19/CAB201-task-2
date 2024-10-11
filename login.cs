@@ -46,21 +46,6 @@ namespace Myapp{
         
         }
         
-        public List<string> menu = new List<string>();
-        
-        
-
-
-        public List<string> surgeon_menu = new List<string>(){
-            "1. Display my details",
-            "2. Change password",
-            "3. See your list of patients",
-            "4. See your schedule",
-            "5. Perform surgery",
-            "6. Log out",
-        };
-        
-
         public void login_menu(){
             User user = Register.GetUser(email);
             ManagementTools management = new ManagementTools();
@@ -79,7 +64,7 @@ namespace Myapp{
                             change_password();
                             break;
                         case 3:
-                            management.CheckIn(user.Checked_in, menu, user);
+                            management.CheckIn(user.Checked_in, user);
                             break;
                         case 4:
                             management.PatientSeeRoom(user);
@@ -102,12 +87,7 @@ namespace Myapp{
                 if (user.Floor_number != null) {
                     bool is_staff_logged_in = true;
                     while(is_staff_logged_in){
-                        Console.WriteLine("Floor Manager Menu.");
-                        Console.WriteLine("Please choose from the menu below:");
-                        foreach (string option in floor_manager_menu){
-                            Console.WriteLine(option);
-                        }
-                        Console.WriteLine("Please enter a choice between 1 and 6.");
+                        FloorManagerMenu(user);
                         int choice = Convert.ToInt16(Console.ReadLine());
                         switch(choice){
                             case 1:
@@ -136,12 +116,7 @@ namespace Myapp{
                 else if(user.Surgeon_speciality != null){
                     bool is_surgeon_logged_in = true;
                     while(is_surgeon_logged_in){
-                        Console.WriteLine("Surgeon Menu.");
-                        Console.WriteLine("Please choose from the menu below:");
-                        foreach (string option in surgeon_menu){
-                            Console.WriteLine(option);
-                        }
-                        Console.WriteLine("Please enter a choice between 1 and 6.");
+                        SurgeonMenu(user);
                         int choice = Convert.ToInt16(Console.ReadLine());
                         switch(choice){
                             case 1:
@@ -235,14 +210,29 @@ namespace Myapp{
             user.Password = new_password;
             Console.WriteLine("Password has been changed.");
         }
-        public List<string> floor_manager_menu = new List<string>(){
-            "1. Display my details",
-            "2. Change password",
-            "3. Assign room to patient",
-            "4. Assign surgery",
-            "5. Unassign room",
-            "6. Log out",
-        };
+
+        public void FloorManagerMenu(User user){
+            Console.WriteLine("Floor Manager Menu.");
+            Console.WriteLine("Please choose from the menu below:");
+            Console.WriteLine("1. Display my details");
+            Console.WriteLine("2. Change password");
+            Console.WriteLine("3. Assign room to patient");
+            Console.WriteLine("4. Assign surgery");
+            Console.WriteLine("5. Unassign room");
+            Console.WriteLine("6. Log out");
+            Console.WriteLine("Please enter a choice between 1 and 6.");
+        }
+        public void SurgeonMenu(User user){
+            Console.WriteLine("Surgeon Menu.");
+            Console.WriteLine("Please choose from the menu below:");
+            Console.WriteLine("1. Display my details");
+            Console.WriteLine("2. Change password");
+            Console.WriteLine("3. See your list of patients");
+            Console.WriteLine("4. See your schedule");
+            Console.WriteLine("5. Perform surgery");
+            Console.WriteLine("6. Log out");
+            Console.WriteLine("Please enter a choice between 1 and 6.");
+        }
 
     }
 }

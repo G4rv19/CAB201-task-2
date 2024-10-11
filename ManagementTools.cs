@@ -42,7 +42,7 @@ namespace Myapp {
             }
         }
 
-        public void CheckIn(bool isCheckedIn, List<string> menu, User user){
+        public void CheckIn(bool isCheckedIn, User user){
             if (user.SurgeryPerformed == true){
                 if (isCheckedIn == true){
                     user.Checked_in = false;
