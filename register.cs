@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -32,6 +33,8 @@ namespace Myapp {
                     Console.WriteLine("Registering as a patient.");
                     Register register = new Register();
                     register.Register_patient();
+                    register.Useris = "Patient";
+
                     break;
                 case 2:
                     Register register_staff = new Register();
@@ -53,28 +56,95 @@ namespace Myapp {
     /// Register patient registers the patient with the details
     /// </summary>
     public class Register {
+        public string Useris;
         public static Dictionary<string, User> users = new Dictionary<string, User>();
         public User Register_function() {
+        Check check = new Check();
+        bool valid = false;
+        string name = string.Empty;
+        int age = 0;
+        string mobile = string.Empty;
+        string email = string.Empty;
+        string password = string.Empty;
+        
+        // Name Check
+        while (!valid) {
+            Console.WriteLine("Please enter your name:");
+            name = Console.ReadLine() ?? string.Empty;
+            check.NameCheck(name);
 
-            Console.WriteLine("Please enter in your name:");
-            string name = Console.ReadLine() ?? string.Empty;
-
-            Console.WriteLine("Please enter in your age:");
-            int age = Convert.ToInt16(Console.ReadLine());
-
-            Console.WriteLine("Please enter in your mobile number:");
-            string mobile = Console.ReadLine();
-
-            Console.WriteLine("Please enter in your email:");
-            string email = Console.ReadLine() ?? string.Empty; 
-
-            Console.WriteLine("Please enter in your password:");
-            string password = Console.ReadLine() ?? string.Empty;
-
-            User user = new User(name, age, mobile, email, password);
-            return user;
-
+            if (check.NameCheck(name) == true) {
+                valid = true; // Only set to true if the name is valid
+            } else {
+                valid = false; // Only set to true if the name is valid
+            }
         }
+
+        // Reset valid flag for age check
+        valid = false;
+
+        // Age Check
+        while (!valid) {
+            Console.WriteLine("Please enter your age:");
+            age = Convert.ToInt16(Console.ReadLine());
+            check.AgeCheck(Useris, age);
+            if(check.AgeCheck(Useris, age) == true) {
+                valid = true;
+            }
+            else {
+                valid = false;
+            }
+        }
+
+        // Reset valid flag for mobile check
+        valid = false;
+
+        // Mobile Check
+        while (!valid) {
+            Console.WriteLine("Please enter your mobile number:");
+            mobile = Console.ReadLine() ?? string.Empty;
+            check.MobileCheck(mobile);
+            if (check.MobileCheck(mobile) == true) {
+                valid = true;
+            }
+            else {
+                valid = false;
+            }
+        }
+
+        // Email Check
+        valid = false;
+        while (!valid) {
+            Console.WriteLine("Please enter your email:");
+            email = Console.ReadLine() ?? string.Empty;
+            check.EmailCheck(email);
+            if (check.EmailCheck(email) == true) {
+                valid = true;
+            }
+            else {
+                valid = false;
+            }
+        }
+
+        // Password Check
+        valid = false;
+        while (!valid) {
+            Console.WriteLine("Please enter your password:");
+            password = Console.ReadLine() ?? string.Empty;
+            check.PasswordCheck(password);
+            if (check.PasswordCheck(password) == true) {
+                valid = true;
+            }
+            else {
+                valid = false;
+            }
+        }
+
+        // Create user after all validations are passed
+        User user = new User(name, age, mobile, email, password);
+        return user;
+        }
+        
         public void Register_patient() {
             User user = Register_function();
             user.is_staff = false;
@@ -91,13 +161,34 @@ namespace Myapp {
             
             User staff = Register_function();
             staff.is_staff = true;
-
-            Console.WriteLine("Please enter in your staff ID:");
-            int id = Convert.ToInt16(Console.ReadLine());
+            Check check = new Check();
+            bool valid = false;
+            int id = 0;
+            int floor = 0;
+            while (!valid) {
+                Console.WriteLine("Please enter in your staff ID:");
+                id = Convert.ToInt16(Console.ReadLine());
+                check.StaffIdCheck(id);
+                if (check.StaffIdCheck(id) == true) {
+                    valid = true;
+                }
+                else {
+                    valid = false;
+                }
+            }
             staff.Staff_id = id;
-
-            Console.WriteLine("Please enter in your floor number:");
-            int floor = Convert.ToInt16(Console.ReadLine());    
+            valid = false;  
+            while (!valid){
+                Console.WriteLine("Please enter in your floor number:");
+                floor = Convert.ToInt16(Console.ReadLine());
+                check.FloorCheck(floor);
+                if (check.FloorCheck(floor) == true) {
+                    valid = true;
+                }
+                else {
+                    valid = false;
+                }
+            } 
             staff.Floor_number = floor;
 
             if(!users.ContainsKey(staff.Email)) {
@@ -119,6 +210,13 @@ namespace Myapp {
             }
             Console.WriteLine("Please enter a choice between 1 and 3.");
             int choice = Convert.ToInt16(Console.ReadLine());
+            if (choice == 1){
+                Useris = "Floor";
+            }
+            else if (choice == 2)
+            {
+                Useris = "Surgeon";
+            }
             switch (choice){
                 case 1:
                     Console.WriteLine("Registering as a floor manager.");
@@ -137,6 +235,7 @@ namespace Myapp {
                     Console.WriteLine("#####");
                     break;
             }
+            
         }
         public void surgeon_register() {
             User staff = Register_function();
