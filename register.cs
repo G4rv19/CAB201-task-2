@@ -183,7 +183,7 @@ namespace Myapp {
                     valid = true;
                 }
                 else {
-                    Error("staff ID");
+                    Error("staff identification number");
                     valid = false;
                 }
             }
@@ -197,7 +197,7 @@ namespace Myapp {
                     valid = true;
                 }
                 else {
-                    Error("floor number");
+                    Error("floor");
                     valid = false;
                 }
             } 
