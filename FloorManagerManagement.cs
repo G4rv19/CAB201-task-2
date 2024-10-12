@@ -7,6 +7,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace Myapp {
     public class FloorManagerManagement {
+        Check check = new Check();
+        private bool valid = false; 
         public List<string> patients = new List<string>(); 
         public List<string> Users = new List<string>();
         public List<string> surgeons = new List<string>();
@@ -143,8 +145,19 @@ namespace Myapp {
                             string selectedSurgeonEmail = managementTools.patientEmailMap[surgeonChoice];
                             User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
                             selectedPatient.surgeonassigned = selectedSurgeon.Name;
-                            Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
-                            string surgeryDateTime = Console.ReadLine();
+                            string surgeryDateTime = null;
+                            while(!valid){
+                                Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
+                                surgeryDateTime = Console.ReadLine();
+                                check.DateTimeCheck(surgeryDateTime);
+                                if(check.DateTimeCheck(surgeryDateTime) == true){
+                                    valid = true;
+                                }
+                                else{
+                                    check.ErrorInvalid("Supplied value is not a valid DateTime.");
+                                    valid = false;
+                                }
+                            }
                             selectedPatient.surgeryDateTime = surgeryDateTime;
                             Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
                             Console.WriteLine($"Surgery will take place on {surgeryDateTime}.");

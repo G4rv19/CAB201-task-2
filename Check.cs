@@ -109,6 +109,17 @@ namespace Myapp {
             }
         }
 
+        public bool DateTimeCheck(string date){
+            string pattern = @"^([01]\d|2[0-3]):([0-5]\d)\s(0[1-9]|[12]\d|3[01])/(0[1-9]|1[0-2])/(\d{4})$";
+            Match match = Regex.Match(date, pattern);
+            if (match.Success == true) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
         public void ErrorInvalid(string message) {
             Console.WriteLine("#####");
             Console.WriteLine($"#Error - {message}");
