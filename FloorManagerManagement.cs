@@ -145,22 +145,22 @@ namespace Myapp {
                             string selectedSurgeonEmail = managementTools.patientEmailMap[surgeonChoice];
                             User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
                             selectedPatient.surgeonassigned = selectedSurgeon.Name;
-                            string surgeryDateTime = null;
+                            string surgeryDateTime;
                             while(!valid){
                                 Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
                                 surgeryDateTime = Console.ReadLine();
                                 check.DateTimeCheck(surgeryDateTime);
                                 if(check.DateTimeCheck(surgeryDateTime) == true){
                                     valid = true;
+                                    selectedPatient.surgeryDateTime = surgeryDateTime;
                                 }
                                 else{
                                     check.ErrorInvalid("Supplied value is not a valid DateTime.");
                                     valid = false;
                                 }
                             }
-                            selectedPatient.surgeryDateTime = surgeryDateTime;
                             Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
-                            Console.WriteLine($"Surgery will take place on {surgeryDateTime}.");
+                            Console.WriteLine($"Surgery will take place on {selectedPatient.surgeryDateTime}.");
                         }
                     }
                     
