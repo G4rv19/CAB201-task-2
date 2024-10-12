@@ -121,13 +121,15 @@ namespace Myapp {
         }
 
         public bool RoomCheck(int room, User user){
-            if (room < 1 || room > 10){
+            if (room < 1 && room > 10){
                 return false;
             }
-            foreach(var patient in Register.users){
-                if (patient.Value.Floor_number == room && patient.Value.Email == user.Email){
-                    ErrorInvalid("Supplied value is out of range, please try again.");
-                    return false;
+            else{
+                foreach(var patient in Register.users){
+                    if (patient.Value.Room == room && patient.Value.Email == user.Email){
+                        ErrorInvalid("Supplied value is out of range, please try again.");
+                        return false;
+                    }
                 }
             }
             return true;
