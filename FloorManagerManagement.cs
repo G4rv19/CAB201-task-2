@@ -47,10 +47,21 @@ namespace Myapp {
                             return;
                         }
                         else{
-                            Console.WriteLine("Please enter your room (1-10):");
-                            int room = Convert.ToInt32(Console.ReadLine());
-                            selectedPatient.Room = room;
-                            selectedPatient.Floor = user.Floor_number;
+                            bool valid = false;
+                            int room = 0;
+                            while(!valid){
+                                Console.WriteLine("Please enter your room (1-10):");
+                                room = Convert.ToInt32(Console.ReadLine());
+                                check.RoomCheck(room, user);
+                                if(check.RoomCheck(room, user) == true){
+                                    valid = true;
+                                    selectedPatient.Room = room;
+                                    selectedPatient.Floor = user.Floor_number;
+                                }
+                                else{
+                                    check.ErrorInvalid("Supplied value is out of range, please try again.");
+                                }
+                            }
                             Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor {user.Floor_number}.");
                         }    
                     }
