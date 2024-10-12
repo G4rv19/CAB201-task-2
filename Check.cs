@@ -121,7 +121,7 @@ namespace Myapp {
         }
 
         public bool RoomCheck(int room, User user){
-            if (room < 1 && room > 10){
+            if (room < 1 || room > 10){
                 return false;
             }
             else{
