@@ -108,6 +108,12 @@ namespace Myapp {
                 return false;
             }
         }
+
+        public void ErrorInvalid(string message) {
+            Console.WriteLine("#####");
+            Console.WriteLine($"#Error - {message}");
+            Console.WriteLine("#####");
+        }
     }
 
 }

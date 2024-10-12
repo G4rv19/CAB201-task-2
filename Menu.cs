@@ -8,6 +8,7 @@ using System.Security.Principal;
 
 namespace Myapp {
     public class Menu {
+        Check check = new Check();
         public void RunMenu() {
             MenuDisplay display = new MenuDisplay();
             MenuOptions menuOptions = new MenuOptions();
@@ -30,9 +31,7 @@ namespace Myapp {
                         Console.WriteLine("Goodbye. Please stay safe.");
                         break;
                     default:
-                        Console.WriteLine("#####");
-                        Console.WriteLine("#Error - Invalid Menu Option, please try again.");
-                        Console.WriteLine("#####");
+                        check.ErrorInvalid("Invalid Menu Option, please try again.");
                         break;
                 }
             } while (choice != 3);

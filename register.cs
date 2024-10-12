@@ -28,6 +28,7 @@ namespace Myapp {
             int choice;
             RegisterOptions();
             choice = Convert.ToInt16(Console.ReadLine());
+            Check check = new Check();
             switch (choice){
                 case 1:
                     Console.WriteLine("Registering as a patient.");
@@ -44,9 +45,7 @@ namespace Myapp {
                     Console.WriteLine("");
                     break;
                 default:
-                    Console.WriteLine("#####");
-                    Console.WriteLine("#Error - Invalid Menu Option, please try again.");
-                    Console.WriteLine("#####");
+                    check.ErrorInvalid("Invalid Menu Option, please try again.");
                     break;
             } 
         }
@@ -58,11 +57,6 @@ namespace Myapp {
     public class Register {
         public string Useris;
         public static Dictionary<string, User> users = new Dictionary<string, User>();
-        public void Error(string message) {
-            Console.WriteLine("#####");
-            Console.WriteLine($"#Error - Supplied {message} is invalid, please try again.");
-            Console.WriteLine("#####");
-        }
         public User Register_function() {
         Check check = new Check();
         bool valid = false;
@@ -81,7 +75,7 @@ namespace Myapp {
             if (check.NameCheck(name) == true) {
                 valid = true; // Only set to true if the name is valid
             } else {
-                Error("name");
+                check.ErrorInvalid("Supplied name is invalid, please try again.");
                 valid = false; // Only set to true if the name is valid
             }
         }
@@ -98,7 +92,7 @@ namespace Myapp {
                 valid = true;
             }
             else {
-                Error("age");
+                check.ErrorInvalid("Supplied age is invalid, please try again.");
                 valid = false;
             }
         }
@@ -115,7 +109,7 @@ namespace Myapp {
                 valid = true;
             }
             else {
-                Error("mobile number");
+                check.ErrorInvalid("Supplied mobile number is invalid, please try again.");
                 valid = false;
             }
         }
@@ -130,7 +124,7 @@ namespace Myapp {
                 valid = true;
             }
             else {
-                Error("email");
+                check.ErrorInvalid("Supplied email is invalid, please try again.");
                 valid = false;
             }
         }
@@ -145,7 +139,7 @@ namespace Myapp {
                 valid = true;
             }
             else {
-                Error("password");
+                check.ErrorInvalid("Supplied password is invalid, please try again.");
                 valid = false;
             }
         }
@@ -183,7 +177,7 @@ namespace Myapp {
                     valid = true;
                 }
                 else {
-                    Error("staff identification number");
+                    check.ErrorInvalid("Supplied staff identification number is invalid, please try again.");
                     valid = false;
                 }
             }
@@ -197,7 +191,7 @@ namespace Myapp {
                     valid = true;
                 }
                 else {
-                    Error("floor");
+                    check.ErrorInvalid("Supplied floor is invalid, please try again.");
                     valid = false;
                 }
             } 
@@ -217,6 +211,7 @@ namespace Myapp {
             staff_type.Add("2. Surgeon");
             staff_type.Add("3. Return to the first menu");
             Console.WriteLine("Register as which type of staff:");
+            Check check = new Check();
             foreach (string type in staff_type){
                 Console.WriteLine(type);
             }
@@ -242,9 +237,8 @@ namespace Myapp {
                     Console.WriteLine("");
                     break;
                 default:
-                    Console.WriteLine("#####");
-                    Console.WriteLine("#Error - Invalid Menu Option, please try again.");
-                    Console.WriteLine("#####");
+                    check.ErrorInvalid("Invalid Menu Option, please try again.");
+                    
                     break;
             }
             
@@ -263,7 +257,7 @@ namespace Myapp {
                     valid = true;
                 }
                 else {
-                    Error("staff ID");
+                    check.ErrorInvalid("Supplied staff identification number is invalid, please try again.");
                     valid = false;
                 }
             }
@@ -300,9 +294,7 @@ namespace Myapp {
                         ValidChoice = true;
                         break;
                     default:
-                        Console.WriteLine("#####");
-                        Console.WriteLine("#Error - Non-valid speciality type, please try again.");
-                        Console.WriteLine("#####");
+                        check.ErrorInvalid("Non-valid speciality type, please try again.");
                         break;
                 }
             }

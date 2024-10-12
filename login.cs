@@ -9,13 +9,12 @@ using System.Text;
 namespace Myapp{
     public class Login{
         public string email;
+        Check check = new Check();
 
         public User Login_User(){
             Console.WriteLine("Login Menu.");
             if (Register.users.Count == 0){
-                Console.WriteLine("#####");
-                Console.WriteLine("#Error - There are no people registered.");
-                Console.WriteLine("#####");
+                check.ErrorInvalid("There are no people registered.");
                 return null;
             }
             else{
@@ -23,9 +22,7 @@ namespace Myapp{
                 email = Console.ReadLine();
                 User user = Register.GetUser(email);
                 if (user == null){
-                    Console.WriteLine("#####");
-                    Console.WriteLine("#Error - Email is not registered.");
-                    Console.WriteLine("#####");
+                    check.ErrorInvalid("Email is not registered.");
                     return null;
                 }
                 else{
@@ -36,9 +33,7 @@ namespace Myapp{
                         login_menu();
                     }
                     else{
-                        Console.WriteLine("#####");
-                        Console.WriteLine("#Error - Wrong Password.");
-                        Console.WriteLine("#####");
+                        check.ErrorInvalid("Wrong Password.");
                     }
                 }
                 return user;
