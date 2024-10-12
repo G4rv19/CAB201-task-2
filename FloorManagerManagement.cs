@@ -8,7 +8,6 @@ using System.Text;
 namespace Myapp {
     public class FloorManagerManagement {
         Check check = new Check();
-        private bool valid = false; 
         public List<string> patients = new List<string>(); 
         public List<string> Users = new List<string>();
         public List<string> surgeons = new List<string>();
@@ -146,6 +145,7 @@ namespace Myapp {
                             User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
                             selectedPatient.surgeonassigned = selectedSurgeon.Name;
                             string surgeryDateTime;
+                            bool valid = false;
                             while(!valid){
                                 Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
                                 surgeryDateTime = Console.ReadLine();
