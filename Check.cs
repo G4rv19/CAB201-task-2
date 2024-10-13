@@ -81,7 +81,7 @@ namespace Myapp {
                     ErrorInvalid("Email is already registered, please try again.");
                 }
                 else{
-                    ErrorInvalid("Supplied value is out of range, please try again.");
+                    ErrorInvalid("Supplied email is invalid, please try again.");
                 }
                 return false;
             }
