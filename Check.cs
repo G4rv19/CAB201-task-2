@@ -77,7 +77,14 @@ namespace Myapp {
                 return true;
             }
             else {
+                if (emails.Contains(email)){
+                    ErrorInvalid("Email is already registered, please try again.");
                 return false;
+                }
+                else{
+                    ErrorInvalid("Supplied value is out of range, please try again.");
+                    return false;
+                }
             }
         }
 
