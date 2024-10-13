@@ -119,12 +119,10 @@ namespace Myapp {
         while (!valid) {
             Console.WriteLine("Please enter in your email:");
             email = Console.ReadLine() ?? string.Empty;
-            check.EmailCheck(email);
             if (check.EmailCheck(email) == true) {
                 valid = true;
             }
             else {
-                check.ErrorInvalid("Supplied email is invalid, please try again.");
                 valid = false;
             }
         }
