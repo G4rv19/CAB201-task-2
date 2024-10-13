@@ -69,7 +69,11 @@ namespace Myapp {
         public bool EmailCheck(string email) {
             string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";  // Basic email format check
             Match match = Regex.Match(email, pattern);
-            if (match.Success == true) {
+            List<string> emails = new List<string>();   
+            foreach (var user in Register.users){
+                emails.Add(user.Value.Email);
+            }
+            if (match.Success == true && !emails.Contains(email)) {
                 return true;
             }
             else {
