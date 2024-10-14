@@ -9,6 +9,7 @@ using System.Text;
 namespace Myapp {
     public class Register_menu {
         private string[] usertype;
+        
         public Register_menu(){
             usertype = new string[] {
                 "1. Patient",
@@ -86,13 +87,17 @@ namespace Myapp {
         // Age Check
         while (!valid) {
             Console.WriteLine("Please enter in your age:");
-            age = Convert.ToInt16(Console.ReadLine());
-            check.AgeCheck(Useris, age);
-            if(check.AgeCheck(Useris, age) == true) {
-                valid = true;
+            if (int.TryParse(Console.ReadLine(), out age)){
+                if (check.AgeCheck(Useris, age)){
+                    valid = true;
+                }
+                else{
+                    valid = false;
+                    check.ErrorInvalid("Supplied age is invalid, please try again.");
+                }
             }
-            else {
-                check.ErrorInvalid("Supplied age is invalid, please try again.");
+            else{
+                check.ErrorInvalid("Supplied value is not an integer, please try again.");
                 valid = false;
             }
         }
