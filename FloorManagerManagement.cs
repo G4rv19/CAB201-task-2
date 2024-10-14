@@ -34,16 +34,17 @@ namespace Myapp {
                     Console.WriteLine($"{index}. {patient}");
                     index++;
                 }
-                Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
-                int choice = Convert.ToInt32(Console.ReadLine());
                 bool valid = false;
+                int choice = 0; // Initialize with a default value
                 while(!valid){
-                    if (choice <1 || choice > patients.Count){
-                        valid = false;
-                        check.ErrorInvalid("Supplied value is out of range, please try again.");
+                    Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
+                    choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice > 0 || choice <= patients.Count){
+                        valid = true;
                     }
                     else{
-                        valid = true;
+                        valid = false;
+                        check.ErrorInvalid("Supplied value is out of range, please try again.");
                     }
                 }
                 if (managementTools.patientEmailMap.TryGetValue(choice, out string selectedPatientEmail)){
@@ -129,10 +130,11 @@ namespace Myapp {
                     Console.WriteLine($"{index}. {patient}");
                     index++;
                 }
-                Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
-                int choice = Convert.ToInt32(Console.ReadLine());
+                int choice = 0;
                 bool valid = false;
                 while(!valid){
+                    Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
+                    choice = Convert.ToInt32(Console.ReadLine());
                     if (choice <1 || choice > patients.Count){
                         check.ErrorInvalid("Supplied value is out of range, please try again.");
                         valid = false;
