@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -101,10 +102,24 @@ namespace Myapp {
 
         // Staff ID must be between 100 and 999
         public bool StaffIdCheck(int staffId) {
+            List<int> staff = new List<int>();
+            foreach( var user in Register.users){
+                if (user.Value.Staff_id.HasValue)
+                {
+                    staff.Add(user.Value.Staff_id.Value);
+                }
+            }
             if (staffId >= 100 && staffId <= 999) {
-                return true;
+                if (staff.Contains(staffId)){
+                    ErrorInvalid("Staff ID is already registered, please try again.");
+                    return false;
+                }
+                else{
+                    return true;
+                }
             }
             else {
+                ErrorInvalid("Supplied staff identification number is invalid, please try again.");
                 return false;
             }
         }

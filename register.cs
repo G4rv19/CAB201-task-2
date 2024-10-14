@@ -175,12 +175,10 @@ namespace Myapp {
             while (!valid) {
                 Console.WriteLine("Please enter in your staff ID:");
                 id = Convert.ToInt16(Console.ReadLine());
-                check.StaffIdCheck(id);
                 if (check.StaffIdCheck(id) == true) {
                     valid = true;
                 }
                 else {
-                    check.ErrorInvalid("Supplied staff identification number is invalid, please try again.");
                     valid = false;
                 }
             }
@@ -255,12 +253,10 @@ namespace Myapp {
             while (!valid) {
                 Console.WriteLine("Please enter in your staff ID:");
                 id = Convert.ToInt16(Console.ReadLine());
-                check.StaffIdCheck(id);
                 if (check.StaffIdCheck(id) == true) {
                     valid = true;
                 }
                 else {
-                    check.ErrorInvalid("Supplied staff identification number is invalid, please try again.");
                     valid = false;
                 }
             }
