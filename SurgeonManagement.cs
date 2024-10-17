@@ -10,6 +10,7 @@ namespace Myapp {
         public List<string> PatientAssignedToSurgeon = new List<string>();
         ManagementTools managementTools = new ManagementTools();
         private User user;
+        Check check = new Check();
         public SurgeonManagement(User user){
             this.user = user;
         }
@@ -66,21 +67,26 @@ namespace Myapp {
                     Console.WriteLine($"{index}. {patient}");
                     index++;
                 }
-                Console.WriteLine($"Please enter a choice between 1 and {PatientAssignedToSurgeon.Count}.");
-                int choice = Convert.ToInt32(Console.ReadLine());
-                if (choice < 1 || choice > PatientAssignedToSurgeon.Count){
-                    Console.WriteLine("Invalid choice.");
-                    return;
-                }
-                else{
-
-                    string patientEmail = managementTools.patientEmailMap[choice];
-                    User selectedPatient = Register.GetUser(patientEmail);  
-                    selectedPatient.surgeryDateTime = null;
-                    selectedPatient.surgeonassigned = null;
-                    selectedPatient.SurgeryPerformed = true;
-                    Console.WriteLine($"Surgery performed on {selectedPatient.Name} by {user.Name}.");
-                    return;
+                bool valid = false;
+                while(!valid){
+                    Console.WriteLine($"Please enter a choice between 1 and {PatientAssignedToSurgeon.Count}.");
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice >= 1 || choice <= PatientAssignedToSurgeon.Count){
+                        string patientEmail = managementTools.patientEmailMap[choice];
+                        User selectedPatient = Register.GetUser(patientEmail);
+                        selectedPatient.SurgeryPerformed = true;
+                        selectedPatient.surgeryDateTime = null;
+                        selectedPatient.surgeonassigned = null;
+                        Console.WriteLine($"Surgery performed on {selectedPatient.Name} by {user.Name}.");
+                        valid = true;
+                        return;
+                    }
+                    else{
+                        valid = false;
+                        check.ErrorInvalid("Supplied value is out of range, please try again.");
+                        
+                        
+                    }
                 }
             }
 
