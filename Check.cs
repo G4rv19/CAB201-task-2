@@ -136,7 +136,7 @@ namespace Myapp {
                         return true;
                     }
                 }
-            return null;
+                return false;
             }
             else {
                 return false;
