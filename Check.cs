@@ -126,18 +126,14 @@ namespace Myapp {
 
         // Floor number must be between 1 and 6
         public bool FloorCheck(int floor) {
-            List<int> rooms = new List<int>();
-            foreach(var patient in Register.users){
-                rooms.Add(patient.Value.Room.Value);
-            }
             if (floor >= 1 && floor <= 6) {
-                if (rooms.Contains(floor)){
-                    ErrorInvalid("Floor has been assigned to another floor manager, please try again.");
-                    return false;
+                foreach(var manager in Register.users){
+                    if (manager.Value.Floor_number.HasValue && manager.Value.Floor_number == floor){
+                        ErrorInvalid("Floor is already registered, please try again.");
+                        return false;
+                    }
                 }
-                else{
-                    return true;
-                }
+                return true;
             }
             else {
                 ErrorInvalid("Supplied floor is invalid, please try again.");
