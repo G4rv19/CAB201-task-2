@@ -38,7 +38,7 @@ namespace Myapp {
                 bool valid = false;
                 int choice = 0;
                 while(!valid){
-                    Console.WriteLine($"Please enter a choice between 1 and {patients.Count}");
+                    Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
                     string input = Console.ReadLine();
                     if (int.TryParse(input, out choice) && choice > 0 && choice <= patients.Count){
                         valid = true;
