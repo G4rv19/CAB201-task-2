@@ -67,7 +67,6 @@ namespace Myapp {
                                 selectedPatient.Floor = user.Floor_number;
                             }
                             else{
-                                check.ErrorInvalid("Supplied value is out of range, please try again.");
                                 valid = false;
                             }
                         }

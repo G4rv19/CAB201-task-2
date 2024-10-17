@@ -92,7 +92,12 @@ namespace Myapp{
                                 change_password();
                                 break;
                             case 3:
+                            if(!check.AllRoomsFull()){
                                 floormanagement.AssigningRoom(user);
+                            }
+                            else{
+                                check.ErrorInvalid("All rooms on this floor are assigned.");
+                            }
                                 break;
                             case 4:
                                 floormanagement.AssignSurgery(user);

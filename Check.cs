@@ -154,12 +154,13 @@ namespace Myapp {
 
         public bool RoomCheck(int room, User user){
             if (room < 1 || room > 10){
+                ErrorInvalid("Supplied value is out of range, please try again.");
                 return false;
             }
             else{
-                foreach(var patient in Register.users){
-                    if (patient.Value.Room == room && patient.Value.Email == user.Email){
-                        ErrorInvalid("Supplied value is out of range, please try again.");
+                foreach (var patient in Register.users){
+                    if (patient.Value.Room.HasValue && patient.Value.Room == room){
+                        ErrorInvalid("Room has been assigned to another patient, please try again.");
                         return false;
                     }
                 }
@@ -181,6 +182,18 @@ namespace Myapp {
         
         // Return true if all rooms are occupied, otherwise false
         return occupiedfloorsCount.Count >= floors.Count;
+        }
+        public bool AllRoomsFull() {
+        List<int> rooms = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        HashSet<int> occupiedRoomsCount = new HashSet<int>();
+        foreach (var room in rooms) {
+            foreach (var patient in Register.users) {
+                if (patient.Value.Room == room) {
+                    occupiedRoomsCount.Add(patient.Value.Room.Value);
+                } 
+            }
+        }
+        return occupiedRoomsCount.Count >= rooms.Count;
         }
 
         public void ErrorInvalid(string message) {
