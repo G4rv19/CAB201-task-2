@@ -15,6 +15,7 @@ namespace Myapp {
         ManagementTools managementTools = new ManagementTools();
         public void AssigningRoom(User user){
             Users.Clear();
+            patients.Clear();
             managementTools.CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, patients);
             if (patients.Count == 0){
                 managementTools.CheckedInPatientList(patient => patient.Name != null && patient.Email != null && patient.is_staff == false, Users);
@@ -35,18 +36,18 @@ namespace Myapp {
                     index++;
                 }
                 bool valid = false;
-                int choice = 0; // Initialize with a default value
+                int choice = 0;
                 while(!valid){
-                    Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
-                    choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice > 0 || choice <= patients.Count){
+                    Console.WriteLine($"Please enter a choice between 1 and {patients.Count}");
+                    string input = Console.ReadLine();
+                    if (int.TryParse(input, out choice) && choice > 0 && choice <= patients.Count){
                         valid = true;
                     }
                     else{
-                        valid = false;
                         check.ErrorInvalid("Supplied value is out of range, please try again.");
                     }
                 }
+                
                 if (managementTools.patientEmailMap.TryGetValue(choice, out string selectedPatientEmail)){
                     User selectedPatient = Register.GetUser(selectedPatientEmail);
                     if (selectedPatient.Room != null){
@@ -72,7 +73,7 @@ namespace Myapp {
                         }
                         Console.WriteLine($"Patient {selectedPatient.Name} has been assigned to room number {room} on floor {user.Floor_number}.");
                     }    
-                    }
+                }
                 else{
                     check.ErrorInvalid("Error in retrieving patient.");
                 }
