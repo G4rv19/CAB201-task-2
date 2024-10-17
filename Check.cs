@@ -127,7 +127,16 @@ namespace Myapp {
         // Floor number must be between 1 and 6
         public bool FloorCheck(int floor) {
             if (floor >= 1 && floor <= 6) {
-                return true;
+                foreach (var user in Register.users){
+                    if (user.Value.Floor_number == floor){
+                        ErrorInvalid("Floor has been assigned to another floor manager, please try again.");
+                        return false;
+                    }
+                    else{
+                        return true;
+                    }
+                }
+            return null;
             }
             else {
                 return false;
