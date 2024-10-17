@@ -158,34 +158,38 @@ namespace Myapp {
                         Console.WriteLine($"{index2}. {surgeon}");
                         index2++;
                     }
-                    Console.WriteLine($"Please enter a choice between 1 and {surgeons.Count}.");
-                    int surgeonChoice = Convert.ToInt32(Console.ReadLine());
-                    if (surgeonChoice <1 || surgeonChoice > surgeons.Count){
-                        Console.WriteLine("Invalid choice.");
-                        return;
-                    }
-                    else{
-                        string selectedSurgeonEmail = managementTools.patientEmailMap[surgeonChoice];
-                        User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
-                        selectedPatient.surgeonassigned = selectedSurgeon.Name;
-                        string surgeryDateTime;
-                        valid = false;
-                        while(!valid){
-                            Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
-                            surgeryDateTime = Console.ReadLine();
-                            check.DateTimeCheck(surgeryDateTime);
-                            if(check.DateTimeCheck(surgeryDateTime) == true){
-                                valid = true;
-                                selectedPatient.surgeryDateTime = surgeryDateTime;
-                            }
-                            else{
-                                check.ErrorInvalid("Supplied value is not a valid DateTime.");
-                                valid = false;
-                            }
+                    valid = false;
+                    while(!valid){
+                        Console.WriteLine($"Please enter a choice between 1 and {surgeons.Count}.");
+                        int surgeonChoice = Convert.ToInt32(Console.ReadLine());
+                        if (surgeonChoice <1 || surgeonChoice > surgeons.Count){
+                            check.ErrorInvalid("Supplied value is out of range, please try again.");
+                            valid = false;
                         }
-                        Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
-                        Console.WriteLine($"Surgery will take place on {selectedPatient.surgeryDateTime}.");
+                        else{
+                            valid = true;
+                        }
                     }
+                    string selectedSurgeonEmail = managementTools.patientEmailMap[surgeonChoice];
+                    User selectedSurgeon = Register.GetUser(selectedSurgeonEmail);
+                    selectedPatient.surgeonassigned = selectedSurgeon.Name;
+                    string surgeryDateTime;
+                    valid = false;
+                    while(!valid){
+                        Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
+                        surgeryDateTime = Console.ReadLine();
+                        check.DateTimeCheck(surgeryDateTime);
+                        if(check.DateTimeCheck(surgeryDateTime) == true){
+                            valid = true;
+                            selectedPatient.surgeryDateTime = surgeryDateTime;
+                        }
+                        else{
+                            check.ErrorInvalid("Supplied value is not a valid DateTime.");
+                            valid = false;
+                        }
+                    }
+                    Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");
+                    Console.WriteLine($"Surgery will take place on {selectedPatient.surgeryDateTime}.");
                 }
                     
                 
