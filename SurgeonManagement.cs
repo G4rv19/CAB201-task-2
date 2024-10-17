@@ -71,9 +71,8 @@ namespace Myapp {
                 bool valid = false;
                 while(!valid){
                     Console.WriteLine($"Please enter a choice between 1 and {PatientAssignedToSurgeon.Count}.");
-                    choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice >= 1 || choice <= PatientAssignedToSurgeon.Count){
-                        string patientEmail = managementTools.patientEmailMap[choice];
+                    if (int.TryParse(Console.ReadLine(), out choice) && choice >= 1 && choice <= PatientAssignedToSurgeon.Count){
+                        string patientEmail = managementTools.patientEmailMap[choice - 1];
                         User selectedPatient = Register.GetUser(patientEmail);
                         selectedPatient.SurgeryPerformed = true;
                         selectedPatient.surgeryDateTime = null;
