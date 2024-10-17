@@ -146,8 +146,11 @@ namespace Myapp {
                         ErrorInvalid("Floor has been assigned to another floor manager, please try again.");
                         return false;
                     }
+                    else{
+                        return true;
+                    }
                 }
-                return true;
+                return false;
             }
             else {
                 ErrorInvalid("Supplied floor is invalid, please try again.");
