@@ -127,15 +127,16 @@ namespace Myapp {
         // Floor number must be between 1 and 6
         public bool FloorCheck(int floor) {
             List<int> floors = new List<int> {1, 2, 3, 4, 5, 6};
-            bool roomsfull = false;
+            int occupiedRoomCount = 0;
+            
             foreach (var room in floors){
                 foreach (var patient in Register.users){
                     if (patient.Value.Room == room){
-                        roomsfull = true;
+                        occupiedRoomCount++;
                     } 
                 }
             }
-            if (roomsfull == true){
+            if (occupiedRoomCount >= floors.Count){
             ErrorInvalid("All floors are assigned.");
             return false;
             }
