@@ -126,7 +126,18 @@ namespace Myapp {
 
         // Floor number must be between 1 and 6
         public bool FloorCheck(int floor) {
-            if (floor >= 1 && floor <= 6) {
+            List<int> floors = new List<int> {1, 2, 3, 4, 5, 6};
+            bool roomsfull = false;
+            foreach (var manager in Register.users){
+                if (manager.Value.Floor_number.HasValue && floors.Contains(manager.Value.Floor_number.Value)){
+                    roomsfull = true;
+                }
+            }
+            if (roomsfull == true){
+            ErrorInvalid("All floors are assigned.");
+            return false;
+            }
+            else if (floor >= 1 && floor <= 6) {
                 foreach(var manager in Register.users){
                     if (manager.Value.Floor_number.HasValue && manager.Value.Floor_number == floor){
                         ErrorInvalid("Floor has been assigned to another floor manager, please try again.");
