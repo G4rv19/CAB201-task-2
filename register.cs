@@ -187,12 +187,10 @@ namespace Myapp {
             while (!valid){
                 Console.WriteLine("Please enter in your floor number:");
                 floor = Convert.ToInt16(Console.ReadLine());
-                check.FloorCheck(floor);
                 if (check.FloorCheck(floor) == true) {
                     valid = true;
                 }
                 else {
-
                     valid = false;
                 }
             } 

@@ -129,7 +129,7 @@ namespace Myapp {
             if (floor >= 1 && floor <= 6) {
                 foreach(var manager in Register.users){
                     if (manager.Value.Floor_number.HasValue && manager.Value.Floor_number == floor){
-                        ErrorInvalid("Floor is already registered, please try again.");
+                        ErrorInvalid("Floor has been assigned to another floor manager, please try again.");
                         return false;
                     }
                 }
