@@ -137,8 +137,8 @@ namespace Myapp {
                 }
             }
             if (occupiedRoomCount.Count >= floors.Count){
-            ErrorInvalid("All floors are assigned.");
-            return false;
+                ErrorInvalid("All floors are assigned.");
+                return false;
             }
             if (floor >= 1 && floor <= 6) {
                 foreach(var manager in Register.users){
@@ -146,11 +146,8 @@ namespace Myapp {
                         ErrorInvalid("Floor has been assigned to another floor manager, please try again.");
                         return false;
                     }
-                    else{
-                        return true;
-                    }
                 }
-                return false;
+                return true;
             }
             else {
                 ErrorInvalid("Supplied floor is invalid, please try again.");
