@@ -128,9 +128,11 @@ namespace Myapp {
         public bool FloorCheck(int floor) {
             List<int> floors = new List<int> {1, 2, 3, 4, 5, 6};
             bool roomsfull = false;
-            foreach (var manager in Register.users){
-                if (manager.Value.Floor_number.HasValue && floors.Contains(manager.Value.Floor_number.Value)){
-                    roomsfull = true;
+            foreach (var room in floors){
+                foreach (var patient in Register.users){
+                    if (patient.Value.Room == room){
+                        roomsfull = true;
+                    } 
                 }
             }
             if (roomsfull == true){
