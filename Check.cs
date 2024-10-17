@@ -167,20 +167,20 @@ namespace Myapp {
             return true;
         }
 
-        public bool AllRoomsFull() {
+        public bool AllFloorsFull() {
         List<int> floors = new List<int> {1, 2, 3, 4, 5, 6};
-        HashSet<int> occupiedRoomCount = new HashSet<int>();
+        HashSet<int> occupiedfloorsCount = new HashSet<int>();
         
-        foreach (var room in floors) {
+        foreach (var floor in floors) {
             foreach (var patient in Register.users) {
-                if (patient.Value.Room.HasValue && patient.Value.Room.Value == room) {
-                    occupiedRoomCount.Add(patient.Value.Room.Value);
+                if (patient.Value.Floor_number.HasValue && patient.Value.Floor_number.Value == floor) {
+                    occupiedfloorsCount.Add(patient.Value.Floor_number.Value);
                 } 
             }
         }
         
         // Return true if all rooms are occupied, otherwise false
-        return occupiedRoomCount.Count >= floors.Count;
+        return occupiedfloorsCount.Count >= floors.Count;
         }
 
         public void ErrorInvalid(string message) {
