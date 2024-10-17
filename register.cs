@@ -225,8 +225,13 @@ namespace Myapp {
             }
             switch (choice){
                 case 1:
+                if (check.AllRoomsFull() == true){
                     Console.WriteLine("Registering as a floor manager.");
                     Register_floor_manager();
+                }
+                else{
+                    check.ErrorInvalid("All floors are assigned.");
+                }
                     break;
                 case 2:
                     Console.WriteLine("Registering as a surgeon.");

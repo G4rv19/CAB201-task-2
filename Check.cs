@@ -126,20 +126,6 @@ namespace Myapp {
 
         // Floor number must be between 1 and 6
         public bool FloorCheck(int floor) {
-            List<int> floors = new List<int> {1, 2, 3, 4, 5, 6};
-            HashSet<int> occupiedRoomCount = new HashSet<int>();
-            
-            foreach (var room in floors){
-                foreach (var patient in Register.users){
-                    if (patient.Value.Room == room){
-                        occupiedRoomCount.Add(patient.Value.Room.Value);
-                    } 
-                }
-            }
-            if (occupiedRoomCount.Count >= floors.Count){
-                ErrorInvalid("All floors are assigned.");
-                return false;
-            }
             if (floor >= 1 && floor <= 6) {
                 foreach(var manager in Register.users){
                     if (manager.Value.Floor_number.HasValue && manager.Value.Floor_number == floor){
@@ -179,6 +165,23 @@ namespace Myapp {
                 }
             }
             return true;
+        }
+
+        public bool AllRoomsFull(){
+            List<int> floors = new List<int> {1, 2, 3, 4, 5, 6};
+            HashSet<int> occupiedRoomCount = new HashSet<int>();
+            
+            foreach (var room in floors){
+                foreach (var patient in Register.users){
+                    if (patient.Value.Room == room){
+                        occupiedRoomCount.Add(patient.Value.Room.Value);
+                    } 
+                }
+            }
+            if (occupiedRoomCount.Count >= floors.Count){
+                return false;
+            }
+            return true; // Add this line to return true if all rooms are not full
         }
 
         public void ErrorInvalid(string message) {
