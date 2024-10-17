@@ -60,7 +60,6 @@ namespace Myapp {
                         while(!valid){
                             Console.WriteLine("Please enter your room (1-10):");
                             room = Convert.ToInt32(Console.ReadLine());
-                            check.RoomCheck(room, user);
                             if(check.RoomCheck(room, user) == true){
                                 valid = true;
                                 selectedPatient.Room = room;
