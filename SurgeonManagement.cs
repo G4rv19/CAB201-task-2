@@ -82,8 +82,8 @@ namespace Myapp {
                         return;
                     }
                     else{
-                        valid = false;
                         check.ErrorInvalid("Supplied value is out of range, please try again.");
+                        valid = false;
                         
                         
                     }
