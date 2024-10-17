@@ -67,10 +67,11 @@ namespace Myapp {
                     Console.WriteLine($"{index}. {patient}");
                     index++;
                 }
+                int choice = 0;
                 bool valid = false;
                 while(!valid){
                     Console.WriteLine($"Please enter a choice between 1 and {PatientAssignedToSurgeon.Count}.");
-                    int choice = Convert.ToInt32(Console.ReadLine());
+                    choice = Convert.ToInt32(Console.ReadLine());
                     if (choice >= 1 || choice <= PatientAssignedToSurgeon.Count){
                         string patientEmail = managementTools.patientEmailMap[choice];
                         User selectedPatient = Register.GetUser(patientEmail);
@@ -84,8 +85,6 @@ namespace Myapp {
                     else{
                         check.ErrorInvalid("Supplied value is out of range, please try again.");
                         valid = false;
-                        
-                        
                     }
                 }
             }
