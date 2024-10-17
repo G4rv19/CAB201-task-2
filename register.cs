@@ -192,7 +192,7 @@ namespace Myapp {
                     valid = true;
                 }
                 else {
-                    check.ErrorInvalid("Supplied floor is invalid, please try again.");
+
                     valid = false;
                 }
             } 
