@@ -159,9 +159,10 @@ namespace Myapp {
                         index2++;
                     }
                     valid = false;
+                    int surgeonChoice = 0;
                     while(!valid){
                         Console.WriteLine($"Please enter a choice between 1 and {surgeons.Count}.");
-                        int surgeonChoice = Convert.ToInt32(Console.ReadLine());
+                        surgeonChoice = Convert.ToInt32(Console.ReadLine());
                         if (surgeonChoice <1 || surgeonChoice > surgeons.Count){
                             check.ErrorInvalid("Supplied value is out of range, please try again.");
                             valid = false;
