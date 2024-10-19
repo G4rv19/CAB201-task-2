@@ -7,10 +7,12 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Myapp {
-    public class Register_menu {
+    public class Register {
+        public string Useris;
+        public static Dictionary<string, User> users = new Dictionary<string, User>();
         private string[] usertype;
-        
-        public Register_menu(){
+        public Register(){
+            Useris = string.Empty;
             usertype = new string[] {
                 "1. Patient",
                 "2. Staff",
@@ -24,7 +26,6 @@ namespace Myapp {
             }
             Console.WriteLine("Please enter a choice between 1 and 3.");
         }
-
         public void RunRegister(){
             int choice;
             RegisterOptions();
@@ -50,14 +51,6 @@ namespace Myapp {
                     break;
             } 
         }
-
-    }
-    /// <summary>
-    /// Register patient registers the patient with the details
-    /// </summary>
-    public class Register {
-        public string Useris;
-        public static Dictionary<string, User> users = new Dictionary<string, User>();
         public User Register_function() {
         Check check = new Check();
         bool valid = false;
@@ -152,7 +145,7 @@ namespace Myapp {
         return user;
         }
         
-        public void Register_patient() {
+        private void Register_patient() {
             User user = Register_function();
             user.is_staff = false;
 
@@ -164,7 +157,7 @@ namespace Myapp {
                 Console.WriteLine("User already exists.");
             }
         }
-        public void Register_floor_manager() {
+        private void Register_floor_manager() {
             
             User staff = Register_function();
             staff.is_staff = true;
@@ -204,7 +197,7 @@ namespace Myapp {
                 Console.WriteLine("User already exists.");
             }
         }
-        public void staff_type() {
+        private void staff_type() {
             List<string> staff_type = new List<string>();
             staff_type.Add("1. Floor manager");
             staff_type.Add("2. Surgeon");
@@ -247,7 +240,7 @@ namespace Myapp {
             }
             
         }
-        public void surgeon_register() {
+        private void surgeon_register() {
             User staff = Register_function();
             staff.is_staff = true;
             Check check = new Check();

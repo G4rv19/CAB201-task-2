@@ -78,5 +78,42 @@ namespace Myapp {
                 return;
             }
         }
+
+        public void show_details(User user) {
+            if (user != null && user.is_staff == false){
+                Console.WriteLine("Your details.");
+                Console.WriteLine($"Name: {user.Name}");
+                Console.WriteLine($"Age: {user.Age}");
+                Console.WriteLine($"Mobile phone: {user.Mobile}");
+                Console.WriteLine($"Email: {user.Email}");
+            }
+            else if (user != null && user.is_staff == true){
+                if (user.Floor_number != null){
+                    Console.WriteLine("Your details.");
+                    Console.WriteLine($"Name: {user.Name}");
+                    Console.WriteLine($"Age: {user.Age}");
+                    Console.WriteLine($"Mobile phone: {user.Mobile}");
+                    Console.WriteLine($"Email: {user.Email}");
+                    Console.WriteLine($"Staff ID: {user.Staff_id}");    
+                    Console.WriteLine($"Floor: {user.Floor_number}.");
+                }
+                else {
+                    Console.WriteLine("Your details.");
+                    Console.WriteLine($"Name: {user.Name}");
+                    Console.WriteLine($"Age: {user.Age}");
+                    Console.WriteLine($"Mobile phone: {user.Mobile}");
+                    Console.WriteLine($"Email: {user.Email}");
+                    Console.WriteLine($"Staff ID: {user.Staff_id}");
+                    Console.WriteLine($"Speciality: {user.Surgeon_speciality}"); 
+                }
+
+            }
+        }
+        public void change_password(User user){
+            Console.WriteLine("Enter new password:");
+            string new_password = Console.ReadLine();
+            user.Password = new_password;
+            Console.WriteLine("Password has been changed.");
+        }
     }
 }

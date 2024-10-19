@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace Myapp{
     public class Login{
-        public string email;
+        private string email;
         Check check = new Check();
 
         public User Login_User(){
@@ -41,7 +41,7 @@ namespace Myapp{
         
         }
         
-        public void login_menu(){
+        private void login_menu(){
             User user = Register.GetUser(email);
             ManagementTools management = new ManagementTools();
             SurgeonManagement surgeonManagement = new SurgeonManagement(user);
@@ -53,10 +53,10 @@ namespace Myapp{
                     int choice = Convert.ToInt16(Console.ReadLine());
                     switch (choice){
                         case 1:
-                            show_details();
+                            management.show_details(user);
                             break;
                         case 2:
-                            change_password();
+                            management.change_password(user);
                             break;
                         case 3:
                             management.CheckIn(user.Checked_in, user);
@@ -86,10 +86,10 @@ namespace Myapp{
                         int choice = Convert.ToInt16(Console.ReadLine());
                         switch(choice){
                             case 1:
-                                show_details(); 
+                                management.show_details(user); 
                                 break;
                             case 2:
-                                change_password();
+                                management.change_password(user);
                                 break;
                             case 3:
                             if(!check.AllRoomsFull()){
@@ -120,10 +120,10 @@ namespace Myapp{
                         int choice = Convert.ToInt16(Console.ReadLine());
                         switch(choice){
                             case 1:
-                                show_details();
+                                management.show_details(user);
                                 break;
                             case 2:
-                                change_password();
+                                management.change_password(user);
                                 break;
                             case 3:
                                 surgeonManagement.PatientAssignedForSurgeon(user);
@@ -143,38 +143,7 @@ namespace Myapp{
                 }
             }
         }
-        public void show_details() {
-            User user = Register.GetUser(email);
-            if (user != null && user.is_staff == false){
-                Console.WriteLine("Your details.");
-                Console.WriteLine($"Name: {user.Name}");
-                Console.WriteLine($"Age: {user.Age}");
-                Console.WriteLine($"Mobile phone: {user.Mobile}");
-                Console.WriteLine($"Email: {user.Email}");
-            }
-            else if (user != null && user.is_staff == true){
-                if (user.Floor_number != null){
-                    Console.WriteLine("Your details.");
-                    Console.WriteLine($"Name: {user.Name}");
-                    Console.WriteLine($"Age: {user.Age}");
-                    Console.WriteLine($"Mobile phone: {user.Mobile}");
-                    Console.WriteLine($"Email: {user.Email}");
-                    Console.WriteLine($"Staff ID: {user.Staff_id}");    
-                    Console.WriteLine($"Floor: {user.Floor_number}.");
-                }
-                else {
-                    Console.WriteLine("Your details.");
-                    Console.WriteLine($"Name: {user.Name}");
-                    Console.WriteLine($"Age: {user.Age}");
-                    Console.WriteLine($"Mobile phone: {user.Mobile}");
-                    Console.WriteLine($"Email: {user.Email}");
-                    Console.WriteLine($"Staff ID: {user.Staff_id}");
-                    Console.WriteLine($"Speciality: {user.Surgeon_speciality}"); 
-                }
-
-            }
-        }
-        public void PatientMenu(User user){
+        private void PatientMenu(User user){
             Console.WriteLine("Patient Menu.");
             Console.WriteLine("Please choose from the menu below:");
             Console.WriteLine("1. Display my details");
@@ -203,15 +172,8 @@ namespace Myapp{
             
             
         }
-        public void change_password(){
-            Console.WriteLine("Enter new password:");
-            string new_password = Console.ReadLine();
-            User user = Register.GetUser(email);
-            user.Password = new_password;
-            Console.WriteLine("Password has been changed.");
-        }
 
-        public void FloorManagerMenu(User user){
+        private void FloorManagerMenu(User user){
             Console.WriteLine("Floor Manager Menu.");
             Console.WriteLine("Please choose from the menu below:");
             Console.WriteLine("1. Display my details");
@@ -222,7 +184,7 @@ namespace Myapp{
             Console.WriteLine("6. Log out");
             Console.WriteLine("Please enter a choice between 1 and 6.");
         }
-        public void SurgeonMenu(User user){
+        private void SurgeonMenu(User user){
             Console.WriteLine("Surgeon Menu.");
             Console.WriteLine("Please choose from the menu below:");
             Console.WriteLine("1. Display my details");
