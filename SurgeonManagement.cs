@@ -41,16 +41,16 @@ namespace Myapp {
                 Console.WriteLine("You do not have any patients assigned.");
                 return;
             }
-            else{
-                int index = 1;
-                foreach (string patient in SurgeryPatients){
-                    string PatientEmail = managementTools.patientEmailMap[index];
-                    User selectedPatient = Register.GetUser(PatientEmail);
-                    Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
-                    index++;
-                }
-                return;
+            
+            var sortedPatients = SurgeryPatients.OrderByDescending(patientEmail => DateTime.ParseExact(Register.GetUser(patientEmail).surgeryDateTime,"HH:mm dd/MM/yyyy", null)).ToList();
+            
+            int index = 1;
+            foreach (string patientEmail in sortedPatients){
+                User selectedPatient = Register.GetUser(managementTools.patientEmailMap[int.Parse(patientEmail)]);
+                Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
+                index++;
             }
+            return;
 
         }
 
