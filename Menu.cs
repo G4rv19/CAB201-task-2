@@ -12,6 +12,7 @@ namespace Myapp {
         Check check = new Check();
         public void RunMenu() {
             int choice;
+            displayHeader();
             do {
                 ShowOptions();
                 choice = Convert.ToInt16(Console.ReadLine());
@@ -33,6 +34,11 @@ namespace Myapp {
                 }
             } while (choice != 3);
             
+        }
+        private void displayHeader(){
+            Console.WriteLine("=================================");
+            Console.WriteLine("Welcome to Gardens Point Hospital");
+            Console.WriteLine("=================================");
         }
 
         private List<string> options(){
