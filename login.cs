@@ -74,6 +74,9 @@ namespace Myapp{
                             Console.WriteLine($"Patient {user.Name} has logged out.");
                             is_patient_logged_in = false;
                             break;
+                        default:
+                            check.ErrorInvalid("Invalid choice.");
+                            break;
                     }
                 }
 
@@ -109,6 +112,9 @@ namespace Myapp{
                                 Console.WriteLine($"Floor manager {user.Name} has logged out.");
                                 is_staff_logged_in = false;
                                 break;
+                            default:
+                                check.ErrorInvalid("Invalid choice.");
+                                break;
 
                         }
                     }
@@ -137,6 +143,9 @@ namespace Myapp{
                             case 6:
                                 Console.WriteLine($"Surgeon {user.Name} has logged out.");
                                 is_surgeon_logged_in = false;
+                                break;
+                            default:
+                                check.ErrorInvalid("Invalid choice.");
                                 break;
                         }
                     }
