@@ -35,24 +35,39 @@ namespace Myapp {
         }
 
         public void SeeSurgery(User user){
-            Console.WriteLine("Your schedule.");
-            managementTools.CheckedInPatientList(patient => patient.surgeonassigned == user.Name, SurgeryPatients);
-            if (SurgeryPatients.Count == 0){
-                Console.WriteLine("You do not have any patients assigned.");
-                return;
-            }
-            
-            var sortedPatients = SurgeryPatients.OrderByDescending(patientEmail => DateTime.ParseExact(Register.GetUser(patientEmail).surgeryDateTime,"HH:mm dd/MM/yyyy", null)).ToList();
-            
-            int index = 1;
-            foreach (string patientEmail in sortedPatients){
-                User selectedPatient = Register.GetUser(patientEmail);
-                Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
-                index++;
-            }
+        Console.WriteLine("Your schedule.");
+        
+        // Retrieve patients assigned to the surgeon
+        managementTools.CheckedInPatientList(patient => patient.surgeonassigned == user.Name, SurgeryPatients);
+        
+        if (SurgeryPatients.Count == 0) {
+            Console.WriteLine("You do not have any patients assigned.");
             return;
-
         }
+        
+        // Sort patients by surgery date and time in ascending order (soonest surgery first)
+        var sortedPatients = SurgeryPatients.OrderBy(patientEmail => {
+            User patient = Register.GetUser(patientEmail);
+            
+            // Try to parse the surgeryDateTime, and default to a very distant future date if parsing fails
+            DateTime surgeryDate;
+            if (DateTime.TryParseExact(patient.surgeryDateTime, "HH:mm dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out surgeryDate)) {
+                return surgeryDate;
+            } else {
+                // Default to a very distant future date if the format is invalid
+                return DateTime.MaxValue;
+            }
+        }).ToList();
+        
+        // Display the sorted surgery schedule
+        int index = 1;
+        foreach (string patientEmail in sortedPatients) {
+            User selectedPatient = Register.GetUser(patientEmail);
+            Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
+            index++;
+        }
+    }    
+
 
         public void PerformSurgery(User user){
             Console.WriteLine("Please select your patient: ");
