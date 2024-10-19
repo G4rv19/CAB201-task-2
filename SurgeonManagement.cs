@@ -36,23 +36,39 @@ namespace Myapp {
 
         public void SeeSurgery(User user){
             Console.WriteLine("Your schedule.");
+
+            // Filter patients assigned to the surgeon
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == user.Name, SurgeryPatients);
-            if (SurgeryPatients.Count == 0){
+
+            if (SurgeryPatients == null || SurgeryPatients.Count == 0){
                 Console.WriteLine("You do not have any patients assigned.");
                 return;
             }
-            
-            var sortedPatients = SurgeryPatients.OrderByDescending(patientEmail => DateTime.ParseExact(Register.GetUser(patientEmail).surgeryDateTime,"HH:mm dd/MM/yyyy", null)).ToList();
-            
+
+            // Sort patients by surgery date in descending order with null checks
+            var sortedPatients = SurgeryPatients
+                .Where(patientEmail => !string.IsNullOrEmpty(patientEmail)) // Ensure the email is not null
+                .OrderByDescending(patientEmail => {
+                    var patient = Register.GetUser(patientEmail);
+                    if (patient == null || string.IsNullOrEmpty(patient.surgeryDateTime)) {
+                        // Handle invalid patients or surgery dates
+                        return DateTime.MinValue; // or skip this patient based on your logic
+                    }
+                    return DateTime.ParseExact(patient.surgeryDateTime, "HH:mm dd/MM/yyyy", null);
+                })
+                .ToList();
+
+            // Display the sorted list
             int index = 1;
-            foreach (string patientEmail in sortedPatients){
-                User selectedPatient = Register.GetUser(managementTools.patientEmailMap[int.Parse(patientEmail)]);
-                Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
+            foreach (var patientEmail in sortedPatients){
+                var selectedPatient = Register.GetUser(patientEmail);
+                if (selectedPatient != null) {
+                    Console.WriteLine($"{index}. Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
+                }
                 index++;
             }
-            return;
-
         }
+
 
         public void PerformSurgery(User user){
             Console.WriteLine("Please select your patient: ");
