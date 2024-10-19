@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq.Expressions;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
@@ -49,8 +50,11 @@ namespace Myapp{
             if (user.is_staff == false){
                 bool is_patient_logged_in = true;
                 while(is_patient_logged_in){  
-                    PatientMenu(user);          
-                    int choice = Convert.ToInt16(Console.ReadLine());
+                    PatientMenu(user);   
+                    if (!int.TryParse(Console.ReadLine(), out int choice)){
+                        check.ErrorInvalid("Invalid choice.");
+                        continue;
+                    }
                     switch (choice){
                         case 1:
                             management.show_details(user);
@@ -86,7 +90,10 @@ namespace Myapp{
                     bool is_staff_logged_in = true;
                     while(is_staff_logged_in){
                         FloorManagerMenu(user);
-                        int choice = Convert.ToInt16(Console.ReadLine());
+                        if(!int.TryParse(Console.ReadLine(), out int choice)){
+                            check.ErrorInvalid("Invalid choice.");
+                            continue;
+                        }
                         switch(choice){
                             case 1:
                                 management.show_details(user); 
@@ -123,7 +130,10 @@ namespace Myapp{
                     bool is_surgeon_logged_in = true;
                     while(is_surgeon_logged_in){
                         SurgeonMenu(user);
-                        int choice = Convert.ToInt16(Console.ReadLine());
+                        if(!int.TryParse(Console.ReadLine(), out int choice)){
+                            check.ErrorInvalid("Invalid choice.");
+                            continue;
+                        }
                         switch(choice){
                             case 1:
                                 management.show_details(user);
