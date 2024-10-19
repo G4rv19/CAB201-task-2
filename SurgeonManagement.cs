@@ -36,41 +36,44 @@ namespace Myapp {
 
         public void SeeSurgery(User user){
         Console.WriteLine("Your schedule.");
-        
+
         // Retrieve patients assigned to the surgeon
         managementTools.CheckedInPatientList(patient => patient.surgeonassigned == user.Name, SurgeryPatients);
-        
+
         if (SurgeryPatients.Count == 0) {
             Console.WriteLine("You do not have any patients assigned.");
             return;
         }
-        
+
         // List to hold valid patients with surgery dates
         List<User> validPatients = new List<User>();
 
-        // Process each patient, check for nulls and add valid ones to the list
-        foreach (string patientEmail in SurgeryPatients) {
-            User patient = Register.GetUser(patientEmail);
-
-            if (patient != null && !string.IsNullOrEmpty(patient.surgeryDateTime)) {
-                // Try to parse the surgery date to ensure it's in the correct format
-                DateTime surgeryDate;
-                if (DateTime.TryParseExact(patient.surgeryDateTime, "HH:mm dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out surgeryDate)) {
-                    validPatients.Add(patient);
-                }
-            }
-        }
-
-        // Sort patients by surgery date in ascending order (soonest surgery first)
-        var sortedPatients = validPatients.OrderBy(patient => DateTime.ParseExact(patient.surgeryDateTime, "HH:mm dd/MM/yyyy", null)).ToList();
-        
-        // Display the sorted surgery schedule
         int index = 1;
-        foreach (User selectedPatient in sortedPatients) {
-            Console.WriteLine($"Performing surgery on patient {selectedPatient.Name} on {selectedPatient.surgeryDateTime}");
+        foreach (string patientEmail in SurgeryPatients) {
+            string selectedPatientEmail = managementTools.patientEmailMap[index];
+            User selectedPatient = Register.GetUser(selectedPatientEmail);
+
+            // Check if surgeryDateTime is valid before adding
+            if (!string.IsNullOrEmpty(selectedPatient.surgeryDateTime)) {
+                validPatients.Add(selectedPatient);
+            }
+
             index++;
         }
+
+        // Sort patients by surgery date (ascending order, i.e., earliest first)
+        var sortedPatients = validPatients.OrderBy(patient => DateTime.ParseExact(patient.surgeryDateTime, "HH:mm dd/MM/yyyy", null)).ToList();
+
+        // Display the sorted surgery schedule
+        index = 1;
+        foreach (User sortedPatient in sortedPatients) {
+            Console.WriteLine($"Performing surgery on patient {sortedPatient.Name} on {sortedPatient.surgeryDateTime}");
+            index++;
+        }
+
+        return;
     }
+
 
         public void PerformSurgery(User user){
             Console.WriteLine("Please select your patient: ");
