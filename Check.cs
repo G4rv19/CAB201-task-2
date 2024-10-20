@@ -22,36 +22,18 @@ namespace Myapp {
 
         // Age check based on user type
         public bool AgeCheck(string userRole, int age) {
-            bool result = false;
-             if (userRole == "Floor") {
-                if(age >= 21 && age <= 70){
-                    result = true;
-                    return true;
-                }
-                else{
-                    result = false;
-                    return false;
-                }
-            } else if (userRole == "Surgeon") {
-                if(age >= 30 && age <= 75){
-                    result = true;
-                    return true;
-                }
-                else{
-                    result = false;
-                    return false;
-                }
+            if (userRole == "Floor"){
+                return age >= 21 && age <= 70;
+            }
+            else if (userRole == "Surgeon"){
+                return age >= 30 && age <= 75;
+            }
+            else if (userRole == "Patient"){
+                return age >= 0 && age <= 100;
             }
             else{
-                if (age >= 0 && age <= 100){
-                    result = true;
-                    return true;
-                }
-                else{
-                    result = false;
-                }
+                return false;
             }
-            return result;
         }
 
         // Mobile number must be exactly 10 digits long and start with a 0

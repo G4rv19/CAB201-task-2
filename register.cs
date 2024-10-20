@@ -82,18 +82,11 @@ namespace Myapp {
         while (!valid) { // validation for age
             Console.WriteLine("Please enter in your age:");
             age = inputService.GetIntInput() ?? 0;
-            if (age >= 0) {
-                if (check.AgeCheck(Useris, age)){
-                    valid = true;
-                }
-                else{
-                    valid = false;
-                    check.ErrorInvalid("Supplied age is invalid, please try again.");
-                }
+            if (check.AgeCheck(Useris, age) == true) {
+                valid = true;
             }
-            else{
-                check.ErrorInvalid("Supplied value is not an integer, please try again.");
-                valid = false;
+            else {
+                check.ErrorInvalid("Supplied age is invalid, please try again.");
             }
         }
 
