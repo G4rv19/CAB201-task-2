@@ -7,15 +7,15 @@ using System.Text;
 namespace Myapp {
     public class SurgeonManagement {
         private List<string> SurgeryPatients = new List<string>(); // list of all patients who are checked in and have a surgery scheduled
-        private List<string> PatientAssignedToSurgeon = new List<string>();
+        private List<string> PatientAssignedToSurgeon = new List<string>(); // list of all patients assigned to the surgeon
         ManagementTools managementTools = new ManagementTools();
-        private User user;
-        Check check = new Check();
+        private User user; // current user
+        Check check = new Check(); // object to check for invalid inputs
         public SurgeonManagement(User user){
             this.user = user;
         }
 
-        public void PatientAssignedForSurgeon(User user){
+        public void PatientAssignedForSurgeon(User user){ //  method to assign patient to surgeon
             PatientAssignedToSurgeon.Clear();   
             Console.WriteLine("Your Patients.");
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
@@ -34,7 +34,7 @@ namespace Myapp {
 
         }
 
-        public void SeeSurgery(User user){
+        public void SeeSurgery(User user){ // method to see the surgery schedule
         Console.WriteLine("Your schedule.");
 
         // Retrieve patients assigned to the surgeon
@@ -75,7 +75,7 @@ namespace Myapp {
     }
 
 
-        public void PerformSurgery(User user){
+        public void PerformSurgery(User user){ // method to perform surgery
             Console.WriteLine("Please select your patient: ");
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == user.Name, PatientAssignedToSurgeon);
             if (PatientAssignedToSurgeon.Count == 0){

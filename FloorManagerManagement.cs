@@ -8,12 +8,12 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace Myapp {
     public class FloorManagerManagement {
-        Check check = new Check();
-        private List<string> patients = new List<string>(); 
-        private List<string> Users = new List<string>();
-        private List<string> surgeons = new List<string>();
+        Check check = new Check(); 
+        private List<string> patients = new List<string>();  // list of all patients who are checked in and have a room assigned
+        private List<string> Users = new List<string>(); // list of all patients who are checked in
+        private List<string> surgeons = new List<string>(); // list of all surgeons
         ManagementTools managementTools = new ManagementTools();
-        public void AssigningRoom(User user){
+        public void AssigningRoom(User user){ // Assigning room to patient
             Users.Clear();
             patients.Clear();
             managementTools.CheckedInPatientList(patient => patient.Checked_in == true && patient.Room == null && patient.Floor == null, patients);
@@ -78,7 +78,7 @@ namespace Myapp {
 
             }
         }
-        public void UnassignRoom(User user){
+        public void UnassignRoom(User user){ // Unassigning room from patient
             managementTools.CheckedInPatientList(patient => patient.Checked_in == false && patient.Room != null && patient.Floor != null, patients);
             if (patients.Count == 0){
                 Console.WriteLine("There are no patients ready to have their rooms unassigned.");
@@ -108,7 +108,7 @@ namespace Myapp {
             }
         }
         
-        public void AssignSurgery(User user){
+        public void AssignSurgery(User user){ // Assigning surgery to patient
             Users.Clear();
             managementTools.CheckedInPatientList(patient => patient.surgeonassigned == null && patient.surgeryDateTime == null && patient.Checked_in == true && patient.Room != null, patients);
             if (patients.Count == 0){
@@ -178,13 +178,26 @@ namespace Myapp {
                         Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
                         surgeryDateTime = Console.ReadLine();
                         check.DateTimeCheck(surgeryDateTime);
-                        if(check.DateTimeCheck(surgeryDateTime) == true){
-                            valid = true;
-                            selectedPatient.surgeryDateTime = surgeryDateTime;
+                        bool isDateTimeTaken = false;
+                        foreach (var otherUser in Register.users){
+                            if (otherUser.Value.surgeryDateTime == surgeryDateTime){
+                                isDateTimeTaken = true;
+                                break;
+                            }
+                        }
+                        if (isDateTimeTaken){
+                            check.ErrorInvalid("Surgery date and time is already taken.");
+                            valid = false;
                         }
                         else{
-                            check.ErrorInvalid("Supplied value is not a valid DateTime.");
-                            valid = false;
+                            if(check.DateTimeCheck(surgeryDateTime) == true){
+                                valid = true;
+                                selectedPatient.surgeryDateTime = surgeryDateTime;
+                            }
+                            else{
+                                check.ErrorInvalid("Supplied value is not a valid DateTime.");
+                                valid = false;
+                            }
                         }
                     }
                     Console.WriteLine($"Surgeon {selectedSurgeon.Name} has been assigned to patient {selectedPatient.Name}.");

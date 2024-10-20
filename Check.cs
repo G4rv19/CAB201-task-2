@@ -125,7 +125,7 @@ namespace Myapp {
         }
 
         // Floor number must be between 1 and 6
-        public bool FloorCheck(int floor) {
+        public bool FloorCheck(int floor) { // check the floor number
             if (floor >= 1 && floor <= 6) {
                 foreach(var manager in Register.users){
                     if (manager.Value.Floor_number.HasValue && manager.Value.Floor_number == floor){
@@ -141,10 +141,11 @@ namespace Myapp {
             }
         }
 
-        public bool DateTimeCheck(string date){
+        public bool DateTimeCheck(string date){ // check the format of the date and time
             string pattern = @"^([01]\d|2[0-3]):([0-5]\d)\s(0[1-9]|[12]\d|3[01])/(0[1-9]|1[0-2])/(\d{4})$";
             Match match = Regex.Match(date, pattern);
             if (match.Success == true) {
+
                 return true;
             }
             else{
@@ -152,7 +153,7 @@ namespace Myapp {
             }
         }
 
-        public bool RoomCheck(int room, User user){
+        public bool RoomCheck(int room, User user){ // check the room number
             if (room < 1 || room > 10){
                 ErrorInvalid("Supplied value is out of range, please try again.");
                 return false;

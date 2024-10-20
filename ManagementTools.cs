@@ -7,7 +7,7 @@ using System.Text;
 namespace Myapp {
     public class ManagementTools {
         public Dictionary<int, string> patientEmailMap = new Dictionary<int, string>();
-        public void CheckedInPatientList(Func<User, bool> condition, List<string> SavingList){
+        public void CheckedInPatientList(Func<User, bool> condition, List<string> SavingList){ // method to list all user with required condition.
             SavingList.Clear();
             patientEmailMap.Clear();
             int index = 1;
@@ -20,7 +20,7 @@ namespace Myapp {
             }
         }
 
-        public void ShowSurgeryDate(User user){
+        public void ShowSurgeryDate(User user){ // method to show the surgery date
             if (user.surgeryDateTime == null){
                 Console.WriteLine("You do not have assigned surgery.");
                 return;
@@ -31,7 +31,7 @@ namespace Myapp {
             }
         }
 
-        public void SurgeonAssigned(User user){
+        public void SurgeonAssigned(User user){ // method to show the assigned surgeon
             if (user.surgeonassigned == null){
                 Console.WriteLine("You do not have an assigned surgeon.");
                 return;
@@ -42,7 +42,7 @@ namespace Myapp {
             }
         }
 
-        public void CheckIn(bool isCheckedIn, User user){
+        public void CheckIn(bool isCheckedIn, User user){  // method to check in and check out
             if (user.SurgeryPerformed == true){
                 if (isCheckedIn == true){
                     user.Checked_in = false;
@@ -68,7 +68,7 @@ namespace Myapp {
 
         }
 
-        public void PatientSeeRoom(User user){
+        public void PatientSeeRoom(User user){ // method to show the room number
             if(user.Room == null){
                 Console.WriteLine("You do not have an assigned room.");
                 return;
@@ -79,7 +79,7 @@ namespace Myapp {
             }
         }
 
-        public void show_details(User user) {
+        public void show_details(User user) { // method to show the user details
             if (user != null && user.is_staff == false){
                 Console.WriteLine("Your details.");
                 Console.WriteLine($"Name: {user.Name}");
@@ -109,7 +109,7 @@ namespace Myapp {
 
             }
         }
-        public void change_password(User user){
+        public void change_password(User user){ // method to change the password
             Console.WriteLine("Enter new password:");
             string new_password = Console.ReadLine();
             user.Password = new_password;

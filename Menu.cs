@@ -9,29 +9,29 @@ using Myapp;
 
 namespace Myapp {
     public class Menu {
-        Check check = new Check();
+        Check check = new Check(); // Check class object
         public void RunMenu() {
             int choice;
-            displayHeader();
+            displayHeader(); // Display the header
             do {
-                ShowOptions();
+                ShowOptions(); // Display the menu options
                 choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice){
                     case 1:
                         Login login = new Login();
-                        login.Login_User();
+                        login.Login_User(); // Run the login menu
                         break;
                     case 2:
                         Register register = new Register();
-                        register.RunRegister();
+                        register.RunRegister(); // Run the register menu
                         break;
                     case 3:
-                        Console.WriteLine("Goodbye. Please stay safe.");
-                        break;
+                        Console.WriteLine("Goodbye. Please stay safe."); // Exit the program
+                        break; 
                     default:
                         check.ErrorInvalid("Invalid Menu Option, please try again.");
-                        break;
-                }
+                        break; // Error message for invalid input
+                } 
             } while (choice != 3);
             
         }

@@ -7,8 +7,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Myapp {
-    public class Register {
-        public string Useris;
+    public class Register { 
+        public string Useris; // User type
         public static Dictionary<string, User> users = new Dictionary<string, User>();
         private string[] usertype;
         public Register(){
@@ -19,14 +19,14 @@ namespace Myapp {
                 "3. Return to the first menu"
             };
         }
-        public void RegisterOptions(){
+        public void RegisterOptions(){ // Register options
             Console.WriteLine("Register as which type of user:");
             foreach (string type in usertype){
                 Console.WriteLine(type);
             }
             Console.WriteLine("Please enter a choice between 1 and 3.");
         }
-        public void RunRegister(){
+        public void RunRegister(){ // Run register
             int choice;
             RegisterOptions();
             choice = Convert.ToInt16(Console.ReadLine());
@@ -51,7 +51,7 @@ namespace Myapp {
                     break;
             } 
         }
-        public User Register_function() {
+        public User Register_function() { // Register function
         Check check = new Check();
         bool valid = false;
         string name = string.Empty;
@@ -61,7 +61,7 @@ namespace Myapp {
         string password = string.Empty;
         
         // Name Check
-        while (!valid) {
+        while (!valid) { // validation for name
             Console.WriteLine("Please enter in your name:");
             name = Console.ReadLine() ?? string.Empty;
             check.NameCheck(name);
@@ -78,7 +78,7 @@ namespace Myapp {
         valid = false;
 
         // Age Check
-        while (!valid) {
+        while (!valid) { // validation for age
             Console.WriteLine("Please enter in your age:");
             if (int.TryParse(Console.ReadLine(), out age)){
                 if (check.AgeCheck(Useris, age)){
@@ -99,7 +99,7 @@ namespace Myapp {
         valid = false;
 
         // Mobile Check
-        while (!valid) {
+        while (!valid) { // check the validation for mobile number
             Console.WriteLine("Please enter in your mobile number:");
             mobile = Console.ReadLine() ?? string.Empty;
             check.MobileCheck(mobile);
@@ -114,7 +114,7 @@ namespace Myapp {
 
         // Email Check
         valid = false;
-        while (!valid) {
+        while (!valid) { // validation for email
             Console.WriteLine("Please enter in your email:");
             email = Console.ReadLine() ?? string.Empty;
             if (check.EmailCheck(email) == true) {
@@ -127,7 +127,7 @@ namespace Myapp {
 
         // Password Check
         valid = false;
-        while (!valid) {
+        while (!valid) { // validation for password
             Console.WriteLine("Please enter in your password:");
             password = Console.ReadLine() ?? string.Empty;
             check.PasswordCheck(password);
@@ -145,7 +145,7 @@ namespace Myapp {
         return user;
         }
         
-        private void Register_patient() {
+        private void Register_patient() { // Register patient
             User user = Register_function();
             user.is_staff = false;
 
@@ -159,13 +159,13 @@ namespace Myapp {
         }
         private void Register_floor_manager() {
             
-            User staff = Register_function();
-            staff.is_staff = true;
-            Check check = new Check();
+            User staff = Register_function(); // Register function
+            staff.is_staff = true; // Set staff to true
+            Check check = new Check(); 
             bool valid = false;
             int id = 0;
             int floor = 0;
-            while (!valid) {
+            while (!valid) { // validation for staff ID
                 Console.WriteLine("Please enter in your staff ID:");
                 id = Convert.ToInt16(Console.ReadLine());
                 if (check.StaffIdCheck(id) == true) {
@@ -177,7 +177,7 @@ namespace Myapp {
             }
             staff.Staff_id = id;
             valid = false;  
-            while (!valid){
+            while (!valid){ // validation for floor number
                 Console.WriteLine("Please enter in your floor number:");
                 floor = Convert.ToInt16(Console.ReadLine());
                 if (check.FloorCheck(floor) == true) {
@@ -197,8 +197,8 @@ namespace Myapp {
                 Console.WriteLine("User already exists.");
             }
         }
-        private void staff_type() {
-            List<string> staff_type = new List<string>();
+        private void staff_type() { 
+            List<string> staff_type = new List<string>(); 
             staff_type.Add("1. Floor manager");
             staff_type.Add("2. Surgeon");
             staff_type.Add("3. Return to the first menu");
@@ -210,15 +210,15 @@ namespace Myapp {
             Console.WriteLine("Please enter a choice between 1 and 3.");
             int choice = Convert.ToInt16(Console.ReadLine());
             if (choice == 1){
-                Useris = "Floor";
+                Useris = "Floor"; // Set user type to floor
             }
             else if (choice == 2)
             {
-                Useris = "Surgeon";
+                Useris = "Surgeon"; // Set user type to surgeon
             }
             switch (choice){
                 case 1:
-                if (!check.AllFloorsFull()){
+                if (!check.AllFloorsFull()){ // Check if all floors are full otherwise lead to register floor manager
                     Console.WriteLine("Registering as a floor manager.");
                     Register_floor_manager();
                 }
@@ -226,7 +226,7 @@ namespace Myapp {
                     check.ErrorInvalid("All floors are assigned.");
                 }
                 break;
-                case 2:
+                case 2: 
                     Console.WriteLine("Registering as a surgeon.");
                     surgeon_register();
                     break;
@@ -240,13 +240,13 @@ namespace Myapp {
             }
             
         }
-        private void surgeon_register() {
+        private void surgeon_register() { 
             User staff = Register_function();
             staff.is_staff = true;
             Check check = new Check();
             int id = 0;
             bool valid = false;
-            while (!valid) {
+            while (!valid) { // validation for staff ID
                 Console.WriteLine("Please enter in your staff ID:");
                 id = Convert.ToInt16(Console.ReadLine());
                 if (check.StaffIdCheck(id) == true) {
@@ -303,7 +303,7 @@ namespace Myapp {
             }
         }
 
-        public static User? GetUser(string email) {
+        public static User? GetUser(string email) { 
             return users.TryGetValue(email, out User user) ? user : null;
         }
     }
