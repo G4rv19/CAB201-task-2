@@ -11,6 +11,7 @@ namespace Myapp {
         public string Useris; // User type
         public static Dictionary<string, User> users = new Dictionary<string, User>();
         private string[] usertype;
+        UserInputService inputService = new UserInputService();
         public Register(){
             Useris = string.Empty;
             usertype = new string[] {
@@ -29,7 +30,7 @@ namespace Myapp {
         public void RunRegister(){ // Run register
             int choice;
             RegisterOptions();
-            choice = Convert.ToInt16(Console.ReadLine());
+            choice = inputService.GetIntInput() ?? 0;
             Check check = new Check();
             switch (choice){
                 case 1:
@@ -63,7 +64,7 @@ namespace Myapp {
         // Name Check
         while (!valid) { // validation for name
             Console.WriteLine("Please enter in your name:");
-            name = Console.ReadLine() ?? string.Empty;
+            name = inputService.GetStringInput() ?? string.Empty;
             check.NameCheck(name);
 
             if (check.NameCheck(name) == true) {
@@ -80,7 +81,8 @@ namespace Myapp {
         // Age Check
         while (!valid) { // validation for age
             Console.WriteLine("Please enter in your age:");
-            if (int.TryParse(Console.ReadLine(), out age)){
+            age = inputService.GetIntInput() ?? 0;
+            if (age >= 0) {
                 if (check.AgeCheck(Useris, age)){
                     valid = true;
                 }
@@ -101,8 +103,7 @@ namespace Myapp {
         // Mobile Check
         while (!valid) { // check the validation for mobile number
             Console.WriteLine("Please enter in your mobile number:");
-            mobile = Console.ReadLine() ?? string.Empty;
-            check.MobileCheck(mobile);
+            mobile = inputService.GetStringInput() ?? string.Empty;
             if (check.MobileCheck(mobile) == true) {
                 valid = true;
             }
@@ -116,7 +117,7 @@ namespace Myapp {
         valid = false;
         while (!valid) { // validation for email
             Console.WriteLine("Please enter in your email:");
-            email = Console.ReadLine() ?? string.Empty;
+            email = inputService.GetStringInput() ?? string.Empty;
             if (check.EmailCheck(email) == true) {
                 valid = true;
             }
@@ -129,7 +130,7 @@ namespace Myapp {
         valid = false;
         while (!valid) { // validation for password
             Console.WriteLine("Please enter in your password:");
-            password = Console.ReadLine() ?? string.Empty;
+            password = inputService.GetStringInput() ?? string.Empty;
             check.PasswordCheck(password);
             if (check.PasswordCheck(password) == true) {
                 valid = true;
@@ -167,7 +168,7 @@ namespace Myapp {
             int floor = 0;
             while (!valid) { // validation for staff ID
                 Console.WriteLine("Please enter in your staff ID:");
-                id = Convert.ToInt16(Console.ReadLine());
+                id = inputService.GetIntInput() ?? 0;
                 if (check.StaffIdCheck(id) == true) {
                     valid = true;
                 }
@@ -179,7 +180,7 @@ namespace Myapp {
             valid = false;  
             while (!valid){ // validation for floor number
                 Console.WriteLine("Please enter in your floor number:");
-                floor = Convert.ToInt16(Console.ReadLine());
+                floor = inputService.GetIntInput() ?? 0;
                 if (check.FloorCheck(floor) == true) {
                     valid = true;
                 }
@@ -208,7 +209,7 @@ namespace Myapp {
                 Console.WriteLine(type);
             }
             Console.WriteLine("Please enter a choice between 1 and 3.");
-            int choice = Convert.ToInt16(Console.ReadLine());
+            int choice = inputService.GetIntInput() ?? 0;
             if (choice == 1){
                 Useris = "Floor"; // Set user type to floor
             }
@@ -235,7 +236,6 @@ namespace Myapp {
                     break;
                 default:
                     check.ErrorInvalid("Invalid Menu Option, please try again.");
-                    
                     break;
             }
             
@@ -248,7 +248,7 @@ namespace Myapp {
             bool valid = false;
             while (!valid) { // validation for staff ID
                 Console.WriteLine("Please enter in your staff ID:");
-                id = Convert.ToInt16(Console.ReadLine());
+                id = inputService.GetIntInput() ?? 0;
                 if (check.StaffIdCheck(id) == true) {
                     valid = true;
                 }
@@ -270,7 +270,7 @@ namespace Myapp {
                     Console.WriteLine(type);
                 }
                 Console.WriteLine("Please enter a choice between 1 and 4.");
-                int choice = Convert.ToInt16(Console.ReadLine());
+                int choice = inputService.GetIntInput() ?? 0;
                 switch (choice){
                     case 1:
                         staff.Surgeon_speciality = "General Surgeon";
@@ -304,7 +304,15 @@ namespace Myapp {
         }
 
         public static User? GetUser(string email) { 
-            return users.TryGetValue(email, out User user) ? user : null;
+            User user;
+            if (users.TryGetValue(email, out user))
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Myapp {
         public bool? SurgeryPerformed { get; set; }
 
     
-    public User(string name, int age, string mobile, string email, string password) {
+    public User(string name, int age, string mobile, string email, string password) { // every user shoud have a name, age, mobile, email and password but if the user is a staff member, they should have a staff id and respective fields.
         Name = name;
         Age = age;
         Mobile = mobile;

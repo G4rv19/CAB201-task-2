@@ -13,6 +13,7 @@ namespace Myapp {
         private List<string> Users = new List<string>(); // list of all patients who are checked in
         private List<string> surgeons = new List<string>(); // list of all surgeons
         ManagementTools managementTools = new ManagementTools();
+        UserInputService userInputService = new UserInputService();
         public void AssigningRoom(User user){ // Assigning room to patient
             Users.Clear();
             patients.Clear();
@@ -39,7 +40,7 @@ namespace Myapp {
                 int choice = 0;
                 while(!valid){
                     Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
-                    string input = Console.ReadLine();
+                    string input = userInputService?.GetStringInput() ?? string.Empty;
                     if (int.TryParse(input, out choice) && choice > 0 && choice <= patients.Count){
                         valid = true;
                     }
@@ -59,7 +60,7 @@ namespace Myapp {
                         int room = 0;
                         while(!valid){
                             Console.WriteLine("Please enter your room (1-10):");
-                            room = Convert.ToInt32(Console.ReadLine());
+                            room = userInputService?.GetIntInput() ?? 0;
                             if(check.RoomCheck(room, user) == true){
                                 valid = true;
                                 selectedPatient.Room = room;
@@ -92,7 +93,7 @@ namespace Myapp {
                     index++;
                 }
                 Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
-                int choice = Convert.ToInt32(Console.ReadLine());
+                int choice = userInputService?.GetIntInput() ?? 0;
                 if (choice <1 || choice > patients.Count){
                     Console.WriteLine("Invalid choice.");
                     return;
@@ -133,7 +134,7 @@ namespace Myapp {
                 bool valid = false;
                 while(!valid){
                     Console.WriteLine($"Please enter a choice between 1 and {patients.Count}.");
-                    choice = Convert.ToInt32(Console.ReadLine());
+                    choice = userInputService?.GetIntInput() ?? 0;
                     if (choice <1 || choice > patients.Count){
                         check.ErrorInvalid("Supplied value is out of range, please try again.");
                         valid = false;
@@ -160,7 +161,7 @@ namespace Myapp {
                     int surgeonChoice = 0;
                     while(!valid){
                         Console.WriteLine($"Please enter a choice between 1 and {surgeons.Count}.");
-                        surgeonChoice = Convert.ToInt32(Console.ReadLine());
+                        surgeonChoice = userInputService?.GetIntInput() ?? 0;
                         if (surgeonChoice <1 || surgeonChoice > surgeons.Count){
                             check.ErrorInvalid("Supplied value is out of range, please try again.");
                             valid = false;
@@ -176,7 +177,7 @@ namespace Myapp {
                     valid = false;
                     while(!valid){
                         Console.WriteLine("Please enter a date and time (e.g. 14:30 31/01/2024).");
-                        surgeryDateTime = Console.ReadLine();
+                        surgeryDateTime = userInputService?.GetStringInput() ?? string.Empty;
                         check.DateTimeCheck(surgeryDateTime);
                         bool isDateTimeTaken = false;
                         foreach (var otherUser in Register.users){

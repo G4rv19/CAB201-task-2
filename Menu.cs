@@ -10,12 +10,13 @@ using Myapp;
 namespace Myapp {
     public class Menu {
         Check check = new Check(); // Check class object
+        UserInputService userInputService = new UserInputService(); // UserInputService class object
         public void RunMenu() {
             int choice;
             displayHeader(); // Display the header
             do {
                 ShowOptions(); // Display the menu options
-                choice = Convert.ToInt16(Console.ReadLine());
+                choice = userInputService.GetIntInput() ?? 0; // Get the user input
                 switch (choice){
                     case 1:
                         Login login = new Login();

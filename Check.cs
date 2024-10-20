@@ -57,7 +57,7 @@ namespace Myapp {
         // Mobile number must be exactly 10 digits long and start with a 0
         public bool MobileCheck(string mobile) {
             string pattern = @"^0\d{9}$";  // Leading 0 followed by exactly 9 digits
-            Match match = Regex.Match(mobile, pattern);
+            Match match = Regex.Match(mobile.ToString(), pattern);
             if (match.Success == true) {
                 return true;
             }

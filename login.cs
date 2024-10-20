@@ -11,6 +11,7 @@ namespace Myapp{
     public class Login{
         private string email; // email of the user
         Check check = new Check();
+        UserInputService UserInput = new UserInputService();
 
         public User Login_User(){ // Login method for the user
             Console.WriteLine("Login Menu.");
@@ -20,7 +21,7 @@ namespace Myapp{
             }
             else{
                 Console.WriteLine("Please enter in your email:"); 
-                string input = Console.ReadLine() ?? string.Empty; // Read the email input
+                string input =UserInput.GetStringInput() ?? string.Empty; // Read the email input
                 email = input ?? string.Empty;
                 User user = Register.GetUser(email!); // Get the user from the email
                 if (user == null){
@@ -29,7 +30,7 @@ namespace Myapp{
                 }
                 else{
                     Console.WriteLine("Please enter in your password:"); 
-                    string input2 = Console.ReadLine() ?? string.Empty; // Read the password input
+                    string input2 = UserInput.GetStringInput() ?? string.Empty; // Read the password input
                     string password = input2 ?? string.Empty;
                     if (user.Password == password){ // Check if the password is correct
                         Console.WriteLine($"Hello {user.Name} welcome back.");
@@ -53,10 +54,7 @@ namespace Myapp{
                 bool is_patient_logged_in = true; // Set the patient logged in to true
                 while(is_patient_logged_in){   // While the patient is logged in
                     PatientMenu(user);   // Run the patient menu
-                    if (!int.TryParse(Console.ReadLine(), out int choice)){
-                        check.ErrorInvalid("Invalid choice.");
-                        continue;
-                    }
+                   int choice = UserInput.GetIntInput() ?? 0; // Get the choice from the user
                     switch (choice){
                         case 1:
                             management.show_details(user); // Show the details of the user
@@ -92,10 +90,7 @@ namespace Myapp{
                     bool is_staff_logged_in = true;
                     while(is_staff_logged_in){
                         FloorManagerMenu(user);
-                        if(!int.TryParse(Console.ReadLine(), out int choice)){
-                            check.ErrorInvalid("Invalid choice.");
-                            continue;
-                        }
+                        int choice = UserInput.GetIntInput() ?? 0;
                         switch(choice){
                             case 1:
                                 management.show_details(user);  // Show the details of the user
@@ -132,10 +127,7 @@ namespace Myapp{
                     bool is_surgeon_logged_in = true; // Set the surgeon logged in to true
                     while(is_surgeon_logged_in){
                         SurgeonMenu(user);
-                        if(!int.TryParse(Console.ReadLine(), out int choice)){
-                            check.ErrorInvalid("Invalid choice.");
-                            continue;
-                        }
+                        int choice = UserInput.GetIntInput() ?? 0;
                         switch(choice){
                             case 1:
                                 management.show_details(user); 

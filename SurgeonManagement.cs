@@ -11,6 +11,7 @@ namespace Myapp {
         ManagementTools managementTools = new ManagementTools();
         private User user; // current user
         Check check = new Check(); // object to check for invalid inputs
+        UserInputService userInputService = new UserInputService(); // object to get user inputs
         public SurgeonManagement(User user){
             this.user = user;
         }
@@ -92,7 +93,7 @@ namespace Myapp {
                 bool valid = false;
                 while(!valid){
                     Console.WriteLine($"Please enter a choice between 1 and {PatientAssignedToSurgeon.Count}.");
-                    choice = Convert.ToInt32(Console.ReadLine());
+                    choice = userInputService.GetIntInput() ?? 0;
                     if (choice >= 1 && choice <= PatientAssignedToSurgeon.Count){
                         string patientEmail = managementTools.patientEmailMap[choice];
                         User selectedPatient = Register.GetUser(patientEmail);
