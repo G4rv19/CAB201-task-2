@@ -6,8 +6,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace Myapp {
     public class SurgeonManagement {
-        public List<string> SurgeryPatients = new List<string>(); // list of all patients who are checked in and have a surgery scheduled
-        public List<string> PatientAssignedToSurgeon = new List<string>();
+        private List<string> SurgeryPatients = new List<string>(); // list of all patients who are checked in and have a surgery scheduled
+        private List<string> PatientAssignedToSurgeon = new List<string>();
         ManagementTools managementTools = new ManagementTools();
         private User user;
         Check check = new Check();

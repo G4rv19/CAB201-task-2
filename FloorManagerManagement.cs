@@ -9,9 +9,9 @@ using System.Text;
 namespace Myapp {
     public class FloorManagerManagement {
         Check check = new Check();
-        public List<string> patients = new List<string>(); 
-        public List<string> Users = new List<string>();
-        public List<string> surgeons = new List<string>();
+        private List<string> patients = new List<string>(); 
+        private List<string> Users = new List<string>();
+        private List<string> surgeons = new List<string>();
         ManagementTools managementTools = new ManagementTools();
         public void AssigningRoom(User user){
             Users.Clear();

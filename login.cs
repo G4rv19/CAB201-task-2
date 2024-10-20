@@ -20,15 +20,17 @@ namespace Myapp{
             }
             else{
                 Console.WriteLine("Please enter in your email:");
-                email = Console.ReadLine();
-                User user = Register.GetUser(email);
+                string input = Console.ReadLine() ?? string.Empty;
+                email = input ?? string.Empty;
+                User user = Register.GetUser(email!);
                 if (user == null){
                     check.ErrorInvalid("Email is not registered.");
                     return null;
                 }
                 else{
                     Console.WriteLine("Please enter in your password:");
-                    string password = Console.ReadLine();
+                    string input2 = Console.ReadLine() ?? string.Empty;
+                    string password = input2 ?? string.Empty;
                     if (user.Password == password){
                         Console.WriteLine($"Hello {user.Name} welcome back.");
                         login_menu();
